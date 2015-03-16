@@ -1,0 +1,148 @@
+﻿
+
+<!--<script type="text/javascript">
+    jwplayer("myElement").setup({
+        file: "video/123.mp4",
+        
+     //image: "123myPoster.jpg"
+ });</script>-->
+
+
+
+<div class="row whiteback" >
+    <div class="large-12  columns">
+        <h4 style="color:#7f755a;">محاضرات</h4>
+        <!--<div id="myElement">Loading the player...</div>-->
+     
+       
+        <div ng-controller="vidogularv3 as controller" class="videogular-container">
+            <videogular vg-theme="controller.config.theme">
+                <vg-media vg-src="controller.config.sources"
+                          vg-tracks="controller.config.tracks">
+                </vg-media>
+                
+                
+                <vg-controls>
+
+                    <vg-volume>
+                        <vg-mute-button></vg-mute-button>
+                        <vg-volume-bar></vg-volume-bar>
+                    </vg-volume>
+                    <vg-fullscreen-button></vg-fullscreen-button>
+                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                    <vg-scrub-bar dir="ltr">
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                       
+                    </vg-scrub-bar>
+
+                    <vg-play-pause-button></vg-play-pause-button>
+                   
+                </vg-controls>
+
+                <vg-overlay-play></vg-overlay-play>
+                <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+            </videogular>
+        </div>
+       
+
+      <div class="row">
+          <p></p>
+      </div>
+     
+
+    </div>
+
+</div>
+<div class="row whiteback">
+    <div class="large-3 large columns" style="margin-left: 2rem">
+        <img src="pic/socialiconsk.jpg" style="height:1rem;"/>
+
+    </div>
+    <div class="large-3 large columns" style="margin-left: 2rem">
+       
+
+    </div>
+    <div class="large-6 large columns" >
+        <h5 style="color:#122141;"><strong> عنوان الفيديو</strong></h5>
+       
+    </div>
+
+</div>
+<br />
+<div class="row" style="background-color: #faf4e4;">
+    <div class="large-12  columns">
+        <p style="color:#101f40;">
+            <h7 style="color:#101f40;">
+                <strong>
+                    الصفحة الر ئيسية
+                    الصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسية الصفحة الرئيسية الصفحة الرئيسيةالصفحة الر ئيسيةالصفحة الرئ  يسية
+                    الصفحة الرئيسيةالصفح ة
+                    الصفحة الرئيسية
+                </strong>
+            </h7>
+        </p>
+    </div>
+
+</div>
+
+<div class="row" style="background-color: #faf4e4;">
+    <div class="large-12  columns">
+        <p style="color:#101f40;">
+            <h7 style="color:#101f40;">
+                <strong>
+                    الصفحة الر ئيسية
+                    الصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسية الصفحة الرئيسية الصفحة الرئيسيةالصفحة الر ئيسيةالصفحة الرئ  يسية
+                    الصفحة الرئيسيةالصفح ة
+                    الصفحة الرئيسية
+                </strong>
+            </h7>
+        </p>
+    </div>
+
+</div>
+
+
+<div class="row " >
+    <div class="large-12  columns" style="margin-top:1rem;">
+
+        <img ng-src="pic/joinus.jpg" class="fleft" />
+    </div>
+
+</div>
+
+
+
+
+
+<div class="row" style="border-bottom:1px grey solid;" ng-repeat="lecture in dat">
+    <div class="large-12  columns" style="margin-top:1rem;">
+        <a href="#view4/{{lecture.Id}}" style="border-bottom:1px black solid;text-decoration:none;color:#443266; font-size:120%;">
+            <img ng-src="pic/videoexample.jpg" class="angpic" style="width:15rem;" />
+        </a>
+        <h3 style="color:#122141;text-align: center;"><strong>  {{lecture.Vtitle}} </strong></h3>
+            
+
+        <p style="color:#101f40;">
+            <h7 style="color:#101f40;">
+                <strong>
+                    {{lecture.Vdescription}}
+                </strong>
+            </h7>
+        </p>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div style="padding-left:4rem;" class="large-3 columns large-centered">
+        <ul class="pagination">
+            <li><a class="redcolor" ng-class="{'bancolor':boolprevious}" ng-click="pagiprevious()" ng-model="boolprevious">Previous &raquo;</a></li>
+            <li>{{currentPage}}</li>
+            <li><a class={{classnext}} ng-click="paginext()">&laquo;Next </a></li>
+
+        </ul>
+    </div>
+
+</div>

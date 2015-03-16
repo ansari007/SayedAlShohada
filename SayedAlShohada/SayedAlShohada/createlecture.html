@@ -1,0 +1,131 @@
+﻿
+ 
+                 
+
+ <script type="text/javascript">
+     // Initialize the widget when the DOM is ready
+     $(function () {
+         // Setup html5 version
+         $("#uploader").pluploadQueue({
+             // General settings
+             runtimes: 'html5,flash,silverlight,html4',
+             url: "/api/Uploader/Postv",
+
+             chunk_size: '10mb',
+             rename: true,
+             dragdrop: true,
+
+             filters: {
+                 // Maximum file size
+                 max_file_size: '10mb',
+                 // Specify what files to browse for
+                 mime_types: [
+                     { title: "Image files", extensions: "jpg,gif,png" },
+                     { title: "Zip files", extensions: "zip" },
+                     {title:"Video files",extensions : "mp4"}
+                 ]
+             },
+
+             // Resize images on clientside if we can
+             resize: {
+                 width: 200,
+                 height: 200,
+                 quality: 90,
+                 crop: true // crop to exact dimensions
+             },
+
+
+             // Flash settings
+             flash_swf_url: '/plupload/js/Moxie.swf',
+
+             // Silverlight settings
+             silverlight_xap_url: '/plupload/js/Moxie.xap'
+         });
+     });
+ </script>
+
+<form name="lecForm" novalidate>
+
+    <div class="row panel inbox ">
+
+        <div class="row">
+            <div class="large-12 columns">
+                <h3>إضافة محاضرة جديدة :</h3>
+                <button class="button tiny" ng-click="back()">Back</button>
+                <div id="uploader">
+
+                    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="large-12 small-12 columns">
+
+
+            <div class="row inbox">
+
+                <div class="large-9 columns">
+
+
+                </div>
+
+
+                <div class="large-3 small-8 columns">
+
+                    <input type="text" ng-model="user.title" required placeholder="إضافة عنوان" name="title" />
+                    <span style="color:red" ng-show="lecForm.title.$dirty && lecForm.title.$invalid">
+                        <span ng-show="lecForm.title.$error.required">Title is required</span>
+                    </span>
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="row">
+
+
+
+                <div class="large-12  small-12 columns">
+
+
+
+                    <textarea placeholder="إضافة تفصيل" ng-model="user.description" required name="description"></textarea>
+                    <span style="color:red" ng-show="lecForm.description.$dirty && lecForm.description.$invalid">
+                        <span ng-show="lecForm.description.$error.required">Description is required</span>
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="large-12 columns">
+                    <button class="button  tiny" ng-click="submit1()" ng-disabled="lecForm.title.$dirty && lecForm.title.$invalid ||
+lecForm.description.$dirty && lecForm.description.$invalid ||  lecForm.title.$pristine || lecForm.description.$pristine">
+                        إضافة محاضرة
+                    </button>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    </form>
+
+ 

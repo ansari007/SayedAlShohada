@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8">
+    <!-- If you delete this meta tag World War Z will become a reality -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayyed Al Shohada2 App</title>
+
+    <!-- If you are using the CSS version, only link these 2 files, you may add app.css to use for your overrides if you like -->
+    <link rel="stylesheet" href="foundation/css/normalize.css">
+    <link rel="stylesheet" href="foundation/css/foundation.css">
+    <link rel="stylesheet" href="foundation/css/app.css">
+    <link href="../Scripts/pace/loader.css" rel="stylesheet" />
+    <link href="../Scripts/videogularcss/videogular-container.css" rel="stylesheet" />
+    <link href="plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet" />
+    <link href="../Scripts/angularnotification/toaster.min.css" rel="stylesheet" />
+    <script src="foundation/js/vendor/jquery.js"></script>
+    <script src="foundation/js/vendor/modernizr.js"></script>
+
+</head>
+
+
+    <body ng-app="mhdapp">
+        <!--login goes here-->
+
+        <div ng-controller="logctrl">
+            <form name="logForm" novalidate ng-if="verif">
+                <div class="row">
+                    <div class=" large-12 small-12 ">
+                        <img src="pic/banner.jpg" width="100%" style="height:65px;" />
+                    </div>
+                </div>
+                <div class="row inbox2">
+                    <div class="large-3 large-centered columns">
+                        <div>
+                            <div class="row">
+                                <div class="large-12 columns">
+
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <input type="text" name="username" ng-model="user.username" required placeholder="Username" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <input type="password" name="password" ng-model="user.password" required placeholder="Password" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-12 large-centered columns">
+                                            <button class="button expand" ng-click="logverif()">LogIn</button>
+                                            <toaster-container toaster-options="{'position-class': 'toast-top-left'}"></toaster-container>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+            <!--login ends here-->
+            <!-- body content here -->
+            <div ng-if="verif2">
+                <div class="off-canvas-wrap" data-offcanvas>
+                    <div class="inner-wrap">
+                        <!--container-->
+                        <div class="row">
+                            <div class=" large-12 small-12 "><img src="pic/banner.jpg" width="100%" style="height:65px;" /></div>
+                            <nav class="top-bar hide-for-small" data-topbar>
+                                <section class="top-bar-section">
+                                    <!-- Right Nav Section -->
+                                    <ul class="right">
+                                        <li><a href="#">تواصل معنا</a></li>
+                                        <li><a href="#">عن المركز</a></li>
+                                        <li><a href="#login">روايات</a></li>
+                                        <li><a href="#viewinbox">أخبار</a></li>
+                                        <li class="has-dropdown not-click">
+                                            <a>المحاضرات</a>
+                                            <ul class="dropdown">
+                                                <li class="title"> <a href="#view3">صفحة المشاهدة</a></li>
+                                                <li><a href="#lecturectrl">صفحة التحكم</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#viewmainpage">الصفحة الرئيسية </a></li>
+                                    </ul>
+                                    <!-- Left Nav Section -->
+                                </section>
+                            </nav>
+                        </div>
+
+                        <nav class="topbar show-for-small">
+                            <a class="right-off-canvas-toggle menu-icon" href="#"><img src="pic/menubutton.jpg" /></a>
+                        </nav>
+
+                        <!--menu-->
+                        <!-- Off Canvas Menu -->
+                        <aside class="right-off-canvas-menu">
+                            <!-- whatever you want goes here -->
+                            <ul class="off-canvas-list">
+                                <li>
+                                    <a href="#viewmainpage">
+                                        <img src="pic/mainpageicon.jpg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#view3">
+                                        <img src="pic/lecicon.jpg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#viewinbox">
+                                        <img src="pic/msgicon.jpg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#index">
+                                        <img src="pic/contactusicon.jpg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#login">
+                                        <img src="pic/aboutusicon.jpg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="pic/articleicon.jpg " />
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+                        <!-- close the off-canvas menu -->
+                        <!--end menu-->
+
+                        <a class="exit-off-canvas"></a>
+                        <section role="main" class="scroll-container">
+                            <div class="row hidediv vars">
+                                <div class="large-5 medium-5 small-5 columns large-centered medium-centered small-centered  ">
+                                    <div class="large-6 columns" ng-controller="inbox">
+                                        <div class="  submitsuccess alert-box success radius ">
+                                            تمة الإضافة بنجاح
+                                        </div>
+
+                                        <div data-alert class=" submiterror alert-box alert round">
+                                            لم تتم الإضافة
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-view>
+                            </div>
+                        </section>
+                    </div> <!--end container-->
+                </div>
+            </div>
+        </div>
+
+        <script src="plupload/js/plupload.full.min.js"></script>
+        <script src="plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+        <script src="angular-1.3/angular.min.js"></script>
+        <script src="angular-1.3/angular-route.js"></script>
+        <script src="angular-1.3/angular-resource.js"></script>
+        <script src="angular-1.3/angular-animate.min.js"></script>
+        <script src="foundation/js/foundation.min.js"></script>
+        <script src="../Scripts/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="../Scripts/bower_components/videogular/videogular.js"></script>
+        <script src="../Scripts/bower_components/videogular-controls/vg-controls.js"></script>
+        <script src="../Scripts/bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+        <script src="../Scripts/bower_components/videogular-poster/vg-poster.js"></script>
+        <script src="../Scripts/bower_components/videogular-buffering/vg-buffering.js"></script>
+        <script src="../Scripts/pace/pace.min.js"></script>
+        <script src="../Scripts/angularnotification/toaster.min.js"></script>
+        <script src="testp.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
+
+    </body>
+</html>
+
+

@@ -1,0 +1,86 @@
+﻿<form name="myForm" novalidate>
+    <div class="row panel inbox ">
+        <div class="large-12 small-12 columns">
+            <div class="row">
+                <div class="large-9 columns">
+                </div>
+                <div class="large-3 small-8 columns">
+                    <label>
+                        <h3>إضافة خبر جديد:</h3>
+                        <input type="text" ng-model="user.title" required placeholder="إضافة عنوان" name="title" />
+                        <span style="color:red" ng-show="myForm.title.$dirty && myForm.title.$invalid">
+                            <span ng-show="myForm.title.$error.required">Title is required</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="large-12  small-12 columns">
+                    <textarea placeholder="إضافة خبر" ng-model="user.description" required name="description"></textarea>
+                    <span style="color:red" ng-show="myForm.description.$dirty && myForm.description.$invalid">
+                        <span ng-show="myForm.description.$error.required">Description is required</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-6 columns">
+                    <!--<div class="  submitsuccess alert-box success radius ">
+                        تمة الإضافة بنجاح
+                    </div>
+                    
+                    <div data-alert class=" submiterror alert-box alert round">
+                       لم تتم الإضافة   
+                    </div>-->
+                    <toaster-container toaster-options="{'position-class': 'toast-top-left'}"></toaster-container>
+
+                </div>
+                <div class="large-3 columns">
+                    <button class="button  tiny" ng-click="submit()" ng-disabled="myForm.title.$dirty && myForm.title.$invalid ||
+myForm.description.$dirty && myForm.description.$invalid || myForm.title.$pristine || myForm.description.$pristine">
+                        إضافة خبر
+                    </button>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+    <div class="inbox row" ng-repeat="m in dat">
+
+        <div class="panel large-12 small-12 columns posrelative">
+            <a href="#viewmessage/{{m.Id}}" class="bancolor">
+
+                {{m.Title}}
+
+            </a>
+            <div class="posabsolute">
+                <a href="#editnews/{{m.Id}}" class="button success tiny">تعديل خبر</a>
+                <button class="button alert tiny" ng-click="deletenews(m.Id)">حذف خبر</button>
+            </div>
+        </div>
+      
+    </div>
+    
+  
+
+  
+
+    <div class="row">
+       
+        <div style="padding-left:4rem;" class="large-3 columns large-centered">
+            <ul class="pagination">
+                <li  ><a class="redcolor" ng-class="{'bancolor':boolprevious}" ng-click="pagiprevious()" ng-model="boolprevious">Previous &raquo;</a></li>
+                <li>{{currentPage}}</li>
+                <li><a class={{classnext}} ng-click="paginext()">&laquo;Next </a></li>
+
+            </ul>
+        </div>
+       
+    </div>
+   
+   
+   
+ 
+  
+ 
+</form>

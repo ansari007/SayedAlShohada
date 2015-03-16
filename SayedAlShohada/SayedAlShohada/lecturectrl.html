@@ -1,0 +1,79 @@
+﻿
+
+<div class="row  inbox ">
+    <div class="large-3 small-7 small-centered large-centered columns ">
+
+  <a href="#createlecture" class="button  radius"> إضافة محاضرة</a>
+
+
+</div>
+
+
+</div>
+
+
+<div class="row " ng-repeat="lecture in dat">
+<div class="large-6 columns">
+    
+</div>
+
+    <div class="large-6  panel columns" style="margin-top:1rem;">
+    <div class="row">
+     <div class="large-6 columns">
+                            <p><h7 style="color:#122141;"><strong>  العنوان : {{lecture.Vtitle}} </strong></h7></p>
+                            <p><h7 style="color:#122141;"><strong>  تاريخ النشر :{{lecture.Date}} </strong></h7></p>
+
+
+        </div> 
+        <div class="large-6 columns"> <img ng-src="pic/videoexample.jpg" width="70%" />
+
+</div>
+
+       
+         
+            
+<!-- 
+            <p style="color:#101f40;">
+                <h7 style="color:#101f40;">
+                    <strong>
+                        الصفحة الر ئيسية
+                        الصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسية الصفحة الرئيسية الصفحة الرئيسيةالصفحة الر ئيسيةالصفحة الرئ  يسية
+                        الصفحة الرئيسيةالصفح ة
+                        الصفحة الرئيسية
+                    </strong>
+                </h7>
+            </p> -->
+ </div>
+ <div class="row inbox">
+     <div class="large-6 columns">
+         <a href="#editlecture/{{lecture.Id}}" class="button  radius success tiny"> تعديل المحاضرة</a>
+
+         <button class="button alert tiny" ng-click="deletelecture(lecture.Id)">حذف المحاضرة</button>
+
+     </div>
+     <div class="large-6 columns">
+         <button class="button radius tiny" ng-click="changestatus(lecture.Id,lecture.Vstatus)">
+             <span ng-if="lecture.Vstatus === 10">جديدة</span>
+             <span ng-if="lecture.Vstatus === 20">منشورة</span>
+             <span ng-if="lecture.Vstatus === 30">مسحوبة</span>
+         </button>
+ 
+     </div>
+ </div>
+</div>
+
+</div>
+
+<div class="row">
+
+    <div style="padding-left:4rem;" class="large-3 columns large-centered">
+        <ul class="pagination">
+            <li><a class="redcolor" ng-class="{'bancolor':boolprevious}" ng-click="pagiprevious()" ng-model="boolprevious">Previous &raquo;</a></li>
+            <li>{{currentPage}}</li>
+            <li><a class={{classnext}} ng-click="paginext()">&laquo;Next </a></li>
+
+        </ul>
+    </div>
+
+</div>
+

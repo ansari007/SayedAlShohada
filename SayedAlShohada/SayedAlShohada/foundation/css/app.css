@@ -1,0 +1,240 @@
+﻿body {
+    background-color: white;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.bancolor {
+    color: #101f40 !important;
+}
+
+.redcolor {
+    color: red !important;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button) {
+    background: none repeat scroll 0% 0% #101f40 !important;
+}
+
+.top-bar {
+    background: none repeat scroll 0% 0% #101f40 !important;
+}
+
+.top-bar-section ul li > a {
+    width: 101% !important;
+}
+
+.top-bar-section ul li:hover:not(.has-form) > a {
+    background: none repeat scroll 0% 0% #272727;
+    color: green;
+}
+
+.inbox {
+    margin-top: 1rem !important;
+}
+
+.inbox2 {
+    margin-top: 4rem !important;
+}
+
+.posrelative {
+    position: relative;
+    overflow: hidden;
+}
+
+.posabsolute {
+    /*position: absolute;*/
+    width: 21rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}
+
+.middlepos {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/*#myElement{
+    width:100% !important;
+}*/
+/*.sidemenu {
+    -webkit-backface-visibility: hidden;
+    width: 11.625rem;
+    top: -158px;
+    height: auto;
+    bottom: 0;
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #203e7f;
+    z-index: 2000;
+    box-sizing: content-box;
+    transition: transform 500ms ease 0s;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -ms-transform: translate(100.5%, 0);
+    -webkit-transform: translate3d(100.5%, 0, 0);
+    -moz-transform: translate3d(100.5%, 0, 0);
+    -ms-transform: translate3d(100.5%, 0, 0);
+    -o-transform: translate3d(100.5%, 0, 0);
+    transform: translate3d(100.5%, 0, 0);
+    right: 0;
+    margin-right: 0.094rem;
+}
+
+    .sidemenu ul {
+        position: absolute;
+        top: 12rem;
+        right: 4rem;
+    }
+
+    .sidemenu * {
+        -webkit-backface-visibility: hidden;
+    }*/
+
+.whiteback {
+    background-color: white;
+}
+
+.fleft {
+    float: left;
+}
+
+
+.fright {
+    float: right;
+}
+
+.con {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*.move-right > .inner-wrap {
+    -ms-transform: translate(11.625rem, 0);
+    -webkit-transform: translate3d(11.625rem, 0, 0);
+    -moz-transform: translate3d(11.625rem, 0, 0);
+    -ms-transform: translate3d(11.625rem, 0, 0);
+    -o-transform: translate3d(11.625rem, 0, 0);
+    transform: translate3d(11.625rem, 0, 0);
+}*/
+
+.no-csstransforms .move-right > .inner-wrap {
+    left: 11.625rem;
+}
+
+.right-off-canvas-menu {
+    width: 11.625rem;
+    background-color: #203d7f !important;
+    margin-right: 0.08rem;
+    z-index: 2000;
+}
+
+.no-csstransforms .right-off-canvas-menu {
+    right: -11.625rem;
+}
+
+.no-csstransforms .move-left > .inner-wrap {
+    right: 11.625rem;
+}
+
+.move-left > .inner-wrap {
+    -ms-transform: translate(-11.625rem, 0);
+    -webkit-transform: translate3d(-11.625rem, 0, 0);
+    -moz-transform: translate3d(-11.625rem, 0, 0);
+    -ms-transform: translate3d(-11.625rem, 0, 0);
+    -o-transform: translate3d(-11.625rem, 0, 0);
+    transform: translate3d(-11.625rem, 0, 0);
+}
+
+
+/* .top-bar-section li{
+
+    width:20% !important;
+  }*/
+
+
+/*.cssFade {
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -ms-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    -ms-opacity: 1;
+    opacity: 1;
+}
+
+.cssFade.ng-hide {
+    -ms-opacity: 0;
+    opacity: 0;
+}*/
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.cssFade {
+    -webkit-animation: fadeIn 5s; /* Safari 4+ */
+    -moz-animation: fadeIn 5s; /* Fx 5+ */
+    -o-animation: fadeIn 5s; /* Opera 12+ */
+    animation: fadeIn 5s; /* IE 10+, Fx 29+ */
+}
+
+.submitsuccess {
+    -ms-opacity: 0;
+    opacity: 0;
+}
+
+.submiterror {
+    -ms-opacity: 0;
+    opacity: 0;
+}
+.hidediv {
+    display: none;
+}
+.showdiv {
+    display: block;
+}
+.vars {
+    
+}
+
