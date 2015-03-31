@@ -1,0 +1,66 @@
+
+
+<ion-view ng-controller="viewlecturectrl as vm" >
+
+  <ion-content class="has-header">
+<!--   <ion-refresher
+  pulling-text="Pull to refresh..."
+  on-refresh="vm.loadList(true)">
+  </ion-refresher> -->
+  
+  <div class="row">
+
+   <div class="padding col "><h1 class="titlecolor">المحاضرات</h1>
+
+</div>
+</div>
+<div class="row ">
+
+
+
+   <div class="padding col ">
+
+
+<video width="100%" controls>
+<!--             <source ng-src="http://mohammad:59454/Files/123.mp4" type="video/mp4" poster="{{vm.lectures[1].Imgloc}}" vm.lectures[1].Vlocation>
+ -->           <source ng-src="{{vm.makevurl(vm.lecture.Vlocation)}}" type="video/mp4"> 
+
+            Your browser does not support the video tag.
+        </video>
+
+    </div>
+</div>
+
+
+
+<div class="row  ">
+  <div class="col col-33 col-offset-33"><h4>{{vm.lecture.Vtitle}}</h4></div>
+  <div class="col col-center ">   <img src="pic/socialiconsk.jpg"/ width="100%">
+  </div>
+</div>
+
+
+
+<div class="row undertitlecolor">
+<div class="col padding ">
+
+<h5> 
+  {{vm.lecture.Vdescription}}
+     {{vm.makevurl(vm.lecture.Vlocation)}}           
+                  </h5>
+
+
+
+</div>
+</div>
+
+<div class="row  ">
+  <div class="col col-33 col-offset-33">
+  </div>
+  <div class="col  padding">   <img src="pic/joinus.jpg" align="left"/>
+  </div>
+</div>
+
+
+  </ion-content>
+</ion-view>

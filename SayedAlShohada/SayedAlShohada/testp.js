@@ -556,18 +556,8 @@ mhdapp.controller("vidogularv3", function ($scope, $routeParams, $http, $sce) {
     this.config = {
         sources: [
             { src: $sce.trustAsResourceUrl("video/123.mp4"), type: "video/mp4" }
-            //{src: $sce.trustAsResourceUrl(""), type: "video/webm"},
-            //{src: $sce.trustAsResourceUrl("video/123.mp4"), type: "video/ogg"}
+            
         ],
-        //tracks: [
-        //    {
-        //        src:  $sce.trustAsResourceUrl("http://www.videogular.com/assets/subs/pale-blue-dot.vtt"),
-        //        kind: "subtitles",
-        //        srclang: "en",
-        //        label: "English",
-        //        default: ""
-        //    }
-        //],
         theme: "../Scripts/bower_components/videogular-themes-default/videogular.css",
         plugins: {
             poster: $sce.trustAsResourceUrl("http://www.videogular.com/assets/images/videogular.png")

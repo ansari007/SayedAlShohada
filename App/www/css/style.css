@@ -1,0 +1,97 @@
+
+/* Empty. Add your own CSS if you like */
+
+
+@font-face {
+  font-family: 'al-fares';
+ src: url('al-fares.ttf');
+}
+
+
+html{
+
+font-family: al-fares !important; 
+
+}
+
+
+
+
+.rightb{
+
+position:absolute;
+right:0;
+
+}
+
+.leftb{
+
+	position:absolute;
+	left: 0;	
+}
+
+.headerbackimg{
+background-image: url('pic/banner.jpg');
+background-repeat: round;
+background-size: 100%;
+
+
+
+}
+
+
+
+.wrap{
+
+
+    word-wrap: break-word;
+
+
+}
+
+
+
+.menucolor{
+
+	background-color:#203D7F ;
+}
+
+.textwhite{
+
+	color:white !important;
+}
+.bordermenu{
+border-color:#101f40;
+}
+.menu{
+	width:275px !important;
+	/*139px*/
+}
+
+.titlecolor{
+color:#716648;
+
+}
+
+.undertitlecolor{
+color:#101f40;
+background-color: #faf4e4;
+
+}
+
+.blcolor{
+	color:#101f40;
+
+
+}
+
+.underlignetitle{
+border-bottom: 2px solid #E1DFD9;
+
+}
+
+
+.anim {
+-webkit-transform: translate3d(-139px, 0px, 0px) !important;
+
+}

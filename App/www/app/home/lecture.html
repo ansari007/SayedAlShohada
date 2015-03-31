@@ -1,0 +1,105 @@
+<ion-view ng-controller="lecturectrl as vm" >
+
+  <ion-content class="has-header">
+  <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="vm.loadList(true)">
+    </ion-refresher>
+  
+  <div class="row">
+
+   <div class="padding col "><h1 class="titlecolor">المحاضرات</h1>
+
+</div>
+</div>
+<div class="row ">
+
+
+
+   <div class="padding col ">
+
+
+<div ng-controller="videogularctrl as controller" class="videogular-container">
+            <videogular vg-theme="controller.config.theme">
+                <vg-media vg-src="controller.config.sources"
+                          vg-tracks="controller.config.tracks">
+                </vg-media>
+                
+                
+                <vg-controls>
+
+                    <vg-volume>
+                        <vg-mute-button></vg-mute-button>
+                        <vg-volume-bar></vg-volume-bar>
+                    </vg-volume>
+                    <vg-fullscreen-button></vg-fullscreen-button>
+                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                    <vg-scrub-bar dir="ltr">
+                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                       
+                    </vg-scrub-bar>
+
+                    <vg-play-pause-button></vg-play-pause-button>
+                   
+                </vg-controls>
+
+                <vg-overlay-play></vg-overlay-play>
+                <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+            </videogular>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="row  ">
+  <div class="col col-33 col-offset-33"><h4>{{vm.lectures[vm.nid].Vtitle}}</h4></div>
+  <div class="col col-center ">   <img src="pic/socialiconsk.jpg"/ width="100%">
+  </div>
+</div>
+
+
+
+<div class="row undertitlecolor">
+<div class="col padding ">
+
+<h5> 
+  
+     Description goes here!!!           
+                  </h5>
+
+
+
+</div>
+</div>
+
+<div class="row  ">
+  <div class="col col-33 col-offset-33">
+  </div>
+  <div class="col  padding">   <img src="pic/joinus.jpg" align="left"/>
+  </div>
+</div>
+
+
+
+
+<div class="list">
+
+    <a class="item item-thumbnail-right"  ng-repeat="val in vm.lectures" 
+    ng-href="#/home/lecture/{{val.Id}}">
+      <img ng-src={{val.Imgloc}}>
+      <h2>{{val.Vtitle}}</h2>
+    
+    </a>
+
+    
+
+</div>
+
+
+
+
+
+  </ion-content>
+</ion-view>
