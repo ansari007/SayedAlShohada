@@ -2,18 +2,24 @@
 (function () {
     'use strict';
 
-    angular.module('eliteApp').controller('newsctrl', ['$http','apictrl', newsctrl]);
+    angular.module('eliteApp').controller('newsctrl', ['$http', 'apictrl', '$scope', newsctrl]);
 
-    function newsctrl($http,apictrl) {
+    function newsctrl($http, apictrl, $scope) {
         var vm = this;
 
-apictrl.getmsgs().then(function(data){
-  vm.news = data;
-  console.log("mhd",vm.news);
- 
+
+        vm.loadList = function (forceRefresh) {
+            apictrl.getmsgs(forceRefresh).then(function (data) {
+                vm.news = data;
 
 
-})
+            }).finally(function () {
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+
+        };
+        vm.loadList(false);
+
 
 
 

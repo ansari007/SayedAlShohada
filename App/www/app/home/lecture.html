@@ -1,105 +1,111 @@
-<ion-view ng-controller="lecturectrl as vm" >
+<ion-view ng-controller="lecturectrl as vm">
 
-  <ion-content class="has-header">
-  <ion-refresher
-    pulling-text="Pull to refresh..."
-    on-refresh="vm.loadList(true)">
-    </ion-refresher>
-  
-  <div class="row">
+    <ion-content class="has-header">
+        <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="vm.loadList(true)">
+        </ion-refresher>
 
-   <div class="padding col "><h1 class="titlecolor">المحاضرات</h1>
+        <div class="row">
 
-</div>
-</div>
-<div class="row ">
+            <div class="col col-50 ">
+                <h3 class="titlecolor nomargin"><b>المحاضرات</b></h3>
+
+            </div>
+        </div>
+        <div class="row ">
+
+            <div class="padding col ">
+
+                <div ng-controller="videogularctrl as controller" class="videogular-container">
+                    <videogular vg-theme="controller.config.theme">
+                        <vg-media vg-src="controller.config.sources"
+                                  vg-tracks="controller.config.tracks">
+                        </vg-media>
 
 
+                        <vg-controls>
 
-   <div class="padding col ">
+                            <vg-volume>
+                                <vg-mute-button></vg-mute-button>
+                                <vg-volume-bar></vg-volume-bar>
+                            </vg-volume>
+                            <vg-fullscreen-button></vg-fullscreen-button>
+                            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                            <vg-scrub-bar dir="ltr">
+                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
 
+                            </vg-scrub-bar>
 
-<div ng-controller="videogularctrl as controller" class="videogular-container">
-            <videogular vg-theme="controller.config.theme">
-                <vg-media vg-src="controller.config.sources"
-                          vg-tracks="controller.config.tracks">
-                </vg-media>
-                
-                
-                <vg-controls>
+                            <vg-play-pause-button></vg-play-pause-button>
 
-                    <vg-volume>
-                        <vg-mute-button></vg-mute-button>
-                        <vg-volume-bar></vg-volume-bar>
-                    </vg-volume>
-                    <vg-fullscreen-button></vg-fullscreen-button>
-                    <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-                    <vg-scrub-bar dir="ltr">
-                        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                       
-                    </vg-scrub-bar>
+                        </vg-controls>
 
-                    <vg-play-pause-button></vg-play-pause-button>
-                   
-                </vg-controls>
+                        <vg-overlay-play></vg-overlay-play>
+                        <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+                    </videogular>
+                </div>
 
-                <vg-overlay-play></vg-overlay-play>
-                <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
-            </videogular>
+            </div>
         </div>
 
-    </div>
-</div>
 
 
+        <div class="row  ">
+            <div class="col col-33 col-offset-33"><h4><b>عنوان الفيديو{{vm.lectures[vm.nid].Vtitle}}</b></h4></div>
+            <div class="col col-center ">
+                <img src="http://mohammad:59454/SayedAlShohada/pic/socialiconsk.jpg" /> width="96%">
+            </div>
+        </div>
 
-<div class="row  ">
-  <div class="col col-33 col-offset-33"><h4>{{vm.lectures[vm.nid].Vtitle}}</h4></div>
-  <div class="col col-center ">   <img src="pic/socialiconsk.jpg"/ width="100%">
-  </div>
-</div>
+        <div class="row bgtitlecolor">
+            <div class=" col padding ">
 
+                <h5 class="wrap sectitlecolor">
+                    <b>
+                        شركة جوجل أو غوغل أو قوقل (بالإنكليزية: Google) هي شركة عامة أمريكية تربح من العمل في مجال الإعلان المرتبط بخدمات البحث على الإنترنت وإرسال رسائل البريد الإلكتروني. وأختير اسم غوغل الذي يعكس المُهمة التي تقوم بها الشركة، وهي تنظيم ذلك الكم الهائل من المعلومات المُتاحة على الويب.[2]
+                    </b>
+                </h5>
+            </div>
 
-
-<div class="row undertitlecolor">
-<div class="col padding ">
-
-<h5> 
-  
-     Description goes here!!!           
-                  </h5>
-
-
-
-</div>
-</div>
-
-<div class="row  ">
-  <div class="col col-33 col-offset-33">
-  </div>
-  <div class="col  padding">   <img src="pic/joinus.jpg" align="left"/>
-  </div>
-</div>
+        </div>
 
 
 
 
-<div class="list">
-
-    <a class="item item-thumbnail-right"  ng-repeat="val in vm.lectures" 
-    ng-href="#/home/lecture/{{val.Id}}">
-      <img ng-src={{val.Imgloc}}>
-      <h2>{{val.Vtitle}}</h2>
-    
-    </a>
-
-    
-
-</div>
+        <div class="row  ">
+            <div class="col col-33 col-offset-33">
+            </div>
+            <div class="col  padding">
+                <img src="http://mohammad:59454/SayedAlShohada/pic/joinus.jpg" align="left" />
+            </div>
+        </div>
+        
 
 
+        <div class="list">
+
+            <a class="item item-thumbnail-right" ng-repeat="val in vm.lectures"
+               ng-href="#/home/lecture/{{val.Id}}">
+                <img ng-src="http://mohammad:59454/SayedAlShohada/pic/videothub.jpg">
+              
+                <h2>{{val.Vtitle}}</h2>
+                <p>By Nine Inch Nails</p>
+            </a>
 
 
 
-  </ion-content>
+        </div>
+
+
+
+
+
+
+        
+
+
+
+
+
+    </ion-content>
 </ion-view>

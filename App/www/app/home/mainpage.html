@@ -1,88 +1,105 @@
-<ion-view >
+<ion-view>
 
-  <ion-content class="has-header">
-  <div class="row">
+    <ion-content class="has-header">
+        <div class="row">
 
-   <div class="padding col "><h1 class="titlecolor">الصفحة الرئيسية</h1>
+            <div class="col col-50 ">
+                <h3 class="titlecolor nomargin"><b>الصفحة الرئيسية</b></h3>
 
-</div>
-</div>
+            </div>
+        </div>
 
-<div class="row undertitlecolor">
-<div class="padding col ">
+        <div class="row bgtitlecolor">
+            <div class=" col padding ">
 
-<h3>
-	أخر رسالة
-</h3>
-</br>
-<h5 class="wrap">  الصفحة الر ئيسية
-                    الصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة ssssالرئيسيةالصفحة الرئيسية الصفحة الرئيسية الصفحة الرئيسيةالصفحة الر ئيسيةالصفحة الرئ  يسية
-                    الصفحة الرئيسيةالصفح ة
-                    الصفحة الرئيسية</h5>
-</div>
+                <h4 class="nomargin sectitlecolor">
+                    <b>أخر رسالة</b>
+                </h4>
 
-</div>
+                <h5 class="wrap sectitlecolor">
+                    <b>
+                        شركة جوجل أو غوغل أو قوقل (بالإنكليزية: Google) هي شركة عامة أمريكية تربح من العمل في مجال الإعلان المرتبط بخدمات البحث على الإنترنت وإرسال رسائل البريد الإلكتروني. وأختير اسم غوغل الذي يعكس المُهمة التي تقوم بها الشركة، وهي تنظيم ذلك الكم الهائل من المعلومات المُتاحة على الويب.[2]
+                    </b>
+                </h5>
+            </div>
 
+        </div>
 
-
-
-
-<div class="row ">
+        <div class="row ">
 
 
 
-   <div class="padding col ">
+            <div class="padding col ">
 
 
-<video width="100%" controls>
-            <source src="video/123.mp4" type="video/mp4">
-            <source src="video/123.ogg" type="video/ogg">
-
-            Your browser does not support the video tag.
-        </video>
-
-   	</div>
-</div>
-
-<div class="row titleundercolor">
-<div class="col padding underlignetitle">
-<h4>فيديو أخر محاضرة</h4>
+                <div ng-controller="videogularctrl as controller" class="videogular-container">
+                    <videogular vg-theme="controller.config.theme">
+                        <vg-media vg-src="controller.config.sources"
+                                  vg-tracks="controller.config.tracks">
+                        </vg-media>
 
 
+                        <vg-controls>
 
+                            <vg-volume>
+                                <vg-mute-button></vg-mute-button>
+                                <vg-volume-bar></vg-volume-bar>
+                            </vg-volume>
+                            <vg-fullscreen-button></vg-fullscreen-button>
+                            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                            <vg-scrub-bar dir="ltr">
+                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
 
+                            </vg-scrub-bar>
 
+                            <vg-play-pause-button></vg-play-pause-button>
 
-</div>
+                        </vg-controls>
 
+                        <vg-overlay-play></vg-overlay-play>
+                        <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
+                    </videogular>
+                </div>
 
-</div>
+            </div>
+        </div>
 
-<div class="row ">
-<div class="col padding ">
-<h4>روايات</h4>
-
-
-
-<h5>  الصفحة الر ئيسية
-                    الصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسيةالصفحة الرئيسية الصفحة الرئيسية الصفحة الرئيسيةالصفحة الر ئيسيةالصفحة الرئ  يسية
-                    الصفحة الرئيسيةالصفح ة
-                    الصفحة الرئيسية</h5>
-
-
-
-</div>
-
-
-</div>
+        <div class="row ">
+            <div class="col underlignetitle">
+                <h4 class="nomargin sectitlecolor"><b>فيديو أخر محاضرة</b></h4>
 
 
 
 
 
-</div>
+
+            </div>
+
+
+        </div>
+
+        <div class="row ">
+            <div class="col  ">
+                <h4 class="sectitlecolor"><b>روايات</b></h4>
 
 
 
-  </ion-content>
+                <h5 class="sectitlecolor"> <b>شركة جوجل أو غوغل أو قوقل (بالإنكليزية: Google) هي شركة عامة أمريكية تربح من العمل في مجال الإعلان المرتبط بخدمات البحث على الإنترنت وإرسال رسائل البريد الإلكتروني. وأختير اسم غوغل الذي يعكس المُهمة التي تقوم بها الشركة، وهي تنظيم ذلك الكم الهائل من المعلومات المُتاحة على الويب.</b></h5>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+    </ion-content>
 </ion-view>

@@ -12,9 +12,10 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory"])
     //  // org.apache.cordova.statusbar required
     //  StatusBar.styleDefault();
     //}
-        DSCacheFactory("MessagesCache", { storageMode: "localStorage", maxAge: 10000, deleteOnExpire: "aggressive" });
-        DSCacheFactory("MessagedispCache", { storageMode: "localStorage", maxAge: 10000, deleteOnExpire: "aggressive" });
-        DSCacheFactory("LecturesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+      DSCacheFactory("MessagesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+      DSCacheFactory("MessagedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+      DSCacheFactory("LecturesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+      DSCacheFactory("LecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
 
   });
 })

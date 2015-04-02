@@ -1030,6 +1030,14 @@
     <Content Include="www\css\al-fares.ttf" />
     <Content Include="www\css\al-fares.zip" />
     <Content Include="www\css\arabicfont.ttf" />
+    <Content Include="www\css\font\HacenTunisia.eot" />
+    <Content Include="www\css\font\HacenTunisia.svg" />
+    <Content Include="www\css\font\HacenTunisia.ttf" />
+    <Content Include="www\css\font\HacenTunisia.woff" />
+    <Content Include="www\css\font\HacenTunisiaBold.eot" />
+    <Content Include="www\css\font\HacenTunisiaBold.svg" />
+    <Content Include="www\css\font\HacenTunisiaBold.ttf" />
+    <Content Include="www\css\font\HacenTunisiaBold.woff" />
     <Content Include="www\css\important.txt" />
     <Content Include="www\css\style.css" />
     <Content Include="www\img\ionic.png" />
@@ -1542,6 +1550,7 @@
     <Content Include="www\pic\msgicon.jpg" />
     <Content Include="www\pic\socialiconsk.jpg" />
     <Content Include="www\pic\videoexample.jpg" />
+    <Content Include="www\pic\videothub.jpg" />
     <Content Include="www\README.md" />
     <Content Include="www\templates\browse.html" />
     <Content Include="www\templates\login.html" />

@@ -2,18 +2,45 @@
 /* Empty. Add your own CSS if you like */
 
 
-@font-face {
-  font-family: 'al-fares';
- src: url('al-fares.ttf');
+
+
+
+@font-face
+{
+    font-family: 'HacenTunisia';
+    src: url('font/HacenTunisia.eot');
+    src: url('font/HacenTunisia.eot?#iefix') format('embedded-opentype'), 
+         url('font/HacenTunisia.woff') format('woff'), 
+         url('font/HacenTunisia.ttf') format('truetype'), 
+         url('font/HacenTunisia.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face
+{
+    font-family: 'HacenTunisia';
+    src: url('font/HacenTunisiaBold.eot');
+    src: url('font/HacenTunisiaBold.eot?#iefix') format('embedded-opentype'), 
+         url('font/HacenTunisiaBold.woff') format('woff'), 
+         url('font/HacenTunisiaBold.ttf') format('truetype'), 
+         url('font/HacenTunisiaBold.svg') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+  font-family: 'HacenTunisia';
 }
 
 
+
+/* 
 html{
 
 font-family: al-fares !important; 
 
 }
-
+ */
 
 
 
@@ -31,7 +58,7 @@ right:0;
 }
 
 .headerbackimg{
-background-image: url('pic/banner.jpg');
+background-image: url('http://mohammad:59454/SayedAlShohada/pic/banner.jpg');
 background-repeat: round;
 background-size: 100%;
 
@@ -63,22 +90,22 @@ background-size: 100%;
 .bordermenu{
 border-color:#101f40;
 }
-.menu{
-	width:275px !important;
-	/*139px*/
-}
+
 
 .titlecolor{
 color:#716648;
 
 }
 
-.undertitlecolor{
-color:#101f40;
-background-color: #faf4e4;
+.sectitlecolor{
+color:#1d2b4a !important;
+
 
 }
 
+.bgtitlecolor{
+	background-color: #faf4e4 !important;
+}
 .blcolor{
 	color:#101f40;
 
@@ -86,12 +113,73 @@ background-color: #faf4e4;
 }
 
 .underlignetitle{
-border-bottom: 2px solid #E1DFD9;
+border-bottom: 1.5px solid #E1DFD9;
 
 }
 
 
-.anim {
+/* .anim {
 -webkit-transform: translate3d(-139px, 0px, 0px) !important;
 
+}
+ */
+.nomargin{
+	margin:0px !important;
+}
+
+
+.menu{
+	width: 105px !important;
+}
+
+ul.list.item{
+
+	border-color:#203D7F !important;
+}
+.bar-header{
+	border-color:#203D7F !important;
+}
+
+
+.menuitem{
+	margin-top: 15px !important;
+
+	  margin-right: 31px !important;
+  }
+
+   .menuheader{
+	margin-top: 2px !important;
+
+	 
+}
+
+ 
+  .tawasalma3na{
+  	margin-top: 25px !important;
+
+	  margin-right: 27px !important;
+  }
+
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  color: #000;
+  font-weight: 500;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  line-height: 1.7 !important; }
+
+.bannerstyle{
+	background-color: #101f40;
+	color: #decda0;
+	
+
+}
+
+.bannerspan{
+	font-size: 20px;
+	margin-right: 3rem;
+	margin-top: 0.5rem;
+}
+
+.newstitlecolor{
+	color: #253351 !important;
+	font-size: 18px !important;
 }
