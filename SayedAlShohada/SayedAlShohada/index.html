@@ -1,17 +1,30 @@
 ﻿
 
-<!--<script type="text/javascript">
-    jwplayer("myElement").setup({
-        file: "video/123.mp4",
-     //image: "123myPoster.jpg"
- });</script>-->
+
+<script>
+
+
+    $(document).ready(function () {
+        setTimeout(function () {
+            var test = $('#hiddenUrl').val();
+
+            jwplayer("myElement").setup({
+                file: test
+                //image: "123myPoster.jpg"
+            });
+        });
+
+    });
+
+</script>
+
 <div class="row" style="background-color: #faf4e4;">
     <div class="large-12 small-10 columns">
         <h4 style="color:#7f755a;">الصفحة الرئيسية</h4>
         <h5 style="color:#101f40;"><strong>أخر رسالة</strong></h5>
-        
-        
-        <!--<div id="myElement">Loading the player...</div>-->
+
+        <input type="hidden" value={{url}} id="hiddenUrl" ng-controller="logctrl" />
+        <div id="myElement"></div>
 
         <p style="color:#101f40;">
             <h7 style="color:#101f40;">
@@ -56,3 +69,4 @@
     </div>
 
 </div>
+

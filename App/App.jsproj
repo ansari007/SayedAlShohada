@@ -1171,6 +1171,7 @@
     <Content Include="www\js\bower_components\jquery\dist\jquery.js" />
     <Content Include="www\js\bower_components\jquery\dist\jquery.min.js" />
     <Content Include="www\js\bower_components\jquery\dist\jquery.min.map" />
+    <Content Include="www\js\bower_components\jquery\dist\testjava.js" />
     <Content Include="www\js\bower_components\jquery\MIT-LICENSE.txt" />
     <Content Include="www\js\bower_components\jquery\src\ajax.js" />
     <Content Include="www\js\bower_components\jquery\src\ajax\jsonp.js" />

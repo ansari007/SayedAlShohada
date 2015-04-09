@@ -26,6 +26,22 @@ mhdapp.config(["$routeProvider", function ($routeProvider) {
 
         })
 
+
+        .
+    when("/viewarticles", {
+        templateUrl: "viewarticles.html",
+        controller: "articles"
+
+
+    })
+        .when("/viewarticle/:num", {
+            templateUrl: "viewarticle.html",
+            controller: "article"
+
+
+        })
+
+
           .when("/login", {
               templateUrl: "SignIn.html",
               controller: "c1"
@@ -66,6 +82,11 @@ mhdapp.config(["$routeProvider", function ($routeProvider) {
          .when("/editnews/:num", {
              templateUrl: "editnews.html",
              controller: "editCtrl"
+         })
+
+         .when("/editarticle/:num", {
+             templateUrl: "editarticle.html",
+             controller: "editarticle"
          })
 
          .when("/editlecture/:num", {
@@ -640,6 +661,8 @@ mhdapp.controller("editlecCtrl", function ($scope, $routeParams, $http, $locatio
 
 
 mhdapp.controller("logctrl", function ($scope, $routeParams, $http, $location, $window, toaster) {
+
+   
   console.log("login ctrl");
     $scope.user = { username: '', password: '' };
     $scope.verif = true;
@@ -668,6 +691,245 @@ mhdapp.controller("logctrl", function ($scope, $routeParams, $http, $location, $
 
 
     }
+       
+
+});
+
+
+
+mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toaster) {
+
+
+    $scope.classnext = 'bancolor';
+    $scope.classprevious = 'unavailable';
+
+    $scope.currentPage = 1;
+    sessionStorage.pagesession = $scope.currentPage;
+    if (sessionStorage.articlesession != null) {
+
+
+        if (sessionStorage.articlesession != "") {
+            $scope.currentPage = sessionStorage.articlesession;
+            sessionStorage.articlesession = "";
+        }
+    }
+    $scope.user = { title: '', description: '' };
+    $http.get('/api/Articles/GetNext/' + $scope.currentPage).then(function (result) {
+
+
+
+        $scope.dat = result.data.Articles;
+
+        $scope.totalpage = result.data.total;
+        console.log($scope.dat);
+
+
+        console.log($scope.dat[0]);
+    });
+
+    if ($scope.currentPage == 1) {
+        $scope.boolprevious = false;
+
+    } else {
+        $scope.boolprevious = true;
+
+    }
+
+    $scope.paginext = function () {
+        if ($scope.currentPage < $scope.totalpage) {
+            $scope.currentPage++;
+            sessionStorage.pagesession = $scope.currentPage;
+
+
+            $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+
+
+                $scope.dat = result.data.Articles;
+                console.log($scope.dat);
+
+
+            });
+        }
+    }
+
+    $scope.pagiprevious = function () {
+        if ($scope.currentPage > 1) {
+
+
+            $scope.currentPage--;
+            sessionStorage.pagesession = $scope.currentPage;
+
+            $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+
+
+                $scope.dat = result.data.Articles;
+                console.log($scope.dat);
+
+
+            });
+        }
+    }
+
+    $scope.edition = function (val) {
+
+
+        $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+
+            $scope.dat = result.data.Articles;
+            console.log($scope.dat);
+            $scope.user = { title: '', description: '' };
+            console.log("edit");
+
+        });
+
+
+
+
+
+
+    }
+    $scope.submit = function () {
+
+        $http.post('/api/Articles/Forminfo', $scope.user).
+          success(function (data, status, headers, config) {
+              $scope.myForm.$setPristine();
+              $scope.user = { title: '', description: '' };
+              console.log("post ok");
+              $http.get('/api/Articles/Getnext/' + 1).then(function (result) {
+
+                  $scope.dat = result.data.Articles;
+
+                  $scope.popsuccess = function () {
+                      toaster.pop('note', "تمة الإضافة بنجاح", "");
+                  };
+                  $scope.popsuccess();
+
+
+
+
+                  console.log($scope.dat);
+
+              });
+
+          }).
+  error(function (data, status, headers, config) {
+      $scope.popfailed = function () {
+          toaster.pop('error', "لم تتم الإضافة ", "");
+      };
+      console.log("post not ok");
+
+      $scope.popfailed();
+
+  });
+
+    }
+
+    $scope.deletearticle = function (val) {
+
+        $http.delete('/api/Articles/DeleteArticles/' + val).
+          success(function (data, status, headers, config) {
+              $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+
+                  $scope.dat = result.data.news;
+                  console.log($scope.dat);
+
+                  console.log("second httpget");
+
+              });
+
+              console.log("deletepost ok");
+
+
+          }).
+  error(function (data, status, headers, config) {
+      console.log("deletepost not ok");
+
+  });
+
+    }
+});
+
+
+
+mhdapp.controller("article", function ($scope, $routeParams, $http, $window) {
+    $scope.back = function () {
+        $window.history.back();
+    }
+    console.log("article controller");
+    $scope.idv = $routeParams.num;
+
+    $http.get('/api/Articles/Getnew/' + $scope.idv).then(function (result) {
+        sessionStorage.articlesession = sessionStorage.pagesession;
+        $scope.data = result.data;
+        console.log($scope.data);
+
+
+
+        console.log($scope.idv);
+        console.log($scope.data[0]);
+
+
+    });
+
+});
+
+
+
+
+
+mhdapp.controller("editarticle", function ($scope, $routeParams, $http, $location, $window, toaster, $timeout) {
+    $scope.popsuccess = function () {
+        toaster.pop('note', "تمة الإضافة بنجاح", "");
+    };
+    $scope.popfailed = function () {
+        toaster.pop('error', "لم تتم الإضافة ", "");
+    };
+
+    $scope.back = function () {
+        $window.history.back();
+        //window.scrollTo(x - 0, y - 0);
+    }
+    console.log("EDIT article contoller");
+    $scope.idv = $routeParams.num;
+
+    $http.get('/api/Articles/Getnew/' + $scope.idv).then(function (result) {
+
+        $scope.dat = result.data;
+        $scope.user = { title: $scope.dat.Title, description: $scope.dat.Description };
+        $scope.showtitle = $scope.dat.Title;
+    });
+
+
+    $scope.editart = function () {
+
+
+        $http.put('/api/Articles/Editarticle/' + $scope.idv, $scope.user).
+          success(function (data, status, headers, config) {
+
+
+              console.log("put ok");
+            
+              $scope.popsuccess();
+
+             
+              $timeout( $location.path("/viewarticles"), 30000);
+                 
+
+             
+
+
+          }).
+  error(function (data, status, headers, config) {
+      console.log("put not ok");
+    
+      console.log("post not ok");
+
+      $scope.popfailed();
+  });
+
+    }
 
 
 });
+
+

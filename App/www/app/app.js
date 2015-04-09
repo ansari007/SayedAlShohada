@@ -5,17 +5,17 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory"])
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    //if(window.cordova && window.cordova.plugins.Keyboard) {
-    //  cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    //}
-    //if(window.StatusBar) {
-    //  // org.apache.cordova.statusbar required
-    //  StatusBar.styleDefault();
-    //}
-      DSCacheFactory("MessagesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleDefault();
+    }
+     /* DSCacheFactory("MessagesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
       DSCacheFactory("MessagedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
       DSCacheFactory("LecturesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
-      DSCacheFactory("LecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+      DSCacheFactory("LecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });*/
 
   });
 })

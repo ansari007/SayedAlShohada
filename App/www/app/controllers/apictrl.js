@@ -4,7 +4,10 @@
     angular.module('eliteApp').factory('apictrl', ['$ionicLoading', '$stateParams', '$http', '$q', 'DSCacheFactory', apictrl]);
 
     function apictrl($ionicLoading, $stateParams, $http, $q, DSCacheFactory) {
-
+        DSCacheFactory("MessagesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("MessagedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("LecturesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("LecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
 
 
         self.MessagesCache = DSCacheFactory.get("MessagesCache");
@@ -27,7 +30,7 @@
             }
 
         });
-        // ===============================================
+     //    ===============================================
 
         self.MessagedispCache.setOptions({
             onExpire: function (key, value) {
@@ -42,7 +45,7 @@
             }
 
         });
-        // ================================================================
+       //  ================================================================
 
         self.LecturesCache.setOptions({
             onExpire: function (key, value) {

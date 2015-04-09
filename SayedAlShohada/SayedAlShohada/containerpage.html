@@ -31,6 +31,7 @@
                         <img src="pic/banner.jpg" width="100%" style="height:65px;" />
                     </div>
                 </div>
+              
                 <div class="row inbox2">
                     <div class="large-3 large-centered columns">
                         <div>
@@ -79,7 +80,8 @@
                                     <ul class="right">
                                         <li><a href="#">تواصل معنا</a></li>
                                         <li><a href="#">عن المركز</a></li>
-                                        <li><a href="#login">روايات</a></li>
+                                        <!--  <li><a href="#login">login</a></li>-->
+                                       <li><a href="#viewarticles"> روايات</a></li>
                                         <li><a href="#viewinbox">أخبار</a></li>
                                         <li class="has-dropdown not-click">
                                             <a>المحاضرات</a>
@@ -125,7 +127,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#login">
+                                    <a href="#articles">
                                         <img src="pic/aboutusicon.jpg" />
                                     </a>
                                 </li>
@@ -157,6 +159,7 @@
                                 </div>
                             </div>
                             <div ng-view>
+                                
                             </div>
                         </section>
                     </div> <!--end container-->
@@ -179,7 +182,10 @@
         <script src="../Scripts/bower_components/videogular-buffering/vg-buffering.js"></script>
         <script src="../Scripts/pace/pace.min.js"></script>
         <script src="../Scripts/angularnotification/toaster.min.js"></script>
+
+        <script src="../Scripts/jwplayer/jwplayer.js"></script>
         <script src="testp.js"></script>
+      
         <script>
             $(document).foundation();
         </script>
