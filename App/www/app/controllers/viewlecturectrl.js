@@ -10,7 +10,9 @@
          vm.nid=$stateParams.id;
 
          apictrl.getlecture().then(function(data){
-  vm.lecture = data;
+             vm.lecture = data;
+             vm.videourl = vm.localhost + data.Vlocation;
+             window.postMessage(vm.videourl, '*');
   console.log("mhd",vm.lecture);
    console.log("news-number",vm.nid);
 

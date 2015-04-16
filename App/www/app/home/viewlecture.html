@@ -11,48 +11,19 @@
 
             </div>
         </div>
-        <div class="row ">
-
-            <div class="padding col ">
-
-                <div ng-controller="videogularctrl as controller" class="videogular-container">
-                    <videogular vg-theme="controller.config.theme">
-                        <vg-media vg-src="controller.config.sources"
-                                  vg-tracks="controller.config.tracks">
-                        </vg-media>
-
-
-                        <vg-controls>
-
-                            <vg-volume>
-                                <vg-mute-button></vg-mute-button>
-                                <vg-volume-bar></vg-volume-bar>
-                            </vg-volume>
-                            <vg-fullscreen-button></vg-fullscreen-button>
-                            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-                            <vg-scrub-bar dir="ltr">
-                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-
-                            </vg-scrub-bar>
-
-                            <vg-play-pause-button></vg-play-pause-button>
-
-                        </vg-controls>
-
-                        <vg-overlay-play></vg-overlay-play>
-                        <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
-                    </videogular>
-                </div>
-
+        <div class="row" ng-controller="viewlecturectrl as vm">
+            <div class="padding col">
+               
+               
+                <div id="playerlec">error player...</div>
             </div>
         </div>
-
 
 
         <div class="row  ">
             <div class="col col-33 col-offset-33"><h4><b>{{vm.lecture.Vtitle}}</b></h4></div>
             <div class="col col-center ">
-                <img src="http://mohammad:59454/SayedAlShohada/pic/socialiconsk.jpg" /> width="96%">
+                <img src="http://mohammad:59454/SayedAlShohada/pic/socialiconsk.jpg" /> 
             </div>
         </div>
 
