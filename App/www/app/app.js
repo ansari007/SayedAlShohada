@@ -1,7 +1,7 @@
-angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory"])
+angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory",'ngCordova'])
 
 
-.run(function($ionicPlatform, DSCacheFactory) {
+.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -12,10 +12,54 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory"])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-     /* DSCacheFactory("MessagesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
-      DSCacheFactory("MessagedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
-      DSCacheFactory("LecturesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
-      DSCacheFactory("LecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });*/
+    
+      //Push Notification
+    var androidConfig = {
+        "senderID": "774696930133",
+        /*"ecb": "onNotification"*/
+    };
+      alert("hello1");
+     /* document.addEventListener("deviceready", function () {*/
+          alert("hello2");
+          $cordovaPush.register(androidConfig).then(function (result) {
+              alert(result);
+            alert("registration ok"); // Success
+        }, function(err) {
+            alert("registration not ok"); // Error
+        });
+
+        $rootScope.$on('$cordovaPush:notificationReceived', function (event, notification) {
+            switch (notification.event) {
+                case 'registered':
+                    if (notification.regid.length > 0) {
+                        alert('registration ID = ' + notification.regid);
+                    }
+                    break;
+
+                case 'message':
+                    // this is the actual push notification. its format depends on the data model from the push server
+                    alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
+                    break;
+
+                case 'error':
+                    alert('GCM error = ' + notification.msg);
+                    break;
+
+                default:
+                    alert('An unknown GCM event has occurred');
+                    break;
+            }
+        });
+
+
+        // WARNING: dangerous to unregister (results in loss of tokenID)
+        $cordovaPush.unregister(options).then(function(result) {
+            alert("r"); // Success!
+        }, function(err) {
+            // Error
+        });
+
+    /*}, false);*/
 
   });
 })
