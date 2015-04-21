@@ -15,103 +15,100 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory",'ngCordova'])
     
         // Push Notification
 
-        // Define the PushPlugin.
-        var pushNotification = window.plugins.pushNotification;
+        //// Define the PushPlugin.
+        //var pushNotification = window.plugins.pushNotification;
 
-        // Platform-specific registrations.
-        if (device.platform == 'android' || device.platform == 'Android') {
-            // Register with GCM for Android apps.
-            pushNotification.register(
-               app.successHandler, app.errorHandler,
-               {
-                   "senderID": 774696930133,
-                   "ecb": "app.onNotificationGCM"
-               });
-            alert()
-        } else if (device.platform === 'iOS') {
-            // Register with APNS for iOS apps.
-            pushNotification.register(
-                app.tokenHandler,
-                app.errorHandler, {
-                    "ecb": "app.onNotificationAPN"
-                });
-        }
-        else if (device.platform === "Win32NT") {
-            // Register with MPNS for WP8 apps.
-            pushNotification.register(
-                app.channelHandler,
-                app.errorHandler,
-                {
-                    "channelName": "MyPushChannel",
-                    "ecb": "app.onNotificationWP8",
-                    "uccb": "app.channelHandler",
-                    "errcb": "app.ErrorHandler"
-                });
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-        var androidConfig = {
-            "senderID": "774696930133"
-            //"ecb": "onNotification"
-        };
-        //document.addEventListener("deviceready", function () {
-        //    var pushNotification = window.plugins.pushNotification;
-        //    console.log(pushNotification);
+        //// Platform-specific registrations.
+        //if (device.platform == 'android' || device.platform == 'Android') {
+        //    // Register with GCM for Android apps.
         //    pushNotification.register(
-        //           successHandler,
-        //           errorHandler,
-        //           {
-        //               senderID: "774696930133",
-        //               ecb: "onNotificationGCM"
-        //               //ecb:"app.onNotificationGCM"
-        //               //ecb:"app.push_android"
-        //           });
-        //    function successHandler(result) {
-        //        alert("ccccc");
-        //        alert('result = ' + result);
-        //    }
-        //    // result contains any error description text returned from the plugin call
-        //    function errorHandler(error) {
-        //        alert("yyyy");
-        //        alert('error = ' + error);
-        //    }
+        //       app.successHandler, app.errorHandler,
+        //       {
+        //           "senderID": 774696930133,
+        //           "ecb": "app.onNotificationGCM"
+        //       });
+        //    alert()
+        //} else if (device.platform === 'iOS') {
+        //    // Register with APNS for iOS apps.
+        //    pushNotification.register(
+        //        app.tokenHandler,
+        //        app.errorHandler, {
+        //            "ecb": "app.onNotificationAPN"
+        //        });
+        //}
+        //else if (device.platform === "Win32NT") {
+        //    // Register with MPNS for WP8 apps.
+        //    pushNotification.register(
+        //        app.channelHandler,
+        //        app.errorHandler,
+        //        {
+        //            "channelName": "MyPushChannel",
+        //            "ecb": "app.onNotificationWP8",
+        //            "uccb": "app.channelHandler",
+        //            "errcb": "app.ErrorHandler"
+        //        });
+        //}
 
 
-        //    function onNotificationGCM(e) {
-        //        switch (e.event) {
-        //            case 'registered':
-        //                if (e.regid.length > 0) {
-        //                    console.log("Regid " + e.regid);
-        //                    alert('registration id = ' + e.regid);
-        //                }
-        //                break;
 
-        //            case 'message':
-        //                // this is the actual push notification. its format depends on the data model from the push server
-        //                alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
-        //                break;
 
-        //            case 'error':
-        //                alert('GCM error = ' + e.msg);
-        //                break;
 
-        //            default:
-        //                alert('An unknown GCM event has occurred');
-        //                break;
 
-        //        }
-        //    }
-        //});
+
+
+
+
+
+
+ 
+        document.addEventListener("deviceready", function () {
+            var pushNotification = window.plugins.pushNotification;
+            console.log(pushNotification);
+            pushNotification.register(
+                   successHandler,
+                   errorHandler,
+                   {
+                       senderID: "774696930133",
+                       ecb: "onNotificationGCM"
+                       //ecb:"app.onNotificationGCM"
+                       //ecb:"app.push_android"
+                   });
+            function successHandler(result) {
+                alert("ccccc");
+                alert('result = ' + result);
+            }
+            // result contains any error description text returned from the plugin call
+            function errorHandler(error) {
+                alert("yyyy");
+                alert('error = ' + error);
+            }
+
+
+            function onNotificationGCM(e) {
+                switch (e.event) {
+                    case 'registered':
+                        if (e.regid.length > 0) {
+                            console.log("Regid " + e.regid);
+                            alert('registration id = ' + e.regid);
+                        }
+                        break;
+
+                    case 'message':
+                        // this is the actual push notification. its format depends on the data model from the push server
+                        alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
+                        break;
+
+                    case 'error':
+                        alert('GCM error = ' + e.msg);
+                        break;
+
+                    default:
+                        alert('An unknown GCM event has occurred');
+                        break;
+
+                }
+            }
+        });
 
 
 
