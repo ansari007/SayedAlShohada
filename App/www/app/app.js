@@ -1,174 +1,195 @@
-angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory",'ngCordova'])
+angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova'])
+    .run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope, $http) {
+        //$ionicPlatform.ready(function () {
+        //// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        //// for form inputs)
+        //if (window.cordova && window.cordova.plugins.Keyboard) {
+        //    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        //}
+        //if (window.StatusBar) {
+        //    // org.apache.cordova.statusbar required
+        //    StatusBar.styleDefault();
+        //}
 
 
-.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-    
-      //Push Notification
-    var androidConfig = {
-        "senderID": "774696930133",
-        /*"ecb": "onNotification"*/
-    };
-      alert("hello1");
-     /* document.addEventListener("deviceready", function () {*/
-          alert("hello2");
-          $cordovaPush.register(androidConfig).then(function (result) {
-              alert(result);
-            alert("registration ok"); // Success
-        }, function(err) {
-            alert("registration not ok"); // Error
-        });
 
-        $rootScope.$on('$cordovaPush:notificationReceived', function (event, notification) {
-            switch (notification.event) {
-                case 'registered':
-                    if (notification.regid.length > 0) {
-                        alert('registration ID = ' + notification.regid);
-                    }
-                    break;
+        document.addEventListener("deviceready", onDeviceReady, false);
+        // device APIs are available
 
-                case 'message':
-                    // this is the actual push notification. its format depends on the data model from the push server
-                    alert('message = ' + notification.message + ' msgCount = ' + notification.msgcnt);
-                    break;
-
-                case 'error':
-                    alert('GCM error = ' + notification.msg);
-                    break;
-
-                default:
-                    alert('An unknown GCM event has occurred');
-                    break;
+        function onDeviceReady() {
+            pushNotification = window.plugins.pushNotification;
+            if (device.platform == 'android' || device.platform == 'Android') {
+                //$("#app-status-ul").append("<li>registering android</li>");
+                pushNotification.register(successHandler, errorHandler, {
+                    "senderID": 864860074818,
+                    "ecb": onGcmNotification
+                }); // required!
+            } else {
+                $("#app-status-ul").append("<li>registering iOS</li>");
+                pushNotification.register(tokenHandler, errorHandler, {
+                    "badge": "true",
+                    "sound": "true",
+                    "alert": "true",
+                    "ecb": "window.onNotificationAPN"
+                }); // required!
             }
-        });
 
 
-        // WARNING: dangerous to unregister (results in loss of tokenID)
-        $cordovaPush.unregister(options).then(function(result) {
-            alert("r"); // Success!
-        }, function(err) {
-            // Error
-        });
+            // handle APNS notifications for iOS
 
-    /*}, false);*/
+            window.onNotificationAPN = function (e) {
+                if (e.alert) {
+                    navigator.notification.alert(e.alert);
+                }
+                if (e.sound) {
+                    var snd = new Media(e.sound);
+                    snd.play();
+                }
+                if (e.badge) {
+                    pushNotification.setApplicationIconBadgeNumber(successHandler, e.badge);
+                }
+            }
+            // handle GCM notifications for Android
 
-  });
-})
+            //window.onNotificationGCM = function (e) {
+            function onGcmNotification(e) {
+                navigator.notification.alert(e.event);
+                switch (e.event) {
+                    case 'registered':
+                        if (e.regid.length > 0) {
+                            navigator.notification.alert(e.regid);
+                            // Your GCM push server needs to know the regID before it can push to this    device
+                            // here is where you might want to send it the regID for later use.
+                            $("#app-status-ul").append("<li>regID = " + e.regid + "</li>");
+                            sessionStorage.setItem("deviceId", e.regid);
+                        }
+                        break;
+                    case 'message':
+                        // if this flag is set, this notification happened while we were in the foreground.
+                        // you might want to play a sound to get the user's attention, throw up a dialog, etc.
+                        if (e.foreground) {
+                            navigator.notification.alert('--INLINE NOTIFICATION--');
+                            // if the notification contains a soundname, play it.
+                            var my_media = new Media("/android_asset/www/" + e.soundname);
+                            my_media.play();
+                        } else { // otherwise we were launched because the user touched a notification in the notification tray.
+                            if (e.coldstart) navigator.notification.alert('--COLDSTART NOTIFICATION--');
+                            else navigator.notification.alert('--BACKGROUND NOTIFICATION--');
+                        }
+                        navigator.notification.alert(e.payload.message);
+                        navigator.notification.alert('MESSAGE -> MSGCNT: ' + e.payload.msgcnt);
+                        break;
+                    case 'error':
+                        navigator.notification.alert('ERROR -> MSG:' + e.msg);
+                        break;
+                    default:
+                        navigator.notification.alert('EVENT -> Unknown, an event was received and we do not know what it is');
+                        break;
+                }
+            }
 
-.config(function($stateProvider, $urlRouterProvider) {
+            function tokenHandler(result) {
+                navigator.notification.alert(result, null, 'Alert', 'OK');
+                sessionStorage.setItem("deviceId", result);
+                sessionStorage.setItem("notificationServer", "APNS");
+                // Your iOS push server needs to know the token before it can push to this device
+                // here is where you might want to send it the token for later use.
+            }
 
-  $stateProvider
+            function successHandler(result) {
+                navigator.notification.alert(result, null, 'Alert', 'OK');
+                sessionStorage.setItem("deviceId", result);
+                sessionStorage.setItem("notificationServer", "GCM");
+            }
 
-    .state('home', {
-       abstract: true,
-      url: "/home",
-      templateUrl: "www/app/home/home.html"
+            function errorHandler(error) {
+                navigator.notification.alert(error, null, 'Alert', 'OK');
+            }
+        }
+        document.addEventListener('deviceready', onDeviceReady, true);
+
+        //document.addEventListener("deviceready", function () {
+        //    var pushNotification = window.plugins.pushNotification;
+        //    console.log(pushNotification);
+        //    pushNotification.register(
+        //           successHandler,
+        //           errorHandler,
+        //           {
+        //               senderID: 864860074818,
+        //               ecb: window.onNotificationGcm
+        //               //ecb:"app.onNotificationGCM"
+        //               //ecb:"app.push_android"
+        //           });
+        //    function successHandler(result) {
+        //        alert("ccccc");
+        //        alert('result = ' + result);
+        //    }
+        //    // result contains any error description text returned from the plugin call
+        //    function errorHandler(error) {
+        //        alert("yyyy");
+        //        alert('error = ' + error);
+        //    }
+
+        //    window.onNotificationGcm = function (e) {
+        //        switch (e.event) {
+        //            case 'registered':
+        //                if (e.regid.length > 0) {
+        //                    console.log("Regid " + e.regid);
+        //                    alert('registration id = ' + e.regid);
+        //                }
+        //                break;
+
+        //            case 'message':
+        //                // this is the actual push notification. its format depends on the data model from the push server
+        //                alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
+        //                break;
+
+        //            case 'error':
+        //                alert('GCM error = ' + e.msg);
+        //                break;
+
+        //            default:
+        //                alert('An unknown GCM event has occurred');
+        //                break;
+
+        //        }
+        //    }
+        //});
+
+
     })
 
-     .state('home.mainpage', {
-       url: "/mainpage",
-         templateUrl: "www/app/home/mainpage.html"
-     })
 
-.state('home.lecture', {
-       url: "/lectures",
-         templateUrl: "www/app/home/lecture.html"
-     })
+.config(function ($stateProvider, $urlRouterProvider) {
 
-.state('home.news', {
-  
-       url: "/news",
-         templateUrl: "www/app/home/news.html"
-     })
-
-.state('home.newsdisplay', {
-       url: "/news/:id",
-         templateUrl: "www/app/home/newsdisplay.html"
-     })
-.state('home.viewlecture', {
-       url: "/lecture/:id",
-         templateUrl: "www/app/home/viewlecture.html"
-     })
-
-
-    // .state('home.myteams', {
-    //   url: "/myteams",
-    //   views: {
-    //     "tab-myteams": {
-    //       templateUrl: "app/home/myteams.html"
-    //     }
-    //   }
-    // })
-
-    // .state('app', {
-    //   abstract: true,
-    //   url: "/app",
-    //   templateUrl: "app/layout/menu-layout.html"
-    // })
-
-    // .state('app.teams', {
-    //   url: "/teams",
-    //   views: {
-    //     'mainContent': {
-    //       templateUrl: "app/teams/teams.html"
-    //     }
-    //   }
-    // })
-
-    // .state('app.team-detail', {
-    //   url: "/teams/:id",
-    //   views: {
-    //     'mainContent': {
-    //       templateUrl: "app/teams/team-detail.html"
-    //     }
-    //   }
-    // })
-
-    // .state('app.game', {
-    //   url: "/game/:id",
-    //   views: {
-    //     'mainContent': {
-    //       templateUrl: "app/game/game.html"
-    //     }
-    //   }
-    // })
-
-    // .state('app.standings', {
-    //   url: "/standings",
-    //   views: {
-    //     'mainContent': {
-    //       templateUrl: "app/standings/standings.html"
-    //     }
-    //   }
-    // })
-
-    // .state('app.locations', {
-    //   url: "/locations",
-    //   views: {
-    //     'mainContent': {
-    //       templateUrl: "app/locations/locations.html"
-    //     }
-    //   }
-    // })
-
-    // .state('app.rules', {
-    //   url: "/rules",
-    //   views: {
-    //     'mainContent': {
-    //       templateUrl: "app/rules/rules.html",
-    //     }
-    //   }
-    // });
+    $stateProvider
+        .state('home', {
+            abstract: true,
+            url: "/home",
+            templateUrl: "www/app/home/home.html"
+        })
+        .state('home.mainpage', {
+            url: "/mainpage",
+            templateUrl: "www/app/home/mainpage.html"
+        })
+        .state('home.lecture', {
+            url: "/lectures",
+            templateUrl: "www/app/home/lecture.html"
+        })
+        .state('home.news', {
+            url: "/news",
+            templateUrl: "www/app/home/news.html"
+        })
+        .state('home.newsdisplay', {
+            url: "/news/:id",
+            templateUrl: "www/app/home/newsdisplay.html"
+        })
+        .state('home.viewlecture', {
+            url: "/lecture/:id",
+            templateUrl: "www/app/home/viewlecture.html"
+        });
 
     // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/home/mainpage');
+    $urlRouterProvider.otherwise('/home/mainpage');
+
 });
