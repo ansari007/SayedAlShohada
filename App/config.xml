@@ -8,5 +8,9 @@
   <preference name="SplashScreen" value="screen" />
   <preference name="windows-target-version" value="8.0" />
   <preference name="windows-phone-target-version" value="8.1" />
+  <vs:plugin name="org.apache.cordova.device" version="0.2.12" />
+  <vs:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
+  <vs:plugin name="com.phonegap.plugins.PushPlugin" version="2.4.0" />
+  <vs:plugin name="org.apache.cordova.network-information" version="0.2.12" />
   <vs:platformSpecificValues />
 </widget>
