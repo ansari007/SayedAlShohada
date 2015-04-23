@@ -5,7 +5,7 @@
 
     function lecturectrl($scope,$stateParams,apictrl,$sce) {
         var vm = this;
-        vm.localhost="http://mohammad:59454";
+        vm.localhost="http://Dev-010:59454";
         
        vm.loadList=function(forceRefresh){
         apictrl.getlectures(forceRefresh).then(function(data){

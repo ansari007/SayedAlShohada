@@ -1,20 +1,22 @@
 angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova'])
 
 
-.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope, $http) {
-    $ionicPlatform.ready(function () {
+.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope, $http, $cordovaDevice) {
+   // $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if (window.StatusBar) {
-            // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();
-        }
+        //if (window.cordova && window.cordova.plugins.Keyboard) {
+        //    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        //}
+        //if (window.StatusBar) {
+        //    // org.apache.cordova.statusbar required
+        //    StatusBar.styleDefault();
+        //}
 
         // Push Notification
         document.addEventListener("deviceready", function () {
+
+
             var pushNotification = window.plugins.pushNotification;
             console.log(pushNotification);
             pushNotification.register(
@@ -22,11 +24,12 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
                    errorHandler,
                    {
                        senderID: "774696930133",
-                       ecb: "onNotificationGCM"
+                       ecb: "window.onNotificationGCM"
                        //ecb:"app.onNotificationGCM"
                        //ecb:"app.push_android"
                    });
             function successHandler(result) {
+
                 alert("ccccc");
                 alert('result = ' + result);
             }
@@ -35,34 +38,41 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
                 alert("yyyy");
                 alert('error = ' + error);
             }
-
-
-            function onNotificationGCM(e) {
-                switch (e.event) {
-                    case 'registered':
-                        if (e.regid.length > 0) {
-                            console.log("Regid " + e.regid);
-                            alert('registration id = ' + e.regid);
-                        }
-                        break;
-
-                    case 'message':
-                        // this is the actual push notification. its format depends on the data model from the push server
-                        alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
-                        break;
-
-                    case 'error':
-                        alert('GCM error = ' + e.msg);
-                        break;
-
-                    default:
-                        alert('An unknown GCM event has occurred');
-                        break;
-
-                }
-            }
         });
-    });
+        window.onNotificationGCM = function (e) {
+            switch (e.event) {
+                case 'registered':
+                    if (e.regid.length > 0) {
+
+                        console.log("Regid " + e.regid);
+                        alert('registration id = ' + e.regid);
+                        //Post
+                        //var device = {
+                        //    Token: e.regid,
+                        //    Platform: $cordovaDevice.getPlatform(),
+                        //    UdId: $cordovaDevice.getUUID(),
+                        //    OsVersion: $cordovaDevice.getVersion()
+                        //}
+                        //apictrl.postdeviceinfo(device);
+                    }
+                    break;
+
+                case 'message':
+                    // this is the actual push notification. its format depends on the data model from the push server
+                    alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
+                    break;
+
+                case 'error':
+                    alert('GCM error = ' + e.msg);
+                    break;
+
+                default:
+                    alert('An unknown GCM event has occurred');
+                    break;
+
+            }
+        }
+    //});
 })
 
 

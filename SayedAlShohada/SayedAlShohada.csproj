@@ -2885,10 +2885,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\ArticleRepository.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\PushController.cs" />
     <Compile Include="Controllers\UploaderController.cs" />
     <Compile Include="Controllers\UploadermvcController.cs" />
     <Compile Include="Controllers\LecturesController.cs" />
@@ -2904,9 +2904,12 @@
     <Compile Include="Models\Mappers\Imp\ArticlesMapper.cs" />
     <Compile Include="Models\Mappers\Imp\LecturesMapper.cs" />
     <Compile Include="Models\Mappers\Imp\LoginMapper.cs" />
+    <Compile Include="Models\Mappers\Imp\PushMapper.cs" />
     <Compile Include="Models\Mappers\INewsMapper.cs" />
     <Compile Include="Models\Mappers\Imp\NewsMapper.cs" />
+    <Compile Include="Models\Mappers\IPushMapper.cs" />
     <Compile Include="Models\NewsForm.cs" />
+    <Compile Include="Models\PushForm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -3171,16 +3174,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59458</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59454/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

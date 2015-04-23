@@ -55,7 +55,9 @@
     <Compile Include="Repository\Imp\LecturesRepository.cs" />
     <Compile Include="Repository\Imp\LoginRepository.cs" />
     <Compile Include="Repository\Imp\NewsRepository.cs" />
+    <Compile Include="Repository\Imp\PushRepository.cs" />
     <Compile Include="Repository\INewsRepository.cs" />
+    <Compile Include="Repository\IPushRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

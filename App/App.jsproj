@@ -1558,7 +1558,6 @@
     <Content Include="www\css\style.css" />
     <Content Include="www\img\ionic.png" />
     <Content Include="www\js\angular-cache.min.js" />
-    <Content Include="www\js\app.js" />
     <Content Include="www\js\bower_components\angular-sanitize\.bower.json" />
     <Content Include="www\js\bower_components\angular-sanitize\angular-sanitize.js" />
     <Content Include="www\js\bower_components\angular-sanitize\angular-sanitize.min.js" />

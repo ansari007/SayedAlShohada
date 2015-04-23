@@ -43,6 +43,7 @@
     <Compile Include="Models\articles.cs" />
     <Compile Include="Models\lectures.cs" />
     <Compile Include="Models\news.cs" />
+    <Compile Include="Models\Push.cs" />
     <Compile Include="Models\Staticcl.cs" />
     <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
