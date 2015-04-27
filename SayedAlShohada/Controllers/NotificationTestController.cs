@@ -25,11 +25,6 @@ namespace SayedAlShohada.Controllers
 
             _androidService = new AndroidPushNotificationService(_pushRepository);
         }
-        // GET: NotificationTest
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
         //public ActionResult Push()
         //{
