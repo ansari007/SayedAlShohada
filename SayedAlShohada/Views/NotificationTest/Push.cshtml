@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Push";
+}
+<h1>Test Push Notification</h1>
+@using (Html.BeginForm("Push", "NotificationTest", FormMethod.Post))
+{
+    <div>
+        <div><label>Message:</label></div>
+        <div><textarea name="message" maxlength="250"></textarea></div>
+        <div><label>platform:</label></div>
+        <div><input type="text" name="applicationkey" style="max-width: 500px; width: 500px;" /></div>
+        <div><label>token:</label></div>
+        <div><input type="text" name="device" style="max-width: 800px; width: 800px;" /></div>
+        <div><label>Badges:</label></div>
+        <div><input type="text" name="badge" value="1" /></div>
+        <div><label>Production Push Notification:</label></div>
+        <div><input type="checkbox" name="IsProduction" value="true" checked="checked" /></div>
+        <div><input type="submit" value="Send" /></div>
+    </div>
+}

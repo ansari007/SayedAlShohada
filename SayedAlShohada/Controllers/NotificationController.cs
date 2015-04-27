@@ -40,6 +40,5 @@ namespace SayedAlShohada.Controllers
             _pushRepository.InsertDevice(map);
 
         }
-
     }
 }
