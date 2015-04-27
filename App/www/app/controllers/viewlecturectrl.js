@@ -6,7 +6,7 @@
     function viewlecturectrl($scope,$stateParams,apictrl,$sce) {
       console.log("view lecture here");
         var vm = this;
-        vm.localhost="http://mohammad:59454";
+        vm.localhost="http://Dev-010:59454";
          vm.nid=$stateParams.id;
 
          apictrl.getlecture().then(function(data){

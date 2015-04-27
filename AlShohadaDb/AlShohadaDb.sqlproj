@@ -63,6 +63,7 @@
     <Build Include="Lectures.sql" />
     <Build Include="Users.sql" />
     <Build Include="Articles.sql" />
+    <Build Include="Push.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AlShohadaDb.refactorlog" />

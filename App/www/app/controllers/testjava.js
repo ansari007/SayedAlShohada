@@ -13,7 +13,7 @@
                     jwplayer("player").setup({
                         file: k,
                     width: "100%",
-                    image: "http://mohammad:59454/SayedAlShohada/pic/videothub.jpg"
+                    image: "http://Dev-010:59454/SayedAlShohada/pic/videothub.jpg"
                     });
                 });
             }
@@ -39,7 +39,7 @@ $(document).ready(function () {
                     jwplayer("playerlec").setup({
                         file: k,
                         width: "100%",
-                        image: "http://mohammad:59454/SayedAlShohada/pic/videoexample.jpg"
+                        image: "http://Dev-010:59454/SayedAlShohada/pic/videoexample.jpg"
                     });
                 });
             }

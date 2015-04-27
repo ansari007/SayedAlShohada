@@ -30,7 +30,7 @@
             }
 
         });
-     //    ===============================================
+        //    ===============================================
 
         self.MessagedispCache.setOptions({
             onExpire: function (key, value) {
@@ -45,7 +45,7 @@
             }
 
         });
-       //  ================================================================
+        //  ================================================================
 
         self.LecturesCache.setOptions({
             onExpire: function (key, value) {
@@ -100,7 +100,7 @@
             }
            
             else{
-        $http.get("http://mohammad:59454/api/Messages/Getall").success(function(data){
+        $http.get("http://Dev-010:59454/api/Messages/Getall").success(function(data){
         
             self.MessagesCache.put(cacheKey,data);
               
@@ -136,9 +136,6 @@
 
             };
 
-
-
-
             if (messagesdata) {
 
 
@@ -152,7 +149,7 @@
                 $ionicLoading.show({
                     template: '...Loading'
                 });
-                $http.get("http://mohammad:59454/api/Messages/Getall").success(function (data) {
+                $http.get("http://Dev-010:59454/api/Messages/Getall").success(function (data) {
 
                     self.MessagesCache.put(cacheKey, data);
                     $ionicLoading.hide();
@@ -160,8 +157,6 @@
 
 
                     console.log("received msgsdata via http", data, status);
-
-
 
                 })
                 .error(function () {
@@ -171,8 +166,6 @@
                 });
             }
             return deferred.promise;
-
-
         }
 
         function getmsgdis() {
@@ -187,22 +180,14 @@
             if (messagedispdata) {
                 deferred.resolve(messagedispdata);
                 console.log("received msgdispdata from the cache");
-
-
-
-
             }
 
             else {
-
-                $http.get("http://mohammad:59454/api/Messages/Getnew/" + vm.num).success(function (data) {
+                $http.get("http://Dev-010:59454/api/Messages/Getnew/" + vm.num).success(function (data) {
 
                     self.MessagedispCache.put(cacheKey, data);
                     deferred.resolve(data);
-
                     console.log("received msgdis data via HTTP");
-
-
                 })
                 .error(function () {
                     console.log("error http mhd");
@@ -210,7 +195,6 @@
                 });
             }
             return deferred.promise;
-
         }
 
         // ----------------------------------------lecturectrl
@@ -236,16 +220,13 @@
                 $ionicLoading.show({
                     template: 'Loading...'
                 });
-                $http.get("http://mohammad:59454/api/Lectures/Getall").success(function (data) {
+                $http.get("http://Dev-010:59454/api/Lectures/Getall").success(function (data) {
 
                     console.log("lecture received via HTTP");
                     self.LecturesCache.put(cacheKey, data);
                     $ionicLoading.hide();
 
                     deferred.resolve(data);
-
-
-
                 })
                 .error(function () {
                     $ionicLoading.hide();
@@ -254,22 +235,16 @@
                     deferred.reject();
                 });
             }
-
             return deferred.promise;
-
         }
-
 
 
         function getlecture() {
             var deferred = $q.defer();
             vm.num = $stateParams.id;
-            $http.get("http://mohammad:59454/api/Lectures/Getlec/" + vm.num).success(function (data) {
+            $http.get("http://Dev-010:59454/api/Lectures/Getlec/" + vm.num).success(function (data) {
                 deferred.resolve(data);
                 console.log("received one lecture via http ", data, status);
-
-
-
             })
             .error(function () {
                 console.log("error get one lecture");
@@ -279,15 +254,24 @@
         }
 
 
+        //----------------<push notification>-------------------------------------------------------------------
+        function postdeviceinfo(device) {
+            alert(device);
+            $http.post("http://sayedalshohada.azurewebsites.net/api/Push/InsertDevice", device).
+           success(function (data, status, headers, config) {
+               console.log(" device info post ok");
+           }).
 
-
-
+          error(function (data, status, headers, config) {
+              console.log("error post device info");
+          });
+        }
         return {
             getmsgs: getmsgs,
             getmsgdis: getmsgdis,
             getlectures: getlectures,
-            getlecture: getlecture
-
+            getlecture: getlecture,
+            postdeviceinfo: postdeviceinfo
         };
 
 

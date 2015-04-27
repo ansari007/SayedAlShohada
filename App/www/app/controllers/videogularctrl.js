@@ -6,19 +6,19 @@
     function videogularctrl($scope, $stateParams, apictrl, $sce,$http) {
         console.log("videogular goes here!!!");
         var vm = this;
-        vm.localhost = "http://mohammad:59454";
+        vm.localhost = "http://Dev-010:59454";
         vm.nid = $stateParams.id;
      /*   $http.get('/api/Lectures/Getlec/' + $scope.idv).then(function(result) {
             $scope.v4 = result.data.Vlocation;
             console.log($scope.v4 + "v4loc");
 
         });*/
-        vm.url = "http://mohammad:59454/SayedAlShohada/video/123.mp4";
+        vm.url = "http://Dev-010:59454/SayedAlShohada/video/123.mp4";
         window.postMessage(vm.url, '*');
         /*"http://www.videogular.com/assets/images/videogular.png"
-        http://mohammad:59454/SayedAlShohada/video/123.mp4
+        http://Dev-010:59454/SayedAlShohada/video/123.mp4
         */
-        /*http://mohammad:59454/SayedAlShohada/pic/videothub.jpg
+        /*http://Dev-010:59454/SayedAlShohada/pic/videothub.jpg
         */
 
         vm.makevurl = function (val) {
