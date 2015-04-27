@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repository
 {
-   public  interface IPushRepository
+    public interface IPushRepository
     {
-       void InsertDevice(Push v);
-
-
+        void InsertDevice(Push v);
     }
 }

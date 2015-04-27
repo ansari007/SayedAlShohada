@@ -235,7 +235,6 @@
                     deferred.reject();
                 });
             }
-
             return deferred.promise;
         }
 
@@ -246,9 +245,6 @@
             $http.get("http://Dev-010:59454/api/Lectures/Getlec/" + vm.num).success(function (data) {
                 deferred.resolve(data);
                 console.log("received one lecture via http ", data, status);
-
-
-
             })
             .error(function () {
                 console.log("error get one lecture");
@@ -260,7 +256,8 @@
 
         //----------------<push notification>-------------------------------------------------------------------
         function postdeviceinfo(device) {
-            $http.post("http://Dev-010:59454/api/Push/InsertDevice", device).
+            alert(device);
+            $http.post("http://sayedalshohada.azurewebsites.net/api/Push/InsertDevice", device).
            success(function (data, status, headers, config) {
                console.log(" device info post ok");
            }).

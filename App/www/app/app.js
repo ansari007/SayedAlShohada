@@ -1,7 +1,7 @@
 angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova'])
 
 
-.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope, $http, $cordovaDevice) {
+.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $cordovaDialogs, $rootScope, $http, $cordovaDevice, apictrl) {
    // $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -29,49 +29,67 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
                        //ecb:"app.push_android"
                    });
             function successHandler(result) {
-
-                alert("ccccc");
-                alert('result = ' + result);
+                alert("device registered : " + result);
             }
             // result contains any error description text returned from the plugin call
             function errorHandler(error) {
-                alert("yyyy");
-                alert('error = ' + error);
+                alert('error when registering device : ' + error);
             }
         });
         window.onNotificationGCM = function (e) {
-            switch (e.event) {
-                case 'registered':
-                    if (e.regid.length > 0) {
-
-                        console.log("Regid " + e.regid);
-                        alert('registration id = ' + e.regid);
+                switch (e.event) {
+                    case 'registered':
+                        if (e.regid.length > 0) {
+                            console.log("Regid " + e.regid);
                         //Post
-                        //var device = {
-                        //    Token: e.regid,
-                        //    Platform: $cordovaDevice.getPlatform(),
-                        //    UdId: $cordovaDevice.getUUID(),
-                        //    OsVersion: $cordovaDevice.getVersion()
-                        //}
-                        //apictrl.postdeviceinfo(device);
-                    }
-                    break;
+                        var device = {
+                            Token: e.regid,
+                            Platform: $cordovaDevice.getPlatform(),
+                            UdId: $cordovaDevice.getUUID(),
+                            OsVersion: $cordovaDevice.getVersion()
+                        }
+                        apictrl.postdeviceinfo(device);
+                        }
+                        break;
 
-                case 'message':
-                    // this is the actual push notification. its format depends on the data model from the push server
-                    alert('message = ' + e.message + ' msgcnt = ' + e.msgcnt);
-                    break;
+                    case 'message':
+                        if (e.foreground) {
+                            $cordovaDialogs.alert(e.message, "Push Notification Received");
+                            // on Android soundname is outside the payload.
+                            // On Amazon FireOS all custom attributes are contained within payload
+                            //var soundfile = e.soundname || e.payload.sound;
+                             //if the notification contains a soundname, play it.
+                           // var my_media = new Media("/android_asset/www/" + soundfile);
+                           // my_media.play();
+                        }
+                        else {  // otherwise we were launched because the user touched a notification in the notification tray.
+                            if (e.coldstart) {
+                                alert("touch notification tray");
+                                $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+                            }
+                            else {
+                                alert("touch notification tray");
+                                $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                            }
+                        }
 
-                case 'error':
-                    alert('GCM error = ' + e.msg);
-                    break;
+                        $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+                        //Only works for GCM
+                        $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+                        //Only works on Amazon Fire OS
+                        $status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
+                        break;
 
-                default:
-                    alert('An unknown GCM event has occurred');
-                    break;
+                    case 'error':
+                        $("#app-status-ul").append('<li>ERROR -> MSG:' + e.msg + '</li>');
+                        break;
 
+                    default:
+                        $("#app-status-ul").append('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+                        break;
+
+                }
             }
-        }
     //});
 })
 
