@@ -90,7 +90,6 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
 
             }
         }
-    });
 })
 
 
