@@ -17,8 +17,6 @@ namespace SayedAlShohada.Controllers
             _pushMapper = new PushMapper();
         }
 
-
-        //Post 
         [HttpPost]
         public void InsertDevice([FromBody] PushForm form)
         {
