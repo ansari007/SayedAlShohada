@@ -1,17 +1,17 @@
 angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova'])
 
 
-.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope, $http, $cordovaDevice) {
-   // $ionicPlatform.ready(function () {
+.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $rootScope, $http, $cordovaDevice,apictrl) {
+    $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        //if (window.cordova && window.cordova.plugins.Keyboard) {
-        //    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        //}
-        //if (window.StatusBar) {
-        //    // org.apache.cordova.statusbar required
-        //    StatusBar.styleDefault();
-        //}
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
 
         // Push Notification
         document.addEventListener("deviceready", function () {
@@ -47,13 +47,26 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
                         console.log("Regid " + e.regid);
                         alert('registration id = ' + e.regid);
                         //Post
-                        //var device = {
-                        //    Token: e.regid,
-                        //    Platform: $cordovaDevice.getPlatform(),
-                        //    UdId: $cordovaDevice.getUUID(),
-                        //    OsVersion: $cordovaDevice.getVersion()
-                        //}
-                        //apictrl.postdeviceinfo(device);
+                        var device = {
+                            Token: e.regid,
+                            Platform: $cordovaDevice.getPlatform(),
+                            UdId: $cordovaDevice.getUUID(),
+                            OsVersion: $cordovaDevice.getVersion()
+                        }
+                        // apictrl.postdeviceinfo(device);
+      /*                  $http.post("http://Dev-010:59454/api/Push/Insertinfo", device).
+         success(function (data, status, headers, config) {
+             alert(" device info post ok");
+         }).
+
+        error(function (data, status, headers, config) {
+            alert("error post device info");
+        });*/
+
+                        $http.get('http://Dev-010:59454/api/Push/Getdevice').then(function (result) {
+                            alert(result);
+                        });
+                        alert("dwedwd");
                     }
                     break;
 
@@ -72,7 +85,7 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
 
             }
         }
-    //});
+    });
 })
 
 

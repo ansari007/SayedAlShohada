@@ -260,13 +260,14 @@
 
         //----------------<push notification>-------------------------------------------------------------------
         function postdeviceinfo(device) {
+            alert(device);
             $http.post("http://Dev-010:59454/api/Push/InsertDevice", device).
            success(function (data, status, headers, config) {
-               console.log(" device info post ok");
+              alert(" device info post ok");
            }).
 
           error(function (data, status, headers, config) {
-              console.log("error post device info");
+              alert("error post device info");
           });
         }
         return {

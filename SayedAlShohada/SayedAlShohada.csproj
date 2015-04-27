@@ -2888,7 +2888,7 @@
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Controllers\PushController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\UploaderController.cs" />
     <Compile Include="Controllers\UploadermvcController.cs" />
     <Compile Include="Controllers\LecturesController.cs" />

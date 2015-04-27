@@ -13,18 +13,27 @@ using System.Web.Http;
 
 namespace SayedAlShohada.Controllers
 {
-    public class PushController : ApiController
+    public class NotificationController : ApiController
     {
        private IPushRepository _pushRepository;
        private IPushMapper _pushMapper;
-        public PushController()
+        public NotificationController()
         {
             _pushRepository = new PushRepository();
             _pushMapper = new PushMapper();
         }
 
+
+
+        [HttpGet]
+        public string Getdevice()
+        {
+            var data = "hello";
+            return data;
+        }
         [HttpPost]
-        public void InsertDevice([FromBody] PushForm form)
+        
+        public void Insertinfo([FromBody] PushForm form)
         {
 
             var map = _pushMapper.Map(form);
