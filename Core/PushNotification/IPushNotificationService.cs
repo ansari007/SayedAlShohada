@@ -6,6 +6,6 @@ namespace Core.PushNotification
     {
         void Stop();
         void Start();
-        void SendMessage(string message, List<PushDeviceInfo> devices);
+        void SendMessage(string message,string msgcnt, List<PushDeviceInfo> devices);
     }
 }

@@ -43,7 +43,7 @@ namespace SayedAlShohada.Controllers
                 listDeviceInfo.Add(deviceInfo);
 
                 if (form.platform.ToLower() == "android")
-                    this._androidService.SendMessage(form.message, listDeviceInfo);
+                    this._androidService.SendMessage(form.message,form.msgcnt, listDeviceInfo);
                 //if (applicationkey == DeviceTypeEnum.Android.ApplicationKey)
                 //    this._androidService.SendMessage(message, listDeviceInfo);
                 //else

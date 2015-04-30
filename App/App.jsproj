@@ -112,6 +112,18 @@
   <ItemGroup>
     <Content Include="Content\ionic.css" />
     <Content Include="Content\ionic.min.css" />
+    <Content Include="Content\pic\aboutusicon.jpg" />
+    <Content Include="Content\pic\articleicon.jpg" />
+    <Content Include="Content\pic\banner.jpg" />
+    <Content Include="Content\pic\contactusicon.jpg" />
+    <Content Include="Content\pic\joinus.jpg" />
+    <Content Include="Content\pic\lecicon.jpg" />
+    <Content Include="Content\pic\mainpageicon.jpg" />
+    <Content Include="Content\pic\menubutton.jpg" />
+    <Content Include="Content\pic\msgicon.jpg" />
+    <Content Include="Content\pic\socialiconsk.jpg" />
+    <Content Include="Content\pic\videoexample.jpg" />
+    <Content Include="Content\pic\videothub.jpg" />
     <Content Include="fonts\ionicons.eot" />
     <Content Include="fonts\ionicons.svg" />
     <Content Include="fonts\ionicons.ttf" />

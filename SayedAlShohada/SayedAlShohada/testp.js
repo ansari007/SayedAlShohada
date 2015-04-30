@@ -3,115 +3,79 @@
 			"com.2fdevs.videogular.plugins.controls",
 			"com.2fdevs.videogular.plugins.overlayplay",
 			"com.2fdevs.videogular.plugins.poster"]);
+
 mhdapp.config(["$routeProvider", function ($routeProvider) {
-    $routeProvider.
-    when('/', {
-        templateUrl: "Index.html",
-        controller: "c1"
-
-
-
-
-    }).
-    when("/viewinbox", {
-        templateUrl: "viewinbox.html",
-        controller: "inbox"
-
-
-    })
+    $routeProvider
+        .when('/', {
+            templateUrl: "/SayedAlShohada/main.html",
+            controller: "c1"
+        })
+        .when("/viewinbox", {
+            templateUrl: "/SayedAlShohada/viewinbox.html",
+            controller: "inbox"
+        })
         .when("/viewmessage/:num", {
-            templateUrl: "viewmessage.html",
+            templateUrl: "/SayedAlShohada/viewmessage.html",
             controller: "messages"
-
-
         })
-
-
-        .
-    when("/viewarticles", {
-        templateUrl: "viewarticles.html",
-        controller: "articles"
-
-
-    })
+        .when("/viewarticles", {
+            templateUrl: "/SayedAlShohada/viewarticles.html",
+            controller: "articles"
+        })
         .when("/viewarticle/:num", {
-            templateUrl: "viewarticle.html",
+            templateUrl: "/SayedAlShohada/viewarticle.html",
             controller: "article"
-
-
         })
-
-
           .when("/login", {
-              templateUrl: "SignIn.html",
+              templateUrl: "/SayedAlShohada/SignIn.html",
               controller: "c1"
-
-
           })
 
-
-
-    .when("/index", {
-        templateUrl: "index.html",
-        controller: "c1"
-
-
-    })
-
-        .when("/view3", {
-            templateUrl: "view3.html",
-            controller: "c3"
-
-
+        .when("/main", {
+            templateUrl: "/SayedAlShohada/main.html",
+            controller: "c1"
         })
 
+        .when("/view3", {
+            templateUrl: "/SayedAlShohada/view3.html",
+            controller: "c3"
+        })
 
-            .when("/lecturectrl", {
-                templateUrl: "lecturectrl.html",
-                controller: "c3"
+        .when("/lecturectrl", {
+            templateUrl: "/SayedAlShohada/lecturectrl.html",
+            controller: "c3"
+        })
 
+        .when("/createlecture", {
+            templateUrl: "/SayedAlShohada/createlecture.html",
+            controller: "c3"
+        })
 
-            })
-
-           .when("/createlecture", {
-               templateUrl: "createlecture.html",
-               controller: "c3"
-           })
-
-
-         .when("/editnews/:num", {
-             templateUrl: "editnews.html",
-             controller: "editCtrl"
-         })
+        .when("/editnews/:num", {
+            templateUrl: "/SayedAlShohada/editnews.html",
+            controller: "editCtrl"
+        })
 
          .when("/editarticle/:num", {
-             templateUrl: "editarticle.html",
+             templateUrl: "/SayedAlShohada/editarticle.html",
              controller: "editarticle"
          })
 
          .when("/editlecture/:num", {
-             templateUrl: "editlecture.html",
+             templateUrl: "/SayedAlShohada/editlecture.html",
              controller: "editlecCtrl"
          })
 
             .when("/view4/:num", {
-                templateUrl: "view4.html",
+                templateUrl: "/SayedAlShohada/view4.html",
                 controller: "viewlecture"
-
-
             })
-
-
     .otherwise({
-        redirectTo: "index"
-    }
-
-
-    );
-
-
+        redirectTo: "index.html"
+    });
 }
 ]);
+
 mhdapp.controller("c1", function ($scope) {
 
     console.log("gtrgtrg");
@@ -119,12 +83,7 @@ mhdapp.controller("c1", function ($scope) {
 );
 
 
-
-
-
-
-
-mhdapp.controller("c3", ["$scope", "$routeParams", "$http", "$location", '$route', '$window',c3]);
+mhdapp.controller("c3", ["$scope", "$routeParams", "$http", "$location", '$route', '$window', c3]);
 function c3($scope, $routeParams, $http, $location, $route, $window) {
     $scope.currentPage = 1;
     sessionStorage.pagelecsession = $scope.currentPage;
@@ -143,8 +102,6 @@ function c3($scope, $routeParams, $http, $location, $route, $window) {
         }
     }
 
-
-
     $scope.user = { title: '', description: '', status: '' };
     $scope.back = function () {
         $window.history.back();
@@ -152,35 +109,26 @@ function c3($scope, $routeParams, $http, $location, $route, $window) {
     //$http.get('/api/Lectures/Getall').then(function (result) {
 
     //    $scope.dat = result.data;
-        
-     
+
+
     //    console.log($scope.dat);
     //});
     $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (result) {
 
-
-
         $scope.dat = result.data.news;
-
         $scope.totalpage = result.data.total;
         console.log($scope.dat);
-
-
         console.log($scope.dat[0]);
     });
 
     if ($scope.currentPage == 1) {
         $scope.boolprevious = false;
-
     } else {
         $scope.boolprevious = true;
 
     }
 
-
-
     $scope.submit1 = function () {
-
         $http.post('/api/Lectures/Postlec', $scope.user).
           success(function (data, status, headers, config) {
               //$scope.lecForm.$setPristine();
@@ -191,96 +139,60 @@ function c3($scope, $routeParams, $http, $location, $route, $window) {
               //$route.reload();
               console.log("post ok");
               $location.path("/lecturectrl");
-
           }).
   error(function (data, status, headers, config) {
       console.log("post not ok");
-
   });
-
     }
-
 
     $scope.deletelecture = function (val) {
 
         $http.delete('/api/Lectures/Deletelec/' + val).
           success(function (data, status, headers, config) {
               $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (result) {
-
                   $scope.dat = result.data.news;
                   console.log($scope.dat);
-
                   console.log("second httpget lectures");
-
               });
-
               console.log("deletepost ok lecture");
-
-
           }).
   error(function (data, status, headers, config) {
       console.log("deletepost not ok lecture");
-
   });
-
     }
 
-
-
     $scope.changestatus = function (id, val2) {
-        if (val2 == 10||val2==30) {
+        if (val2 == 10 || val2 == 30) {
 
-            $http.put('/api/Lectures/Publish/'+id).
-                success(function(data, status, headers, config) {
-                    $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (result) {
-
-                        $scope.dat = result.data.news;
-                        console.log($scope.dat);
-
-                        console.log("second httpget lectures");
-
-                    });
-
-                    console.log("statusupdate ok lecture");
-
-
-                }).
-                error(function(data, status, headers, config) {
-                    console.log("deletepost not ok lecture");
-
-                });
-        }
-
-
-
-
-
-        if (val2 == 20) {
-
-            $http.put('/api/Lectures/Withdraw/'+id).
+            $http.put('/api/Lectures/Publish/' + id).
                 success(function (data, status, headers, config) {
                     $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (result) {
-
                         $scope.dat = result.data.news;
                         console.log($scope.dat);
-
                         console.log("second httpget lectures");
-
                     });
-
                     console.log("statusupdate ok lecture");
-
-
                 }).
                 error(function (data, status, headers, config) {
                     console.log("deletepost not ok lecture");
-
                 });
         }
+        if (val2 == 20) {
 
+            $http.put('/api/Lectures/Withdraw/' + id).
+                success(function (data, status, headers, config) {
+                    $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (result) {
+                        $scope.dat = result.data.news;
+                        console.log($scope.dat);
+                        console.log("second httpget lectures");
+                    });
+                    console.log("statusupdate ok lecture");
+                }).
+                error(function (data, status, headers, config) {
+                    console.log("deletepost not ok lecture");
+                });
+        }
     }
-
-
 
     $scope.paginext = function () {
         if ($scope.currentPage < $scope.totalpage) {
@@ -293,46 +205,31 @@ function c3($scope, $routeParams, $http, $location, $route, $window) {
 
                 $scope.dat = result.data.news;
                 console.log($scope.dat);
-
-
             });
         }
     }
 
     $scope.pagiprevious = function () {
         if ($scope.currentPage > 1) {
-
-
             $scope.currentPage--;
             sessionStorage.pagelecsession = $scope.currentPage;
             sessionStorage.pageconlecsession = $scope.currentPage;
             $http.get('/api/Lectures/Getnext/' + $scope.currentPage).then(function (result) {
-
-
                 $scope.dat = result.data.news;
                 console.log($scope.dat);
-
-
             });
         }
     }
-
-
-
 };
 
 
-mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route,toaster) {
+mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaster) {
 
-    
     $scope.classnext = 'bancolor';
     $scope.classprevious = 'unavailable';
-
     $scope.currentPage = 1;
     sessionStorage.pagesession = $scope.currentPage;
     if (sessionStorage.messagesession != null) {
-
-
         if (sessionStorage.messagesession != "") {
             $scope.currentPage = sessionStorage.messagesession;
             sessionStorage.messagesession = "";
@@ -341,14 +238,9 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route,toaster
     $scope.user = { title: '', description: '' };
     $http.get('/api/Messages/GetNext/' + $scope.currentPage).then(function (result) {
 
-
-
         $scope.dat = result.data.news;
-
         $scope.totalpage = result.data.total;
         console.log($scope.dat);
-
-
         console.log($scope.dat[0]);
     });
 
@@ -357,126 +249,88 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route,toaster
 
     } else {
         $scope.boolprevious = true;
-
     }
 
     $scope.paginext = function () {
         if ($scope.currentPage < $scope.totalpage) {
             $scope.currentPage++;
             sessionStorage.pagesession = $scope.currentPage;
-
-
             $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
-
-
                 $scope.dat = result.data.news;
                 console.log($scope.dat);
-
-
             });
         }
     }
 
     $scope.pagiprevious = function () {
         if ($scope.currentPage > 1) {
-
-
             $scope.currentPage--;
             sessionStorage.pagesession = $scope.currentPage;
-
             $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
-
-
                 $scope.dat = result.data.news;
                 console.log($scope.dat);
-
-
             });
         }
     }
 
     $scope.edition = function (val) {
-
-
         $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
-
             $scope.dat = result.data.news;
             console.log($scope.dat);
             $scope.user = { title: '', description: '' };
             console.log("edit");
-
         });
-
-
-
-
-
-
     }
     $scope.submit = function () {
+        $http.post('/api/Messages/Forminfo', $scope.user)
+            .success(function (data, status, headers, config) {
+                $scope.myForm.$setPristine();
+                $scope.user = { title: '', description: '' };
+                console.log("post ok");
+                $http.get('/api/Messages/Getnext/' + 1).then(function (result) {
 
-        $http.post('/api/Messages/Forminfo', $scope.user).
-          success(function (data, status, headers, config) {
-              $scope.myForm.$setPristine();
-              $scope.user = { title: '', description: '' };
-              console.log("post ok");
-              $http.get('/api/Messages/Getnext/' + 1).then(function (result) {
+                    $scope.dat = result.data.news;
 
-                  $scope.dat = result.data.news;
+                    $scope.popsuccess = function () {
+                        toaster.pop('note', "تمة الإضافة بنجاح", "");
+                    };
+                    $scope.popsuccess();
+                    console.log($scope.dat);
+                });
+            })
+            .error(function (data, status, headers, config) {
+                $scope.popfailed = function () {
+                    toaster.pop('error', "لم تتم الإضافة ", "");
+                };
+                console.log("post not ok");
 
-                  $scope.popsuccess = function () {
-                      toaster.pop('note', "تمة الإضافة بنجاح", "");
-                  };
-                  $scope.popsuccess();
-               
-                 
-                  
-             
-                  console.log($scope.dat);
-
-              });
-
-          }).
-  error(function (data, status, headers, config) {
-      $scope.popfailed = function () {
-          toaster.pop('error', "لم تتم الإضافة ", "");
-      };
-      console.log("post not ok");
-      
-      $scope.popfailed();
-    
-  });
+                $scope.popfailed();
+            });
 
     }
 
     $scope.deletenews = function (val) {
 
-        $http.delete('/api/Messages/Deletenews/' + val).
-          success(function (data, status, headers, config) {
-              $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
+        $http.delete('/api/Messages/Deletenews/' + val)
+            .success(function (data, status, headers, config) {
+                $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
 
-                  $scope.dat = result.data.news;
-                  console.log($scope.dat);
+                    $scope.dat = result.data.news;
+                    console.log($scope.dat);
+                    console.log("second httpget");
+                });
+                console.log("deletepost ok");
+            })
+            .error(function (data, status, headers, config) {
+                console.log("deletepost not ok");
 
-                  console.log("second httpget");
-
-              });
-
-              console.log("deletepost ok");
-
-
-          }).
-  error(function (data, status, headers, config) {
-      console.log("deletepost not ok");
-
-  });
-
+            });
     }
 });
 
 
-mhdapp.controller("messages", function ($scope, $routeParams, $http,$window) {
-    $scope.back=function() {
+mhdapp.controller("messages", function ($scope, $routeParams, $http, $window) {
+    $scope.back = function () {
         $window.history.back();
     }
     console.log("messgaes contoller");
@@ -486,68 +340,52 @@ mhdapp.controller("messages", function ($scope, $routeParams, $http,$window) {
         sessionStorage.messagesession = sessionStorage.pagesession;
         $scope.data = result.data;
         console.log($scope.data);
-
-
-
         console.log($scope.idv);
         console.log($scope.data[0]);
-
-
     });
-
 });
 
 
 
-mhdapp.controller("editCtrl", function ($scope, $routeParams, $http, $location,$window) {
+mhdapp.controller("editCtrl", function ($scope, $routeParams, $http, $location, $window) {
     $scope.back = function () {
         $window.history.back();
         //window.scrollTo(x - 0, y - 0);
     }
     console.log("EDIT contoller");
     $scope.idv = $routeParams.num;
-
-    $http.get('/api/Messages/Getnew/'+ $scope.idv).then(function (result) {
-
+    $http.get('/api/Messages/Getnew/' + $scope.idv).then(function (result) {
         $scope.dat = result.data;
         $scope.user = { title: $scope.dat.Title, description: $scope.dat.Description };
         $scope.showtitle = $scope.dat.Title;
     });
 
-
     $scope.editnews = function () {
 
+        $http.put('/api/Messages/Editnew/' + $scope.idv, $scope.user)
+            .success(function (data, status, headers, config) {
+                console.log("put ok");
+                $(".submitsuccess").removeClass("cssFade");
 
-        $http.put('/api/Messages/Editnew/'+ $scope.idv, $scope.user).
-          success(function (data, status, headers, config) {
+                setTimeout(function () {
+                    $(".submitsuccess").addClass("cssFade");
 
+                }, 500);
+                $location.path("/viewinbox");
+                //setTimeout(function () {
 
-              console.log("put ok");
-              $(".submitsuccess").removeClass("cssFade");
-
-              setTimeout(function () {
-                  $(".submitsuccess").addClass("cssFade");
-
-              }, 500);
-              $location.path("/viewinbox");
-              //setTimeout(function () {
-                 
-              //    $location.path("/viewinbox");
-              //}, 2000);
-             
-
-          }).
-  error(function (data, status, headers, config) {
-      console.log("put not ok");
-
-  });
+                //    $location.path("/viewinbox");
+                //}, 2000);
+            })
+            .error(function (data, status, headers, config) {
+                console.log("put not ok");
+            });
 
     }
 
-
 });
 
-mhdapp.controller("viewlecture", function ($scope, $routeParams, $http,$window) {
+mhdapp.controller("viewlecture", function ($scope, $routeParams, $http, $window) {
 
     console.log("viewlecture contoller");
     sessionStorage.lecsession = sessionStorage.pagelecsession;
@@ -557,18 +395,10 @@ mhdapp.controller("viewlecture", function ($scope, $routeParams, $http,$window) 
     }
 
     $http.get('/api/Lectures/Getlec/' + $scope.idv).then(function (result) {
-
         $scope.dat = result.data;
         console.log($scope.dat);
-
-
-
         console.log($scope.idv);
-
-
-
     });
-
 });
 
 mhdapp.controller("vidogularv3", function ($scope, $routeParams, $http, $sce) {
@@ -577,7 +407,7 @@ mhdapp.controller("vidogularv3", function ($scope, $routeParams, $http, $sce) {
     this.config = {
         sources: [
             { src: $sce.trustAsResourceUrl("video/123.mp4"), type: "video/mp4" }
-            
+
         ],
         theme: "../Scripts/bower_components/videogular-themes-default/videogular.css",
         plugins: {
@@ -587,8 +417,6 @@ mhdapp.controller("vidogularv3", function ($scope, $routeParams, $http, $sce) {
 
 
 });
-
-
 
 
 mhdapp.controller("vidogularv4", function ($scope, $routeParams, $http, $sce) {
@@ -618,121 +446,89 @@ mhdapp.controller("editlecCtrl", function ($scope, $routeParams, $http, $locatio
     sessionStorage.conlecsession = sessionStorage.pageconlecsession;
     $scope.back = function () {
         $window.history.back();
-        
     }
-
     console.log("EDIT lecture controller");
     $scope.idv = $routeParams.num;
 
     $http.get('/api/Lectures/Getlec/' + $scope.idv).then(function (result) {
-
         $scope.data = result.data;
         console.log($scope.data);
         $scope.user = { title: $scope.data.Vtitle, description: $scope.data.Vdescription, status: $scope.data.Vstatus };
         $scope.urlv = $scope.data.Vlocation;
         console.log($scope.urlv);
-
-
-
     });
 
 
     $scope.editlectures = function () {
 
-
-        $http.put('/api/Lectures/Putlec/' + $scope.idv, $scope.user).
-          success(function (data, status, headers, config) {
-
-
-              console.log("put lec ok");
-              $location.path("/lecturectrl");
-
-          }).
-  error(function (data, status, headers, config) {
-      console.log("put lec not ok");
-
-  });
-
+        $http.put('/api/Lectures/Putlec/' + $scope.idv, $scope.user)
+            .success(function (data, status, headers, config) {
+                console.log("put lec ok");
+                $location.path("/lecturectrl");
+            })
+            .error(function (data, status, headers, config) {
+                console.log("put lec not ok");
+            });
     }
-
-
 });
 
 
 
 mhdapp.controller("logctrl", function ($scope, $routeParams, $http, $location, $window, toaster) {
 
-   
-  console.log("login ctrl");
+    console.log("login ctrl");
     $scope.user = { username: '', password: '' };
-    $scope.verif = true;
-    $scope.verif2 = false;
+    $scope.notLoggedIn = true;
+    $scope.LoggedIn = false;
     $scope.popfailed = function () {
-        toaster.pop('error', "Invalid username or password ", "");
+        toaster.pop('error', "الإسم أو كلمة المرور غير مطابقة", "");
     };
     console.log("post not ok");
 
-   
-    $scope.logverif= function() {
-
-
-        $http.post('/api/Login/Verif', $scope.user).then(function(result) {
-            $scope.verif = result.data;
-            if ($scope.verif == false) {
-                $scope.verif = true;
+    $scope.logverif = function () {
+        $http.post('/api/Login/Verif', $scope.user).then(function (result) {
+            var loggedResult = result.data;
+            if (loggedResult == false) {
                 $scope.popfailed();
             } else {
-                $scope.verif2 = $scope.verif;
-                $scope.verif = false;
+                $scope.LoggedIn = loggedResult;
+                $scope.notLoggedIn = false;
             }
-            console.log($scope.verif2);
+            console.log($scope.LoggedIn);
 
         });
-
-
     }
-       
-
 });
-
 
 
 mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toaster) {
 
-
     $scope.classnext = 'bancolor';
     $scope.classprevious = 'unavailable';
-
     $scope.currentPage = 1;
     sessionStorage.pagesession = $scope.currentPage;
     if (sessionStorage.articlesession != null) {
-
-
         if (sessionStorage.articlesession != "") {
             $scope.currentPage = sessionStorage.articlesession;
             sessionStorage.articlesession = "";
         }
     }
+
     $scope.user = { title: '', description: '' };
+
     $http.get('/api/Articles/GetNext/' + $scope.currentPage).then(function (result) {
-
-
-
         $scope.dat = result.data.Articles;
-
         $scope.totalpage = result.data.total;
         console.log($scope.dat);
-
-
         console.log($scope.dat[0]);
     });
 
     if ($scope.currentPage == 1) {
         $scope.boolprevious = false;
 
-    } else {
+    }
+    else {
         $scope.boolprevious = true;
-
     }
 
     $scope.paginext = function () {
@@ -740,112 +536,73 @@ mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toa
             $scope.currentPage++;
             sessionStorage.pagesession = $scope.currentPage;
 
-
             $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
-
-
                 $scope.dat = result.data.Articles;
                 console.log($scope.dat);
-
-
             });
         }
     }
 
     $scope.pagiprevious = function () {
         if ($scope.currentPage > 1) {
-
-
             $scope.currentPage--;
             sessionStorage.pagesession = $scope.currentPage;
-
             $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
-
-
                 $scope.dat = result.data.Articles;
                 console.log($scope.dat);
-
-
             });
         }
     }
 
     $scope.edition = function (val) {
-
-
         $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
-
             $scope.dat = result.data.Articles;
             console.log($scope.dat);
             $scope.user = { title: '', description: '' };
             console.log("edit");
-
         });
-
-
-
-
-
-
     }
     $scope.submit = function () {
+        $http.post('/api/Articles/Forminfo', $scope.user)
+            .success(function (data, status, headers, config) {
+                $scope.myForm.$setPristine();
+                $scope.user = { title: '', description: '' };
+                console.log("post ok");
+                $http.get('/api/Articles/Getnext/' + 1).then(function (result) {
+                    $scope.dat = result.data.Articles;
+                    $scope.popsuccess = function () {
+                        toaster.pop('note', "تمة الإضافة بنجاح", "");
+                    };
+                    $scope.popsuccess();
+                    console.log($scope.dat);
+                });
+            })
+            .error(function (data, status, headers, config) {
+                $scope.popfailed = function () {
+                    toaster.pop('error', "لم تتم الإضافة ", "");
+                };
+                console.log("post not ok");
 
-        $http.post('/api/Articles/Forminfo', $scope.user).
-          success(function (data, status, headers, config) {
-              $scope.myForm.$setPristine();
-              $scope.user = { title: '', description: '' };
-              console.log("post ok");
-              $http.get('/api/Articles/Getnext/' + 1).then(function (result) {
+                $scope.popfailed();
 
-                  $scope.dat = result.data.Articles;
-
-                  $scope.popsuccess = function () {
-                      toaster.pop('note', "تمة الإضافة بنجاح", "");
-                  };
-                  $scope.popsuccess();
-
-
-
-
-                  console.log($scope.dat);
-
-              });
-
-          }).
-  error(function (data, status, headers, config) {
-      $scope.popfailed = function () {
-          toaster.pop('error', "لم تتم الإضافة ", "");
-      };
-      console.log("post not ok");
-
-      $scope.popfailed();
-
-  });
-
+            });
     }
 
     $scope.deletearticle = function (val) {
 
-        $http.delete('/api/Articles/DeleteArticles/' + val).
-          success(function (data, status, headers, config) {
-              $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+        $http.delete('/api/Articles/DeleteArticles/' + val)
+            .success(function (data, status, headers, config) {
+                $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+                    $scope.dat = result.data.news;
+                    console.log($scope.dat);
+                    console.log("second httpget");
+                });
+                console.log("deletepost ok");
+            })
+            .error(function (data, status, headers, config) {
+                console.log("deletepost not ok");
 
-                  $scope.dat = result.data.news;
-                  console.log($scope.dat);
-
-                  console.log("second httpget");
-
-              });
-
-              console.log("deletepost ok");
-
-
-          }).
-  error(function (data, status, headers, config) {
-      console.log("deletepost not ok");
-
-  });
-
+            });
     }
 });
 
@@ -862,19 +619,10 @@ mhdapp.controller("article", function ($scope, $routeParams, $http, $window) {
         sessionStorage.articlesession = sessionStorage.pagesession;
         $scope.data = result.data;
         console.log($scope.data);
-
-
-
         console.log($scope.idv);
         console.log($scope.data[0]);
-
-
     });
-
 });
-
-
-
 
 
 mhdapp.controller("editarticle", function ($scope, $routeParams, $http, $location, $window, toaster, $timeout) {
@@ -899,37 +647,19 @@ mhdapp.controller("editarticle", function ($scope, $routeParams, $http, $locatio
         $scope.showtitle = $scope.dat.Title;
     });
 
-
     $scope.editart = function () {
-
-
-        $http.put('/api/Articles/Editarticle/' + $scope.idv, $scope.user).
-          success(function (data, status, headers, config) {
-
-
-              console.log("put ok");
-            
-              $scope.popsuccess();
-
-             
-              $timeout( $location.path("/viewarticles"), 30000);
-                 
-
-             
-
-
-          }).
-  error(function (data, status, headers, config) {
-      console.log("put not ok");
-    
-      console.log("post not ok");
-
-      $scope.popfailed();
-  });
-
+        $http.put('/api/Articles/Editarticle/' + $scope.idv, $scope.user)
+            .success(function (data, status, headers, config) {
+                console.log("put ok");
+                $scope.popsuccess();
+                $timeout($location.path("/viewarticles"), 30000);
+            })
+            .error(function (data, status, headers, config) {
+                console.log("put not ok");
+                console.log("post not ok");
+                $scope.popfailed();
+            });
     }
-
-
 });
 
 

@@ -5,13 +5,13 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
    // $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if (window.StatusBar) {
-            // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();
-        }
+        //if (window.cordova && window.cordova.plugins.Keyboard) {
+        //    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        //}
+        //if (window.StatusBar) {
+        //    // org.apache.cordova.statusbar required
+        //    StatusBar.styleDefault();
+        //}
 
         // Push Notification
         document.addEventListener("deviceready", function () {
@@ -54,7 +54,7 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
 
                 case 'message':
                         if (e.foreground) {
-                            $cordovaDialogs.alert(e.message, "Push Notification Received");
+                            $cordovaDialogs.alert(e.payload.message, "Push Notification Received");
                             // on Android soundname is outside the payload.
                             // On Amazon FireOS all custom attributes are contained within payload
                             //var soundfile = e.soundname || e.payload.sound;
@@ -64,20 +64,20 @@ angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova']
                         }
                         else {  // otherwise we were launched because the user touched a notification in the notification tray.
                             if (e.coldstart) {
-                                alert("touch notification tray");
-                                $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+                                //alert("touch notification tray");
+                                //$("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
                             }
                             else {
-                                alert("touch notification tray");
-                                $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+                                //alert("touch notification tray");
+                                //$("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
                             }
                         }
 
-                        $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
-                        //Only works for GCM
-                        $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
-                        //Only works on Amazon Fire OS
-                        $status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
+                        //$("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
+                        ////Only works for GCM
+                        //$("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
+                        ////Only works on Amazon Fire OS
+                        //$status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
                     break;
 
                 case 'error':
