@@ -64,8 +64,8 @@ namespace Infrastructure.Services.PushNotification
                 if (firstOrDefault != null)
                 {
                     var a = new GcmNotification().ForDeviceRegistrationId(firstOrDefault.DeviceToken)
-                        .WithJson("{\"alert\":\" " + message + "\",\"badge\":0}");
-
+                             .WithJson("{\"message\":\" " + message + "\"}");
+                    //.WithJson("{\"message\":\" " + message + "\",\"badge\":0,\"msgcnt\":\" " + msgcnt + "\"}");
                     //a.TimeToLive = this._timeToLive;
                     this._pushBroker.QueueNotification(a, androidAppName);
                 }

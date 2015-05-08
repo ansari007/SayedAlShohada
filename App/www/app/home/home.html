@@ -1,4 +1,48 @@
 <ion-side-menus>
+    <ion-pane ion-side-menu-content>
+        <ion-nav-bar class="bannerstyle">
+            <ion-nav-back-button class="button-clear icon ion-ios7-arrow-back leftb"></ion-nav-back-button>
+            <button menu-toggle="right" class="button button-icon icon ion-navicon rightb"></button>
+            <span class="bannerspan">مركز سيد الشهداء<sup>(ع)</sup></span>
+        </ion-nav-bar>
+        <ion-nav-view animation="slide-right-left"></ion-nav-view>
+    </ion-pane>
+
+    <ion-side-menu side="right" width="105">
+
+        <header class="bar bar-header menucolor  ">
+            <h1 class="title textwhite ">
+                <a ui-sref="home.mainpage" menu-toggle="right" class=" menucolor   textwhite">
+                    <img src="~/Content/pic/mainpageicon.jpg" class="menuheader">
+                </a>
+            </h1>
+        </header>
+
+        <ion-content class="has-header menucolor">
+            <ul class="list">
+                <a ui-sref="home.lecture" class="menucolor textwhite" menu-toggle="right">
+                    <img class="menuitem" src="~/Content/pic/lecicon.jpg">
+                </a>
+                <a ui-sref="home.lecture" class=" menucolor textwhite" menu-toggle="right">
+                    <img class="menuitem" src="~/Content/pic/articleicon.jpg">
+                </a>
+                <a ui-sref="home.news" class="menucolor textwhite" menu-toggle="right">
+                    <img class="menuitem" src="~/Content/pic/msgicon.jpg">
+                </a>
+                <a ui-sref="home.news" class="menucolor textwhite" menu-toggle="right">
+                    <img class="tawasalma3na" src="~/Content/pic/contactusicon.jpg">
+                </a>
+                <a ui-sref="home.news" class="menucolor textwhite" menu-toggle="right">
+                    <img class="menuitem" src="~/Content/pic/aboutusicon.jpg">
+                </a>
+            </ul>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+
+
+
+<!--<ion-side-menus>
 
     <ion-pane ion-side-menu-content>
 
@@ -32,4 +76,4 @@
             <side-menu>
 
 
-</ion-side-menus>
+</ion-side-menus>-->

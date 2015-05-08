@@ -1,69 +1,50 @@
-﻿
-
-
-
-<script type="text/javascript">
-     // Initialize the widget when the DOM is ready
-     $(function () {
-         // Setup html5 version
-         $("#uploader").pluploadQueue({
-             // General settings
-             runtimes: 'html5,flash,silverlight,html4',
-             url: "/api/Uploader",
-
-             chunk_size: '10mb',
-             rename: true,
-             dragdrop: false,
-
-             filters: {
-                 // Maximum file size
-                 max_file_size: '10mb',
-                 // Specify what files to browse for
-                 mime_types: [
-                     { title: "Image files", extensions: "jpg,gif,png" },
-                     { title: "Zip files", extensions: "zip" },
-                     {title:"Video files",extensions : "mp4"}
-                 ]
-             },
-
-             // Resize images on clientside if we can
-             resize: {
-                 width: 200,
-                 height: 200,
-                 quality: 90,
-                 crop: true // crop to exact dimensions
-             },
-
-
-             // Flash settings
-             flash_swf_url: '/plupload/js/Moxie.swf',
-
-             // Silverlight settings
-             silverlight_xap_url: '/plupload/js/Moxie.xap'
-         });
-     });
+﻿<script type="text/javascript">
+    // Initialize the widget when the DOM is ready
+    $(function () {
+        // Setup html5 version
+        $("#uploader").pluploadQueue({
+            // General settings
+            runtimes: 'html5,flash,silverlight,html4',
+            url: "/api/Uploader/Post",
+            chunk_size: '10mb',
+            rename: true,
+            dragdrop: false,
+            filters: {
+                // Maximum file size
+                max_file_size: '10mb',
+                // Specify what files to browse for
+                mime_types: [
+                    { title: "Image files", extensions: "jpg,gif,png" },
+                    { title: "Zip files", extensions: "zip" },
+                    { title: "Video files", extensions: "mp4" }
+                ]
+            },
+            // Resize images on clientside if we can
+            resize: {
+                width: 200,
+                height: 200,
+                quality: 90,
+                crop: true // crop to exact dimensions
+            },
+            // Flash settings
+            flash_swf_url: '/plupload/js/Moxie.swf',
+            // Silverlight settings
+            silverlight_xap_url: '/plupload/js/Moxie.xap'
+        });
+    });
 </script>
-
 <form name="lecForm" novalidate>
-
     <div class="row panel inbox ">
-
         <div class="row">
             <div class="large-12 columns">
-                
-
                 <h3>إضافة محاضرة جديدة :</h3>
-                <button class="button tiny" ng-click="back()">Back</button>
-                
+                <button class="button tiny" ng-click="back()">رجوع</button>
                 <div ng-controller="vidogularv4 as controller" class="videogular-container" style="margin-bottom: 8%">
                     <videogular vg-theme="controller.config.theme">
                         <vg-media vg-src="controller.config.sources"
                                   vg-tracks="controller.config.tracks">
                         </vg-media>
-
-
                         <vg-controls>
-
                             <vg-volume>
                                 <vg-mute-button></vg-mute-button>
                                 <vg-volume-bar></vg-volume-bar>
@@ -72,105 +53,45 @@
                             <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
                             <vg-scrub-bar dir="ltr">
                                 <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-
                             </vg-scrub-bar>
-
                             <vg-play-pause-button></vg-play-pause-button>
-
                         </vg-controls>
-
                         <vg-overlay-play></vg-overlay-play>
                         <vg-poster vg-url='controller.config.plugins.poster'></vg-poster>
                     </videogular>
                 </div>
-
                 <div id="uploader">
-
                     <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
                 </div>
-
             </div>
         </div>
-
-
-
-
         <div class="large-12 small-12 columns">
-
-
             <div class="row inbox">
-
                 <div class="large-9 columns">
-
-
                 </div>
-
-
                 <div class="large-3 small-8 columns">
-
                     <input type="text" ng-model="user.title" required placeholder="إضافة عنوان" name="title" />
                     <span style="color:red" ng-show="lecForm.title.$dirty && lecForm.title.$invalid">
                         <span ng-show="lecForm.title.$error.required">Title is required</span>
                     </span>
-
-
-
-
-
                 </div>
-
-
-
             </div>
-
-
-
             <div class="row">
-
-
-
                 <div class="large-12  small-12 columns">
-
-
-
                     <textarea placeholder="إضافة تفصيل" ng-model="user.description" required name="description"></textarea>
                     <span style="color:red" ng-show="lecForm.description.$dirty && lecForm.description.$invalid">
                         <span ng-show="lecForm.description.$error.required">Description is required</span>
                     </span>
-
                 </div>
-
             </div>
-
             <div class="row">
                 <div class="large-12 columns">
                     <button class="button  tiny" ng-click="editlectures()" ng-disabled="lecForm.title.$dirty && lecForm.title.$invalid ||
 lecForm.description.$dirty && lecForm.description.$invalid">
                         تعديل المحاضرة
                     </button>
-
-
                 </div>
-
             </div>
         </div>
-
-
     </div>
-
 </form>
-
-<!--<script>
-    $(document).ready(function () {
-        $("a.plupload_start").click(function () {
-            var text = $('div.plupload_file_name span').text();
-            if (text == "") {
-                text = "nothing";
-            }
-            var res = text.split("U");
-
-            alert(res[0]);
-
-        });
-    });
-</script>-->

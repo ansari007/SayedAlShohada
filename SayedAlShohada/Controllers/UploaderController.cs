@@ -17,7 +17,7 @@ namespace SayedAlShohada.Controllers
     public class UploaderController : ApiController
     {
         [HttpPost]
-        public HttpResponseMessage Postv()
+        public HttpResponseMessage Post()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {

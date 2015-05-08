@@ -206,9 +206,9 @@ Global
 		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|iOS.ActiveCfg = Debug|iOS
 		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|iOS.Build.0 = Debug|iOS
 		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|iOS.Deploy.0 = Debug|iOS
-		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Mixed Platforms.ActiveCfg = Debug|Android
-		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Mixed Platforms.Build.0 = Debug|Android
-		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Mixed Platforms.Deploy.0 = Debug|Android
+		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Mixed Platforms.ActiveCfg = Debug|iOS
+		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Mixed Platforms.Build.0 = Debug|iOS
+		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Mixed Platforms.Deploy.0 = Debug|iOS
 		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Windows Phone (Universal).ActiveCfg = Debug|Windows Phone (Universal)
 		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Windows Phone (Universal).Build.0 = Debug|Windows Phone (Universal)
 		{5D3EB201-0E5D-4740-890A-048663E90F7F}.Debug|Windows Phone (Universal).Deploy.0 = Debug|Windows Phone (Universal)

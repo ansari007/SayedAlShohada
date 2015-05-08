@@ -8,6 +8,7 @@ using Core.PushNotification;
 using Infrastructure.Repository;
 using Infrastructure.Repository.Imp;
 using Infrastructure.Services.PushNotification;
+using PushSharp;
 using PushSharp.Core;
 using SayedAlShohada.Models;
 
@@ -16,14 +17,17 @@ namespace SayedAlShohada.Controllers
     public class NotificationTestController : ApiController
     {
 
-        private readonly IAndroidPushNotificationService _androidService;
+        private readonly IAndroidPushNotificationService _androidPushService;
+        private readonly IApplePushNotificationService _applePushService;
         private readonly IPushRepository _pushRepository;
 
         public NotificationTestController()
         {
             _pushRepository = new PushRepository();
 
-            _androidService = new AndroidPushNotificationService(_pushRepository);
+            _androidPushService = new AndroidPushNotificationService(_pushRepository);
+
+            _applePushService = new ApplePushNotificationService(_pushRepository);
         }
 
         //public ActionResult Push()
@@ -43,11 +47,11 @@ namespace SayedAlShohada.Controllers
                 listDeviceInfo.Add(deviceInfo);
 
                 if (form.platform.ToLower() == "android")
-                    this._androidService.SendMessage(form.message, listDeviceInfo);
+                    this._androidPushService.SendMessage(form.message, listDeviceInfo);
                 //if (applicationkey == DeviceTypeEnum.Android.ApplicationKey)
                 //    this._androidService.SendMessage(message, listDeviceInfo);
-                //else
-                //    this._appleService.SendMessage(message, listDeviceInfo);
+                else
+                    this._applePushService.SendMessage(form.message, listDeviceInfo);
             }
 
             //return this.RedirectToAction("Push");
