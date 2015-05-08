@@ -1,109 +1,75 @@
 (function () {
     'use strict';
-
-    angular.module('eliteApp').factory('apictrl', ['$stateParams','$http','$q','DSCacheFactory','$ionicLoading','$timeout',apictrl]);
-
-    function apictrl($stateParams,$http,$q,$ionicLoading,$timeout,DSCacheFactory) {
+    angular.module('eliteApp').factory('apictrl', ['$stateParams', '$http', '$q', 'DSCacheFactory', '$ionicLoading', '$timeout', apictrl]);
+    function apictrl($stateParams, $http, $q, $ionicLoading, $timeout, DSCacheFactory) {
         var vm = this;
-vm.num=$stateParams.id;
+        vm.num = $stateParams.id;
 
+        function getmsgs() {
+            var deferred = $q.defer();
+            $ionicLoading.show({ template: "Loading..." });
+            $http.get("http://localhost:59454/api/Messages").success(function (data) {
 
-function getmsgs(){
+                $timeout(function () {
+                    $ionicLoading.hide();
+                    deferred.resolve(data);
 
-    var deferred=$q.defer();
-    $ionicLoading.show({template:"Loading..."});
-$http.get("http://localhost:59454/api/Messages").success(function(data){
+                }, 500);
+                console.log("ok", data, status);
+            })
+            .error(function () {
+                $ionicLoading.hide();
+                console.log("error http mhd");
+                deferred.reject();
+            });
+            return deferred.promise;
+        }
 
-    $timeout(function(){
-        $ionicLoading.hide();
-         deferred.resolve(data);
-        
-    }, 500);
-    console.log("ok",data,status);
+        function getmsgdis() {
+            $ionicLoading.show({ template: "Loading..." });
+            var deferred = $q.defer();
+            $http.get("http://localhost:59454/api/Messages/" + vm.num + "").success(function (data) {
 
-    
+                $timeout(function () {
+                    $ionicLoading.hide();
+                    deferred.resolve(data);
 
-})
-.error(function(){
-    $ionicLoading.hide();
-console.log("error http mhd");
-deferred.reject();
-});
+                }, 500);
 
-return deferred.promise;
+            })
+            .error(function () {
+                console.log("error http mhd");
+                deferred.reject();
+            });
+            return deferred.promise;
+        }
 
-}
+        // ----------------------------------------lecturectrl
 
+        function getlectures() {
 
+            $ionicLoading.show({ template: "Loading..." });
 
-function getmsgdis(){
-    $ionicLoading.show({template:"Loading..."});
-    var deferred=$q.defer();
-$http.get("http://localhost:59454/api/Messages/"+vm.num+"").success(function(data){
+            var deferred = $q.defer();
+            $http.get("http://localhost:59454/api/Values").success(function (data) {
 
-    $timeout(function(){
-        $ionicLoading.hide();
-         deferred.resolve(data);
-        
-    }, 500);
-  
+                $timeout(function () {
+                    $ionicLoading.hide();
+                    deferred.resolve(data);
 
-})
-.error(function(){
-console.log("error http mhd");
-deferred.reject();
-});
-return deferred.promise;
-
-}
-
-// ----------------------------------------lecturectrl
-
-
-function getlectures(){
-    
-$ionicLoading.show({template:"Loading..."});
-
-    var deferred=$q.defer();
-$http.get("http://localhost:59454/api/Values").success(function(data){
-
-   $timeout(function(){
-        $ionicLoading.hide();
-         deferred.resolve(data);
-        
-    }, 500);
-
-})
-.error(function(){
-    $ionicLoading.hide();
-console.log("error http valuesctrl");
-deferred.reject();
-});
-
-return deferred.promise;
-
-}
-
-
-
-
-
-
-
-
-
-return{
-getmsgs: getmsgs,
-getmsgdis: getmsgdis,
-getlectures: getlectures
-
-};
-
-
-
-
-
+                }, 500);
+            })
+            .error(function () {
+                $ionicLoading.hide();
+                console.log("error http valuesctrl");
+                deferred.reject();
+            });
+            return deferred.promise;
+        }
+        return {
+            getmsgs: getmsgs,
+            getmsgdis: getmsgdis,
+            getlectures: getlectures
+        };
     };
-
-
 })();

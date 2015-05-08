@@ -14,6 +14,7 @@
   <preference name="UIWebViewBounce" value="false" />
   <preference name="DisallowOverscroll" value="true" />
   <preference name="BackupWebStorage" value="none" />
+  <preference name="target-device" value="universal" />
   <vs:plugin name="org.apache.cordova.device" version="0.2.12" />
   <vs:plugin name="org.apache.cordova.dialogs" version="0.2.10" />
   <vs:plugin name="org.apache.cordova.network-information" version="0.2.12" />

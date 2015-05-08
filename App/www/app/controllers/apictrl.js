@@ -183,7 +183,7 @@
 
         //----------------<push notification>-------------------------------------------------------------------
         function postdeviceinfo(device) {
-            alert(device);
+            //alert(device);
             $http.post(online + "Push/InsertDevice", device).
            success(function (data, status, headers, config) {
                console.log(" device info post ok");

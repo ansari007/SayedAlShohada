@@ -52,7 +52,7 @@ namespace Infrastructure.Services.PushNotification
         }
 
 
-        public void SendMessage(string message, string msgcnt, List<PushDeviceInfo> devices)
+        public void SendMessage(string message, List<PushDeviceInfo> devices)
         {
             if (!this.isStarted) this.Start();
             this.isStarted = true;
@@ -64,7 +64,7 @@ namespace Infrastructure.Services.PushNotification
                 if (firstOrDefault != null)
                 {
                     var a = new GcmNotification().ForDeviceRegistrationId(firstOrDefault.DeviceToken)
-                             .WithJson("{\"message\":\" " + message + "\",\"msgcnt\":\" " + msgcnt + "\"}");
+                             .WithJson("{\"message\":\" " + message + "\"}");
                     //.WithJson("{\"message\":\" " + message + "\",\"badge\":0,\"msgcnt\":\" " + msgcnt + "\"}");
                     //a.TimeToLive = this._timeToLive;
                     this._pushBroker.QueueNotification(a, androidAppName);
