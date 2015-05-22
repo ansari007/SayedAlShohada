@@ -866,6 +866,8 @@
     <Content Include="scripts\i18n\angular-locale_bez.js" />
     <Content Include="scripts\i18n\angular-locale_bg-bg.js" />
     <Content Include="scripts\i18n\angular-locale_bg.js" />
+    <Content Include="scripts\i18n\angular-locale_bm-latn-ml.js" />
+    <Content Include="scripts\i18n\angular-locale_bm-latn.js" />
     <Content Include="scripts\i18n\angular-locale_bm-ml.js" />
     <Content Include="scripts\i18n\angular-locale_bm.js" />
     <Content Include="scripts\i18n\angular-locale_bn-bd.js" />
@@ -921,6 +923,8 @@
     <Content Include="scripts\i18n\angular-locale_de.js" />
     <Content Include="scripts\i18n\angular-locale_dje-ne.js" />
     <Content Include="scripts\i18n\angular-locale_dje.js" />
+    <Content Include="scripts\i18n\angular-locale_dsb-de.js" />
+    <Content Include="scripts\i18n\angular-locale_dsb.js" />
     <Content Include="scripts\i18n\angular-locale_dua-cm.js" />
     <Content Include="scripts\i18n\angular-locale_dua.js" />
     <Content Include="scripts\i18n\angular-locale_dyo-sn.js" />
@@ -991,6 +995,7 @@
     <Content Include="scripts\i18n\angular-locale_en-mt.js" />
     <Content Include="scripts\i18n\angular-locale_en-mu.js" />
     <Content Include="scripts\i18n\angular-locale_en-mw.js" />
+    <Content Include="scripts\i18n\angular-locale_en-my.js" />
     <Content Include="scripts\i18n\angular-locale_en-na.js" />
     <Content Include="scripts\i18n\angular-locale_en-nf.js" />
     <Content Include="scripts\i18n\angular-locale_en-ng.js" />
@@ -1138,6 +1143,7 @@
     <Content Include="scripts\i18n\angular-locale_gl-es.js" />
     <Content Include="scripts\i18n\angular-locale_gl.js" />
     <Content Include="scripts\i18n\angular-locale_gsw-ch.js" />
+    <Content Include="scripts\i18n\angular-locale_gsw-fr.js" />
     <Content Include="scripts\i18n\angular-locale_gsw-li.js" />
     <Content Include="scripts\i18n\angular-locale_gsw.js" />
     <Content Include="scripts\i18n\angular-locale_gu-in.js" />
@@ -1160,6 +1166,8 @@
     <Content Include="scripts\i18n\angular-locale_hr-ba.js" />
     <Content Include="scripts\i18n\angular-locale_hr-hr.js" />
     <Content Include="scripts\i18n\angular-locale_hr.js" />
+    <Content Include="scripts\i18n\angular-locale_hsb-de.js" />
+    <Content Include="scripts\i18n\angular-locale_hsb.js" />
     <Content Include="scripts\i18n\angular-locale_hu-hu.js" />
     <Content Include="scripts\i18n\angular-locale_hu.js" />
     <Content Include="scripts\i18n\angular-locale_hy-am.js" />
@@ -1234,6 +1242,8 @@
     <Content Include="scripts\i18n\angular-locale_ky.js" />
     <Content Include="scripts\i18n\angular-locale_lag-tz.js" />
     <Content Include="scripts\i18n\angular-locale_lag.js" />
+    <Content Include="scripts\i18n\angular-locale_lb-lu.js" />
+    <Content Include="scripts\i18n\angular-locale_lb.js" />
     <Content Include="scripts\i18n\angular-locale_lg-ug.js" />
     <Content Include="scripts\i18n\angular-locale_lg.js" />
     <Content Include="scripts\i18n\angular-locale_lkt-us.js" />
@@ -1277,12 +1287,10 @@
     <Content Include="scripts\i18n\angular-locale_mn.js" />
     <Content Include="scripts\i18n\angular-locale_mr-in.js" />
     <Content Include="scripts\i18n\angular-locale_mr.js" />
-    <Content Include="scripts\i18n\angular-locale_ms-bn.js" />
     <Content Include="scripts\i18n\angular-locale_ms-latn-bn.js" />
     <Content Include="scripts\i18n\angular-locale_ms-latn-my.js" />
     <Content Include="scripts\i18n\angular-locale_ms-latn-sg.js" />
     <Content Include="scripts\i18n\angular-locale_ms-latn.js" />
-    <Content Include="scripts\i18n\angular-locale_ms-my.js" />
     <Content Include="scripts\i18n\angular-locale_ms.js" />
     <Content Include="scripts\i18n\angular-locale_mt-mt.js" />
     <Content Include="scripts\i18n\angular-locale_mt.js" />
@@ -1351,6 +1359,10 @@
     <Content Include="scripts\i18n\angular-locale_pt-st.js" />
     <Content Include="scripts\i18n\angular-locale_pt-tl.js" />
     <Content Include="scripts\i18n\angular-locale_pt.js" />
+    <Content Include="scripts\i18n\angular-locale_qu-bo.js" />
+    <Content Include="scripts\i18n\angular-locale_qu-ec.js" />
+    <Content Include="scripts\i18n\angular-locale_qu-pe.js" />
+    <Content Include="scripts\i18n\angular-locale_qu.js" />
     <Content Include="scripts\i18n\angular-locale_rm-ch.js" />
     <Content Include="scripts\i18n\angular-locale_rm.js" />
     <Content Include="scripts\i18n\angular-locale_rn-bi.js" />
@@ -1379,6 +1391,7 @@
     <Content Include="scripts\i18n\angular-locale_sbp.js" />
     <Content Include="scripts\i18n\angular-locale_se-fi.js" />
     <Content Include="scripts\i18n\angular-locale_se-no.js" />
+    <Content Include="scripts\i18n\angular-locale_se-se.js" />
     <Content Include="scripts\i18n\angular-locale_se.js" />
     <Content Include="scripts\i18n\angular-locale_seh-mz.js" />
     <Content Include="scripts\i18n\angular-locale_seh.js" />
@@ -1397,6 +1410,8 @@
     <Content Include="scripts\i18n\angular-locale_sk.js" />
     <Content Include="scripts\i18n\angular-locale_sl-si.js" />
     <Content Include="scripts\i18n\angular-locale_sl.js" />
+    <Content Include="scripts\i18n\angular-locale_smn-fi.js" />
+    <Content Include="scripts\i18n\angular-locale_smn.js" />
     <Content Include="scripts\i18n\angular-locale_sn-zw.js" />
     <Content Include="scripts\i18n\angular-locale_sn.js" />
     <Content Include="scripts\i18n\angular-locale_so-dj.js" />
@@ -1511,6 +1526,8 @@
     <Content Include="scripts\i18n\angular-locale_xog.js" />
     <Content Include="scripts\i18n\angular-locale_yav-cm.js" />
     <Content Include="scripts\i18n\angular-locale_yav.js" />
+    <Content Include="scripts\i18n\angular-locale_yi-001.js" />
+    <Content Include="scripts\i18n\angular-locale_yi.js" />
     <Content Include="scripts\i18n\angular-locale_yo-bj.js" />
     <Content Include="scripts\i18n\angular-locale_yo-ng.js" />
     <Content Include="scripts\i18n\angular-locale_yo.js" />
@@ -1540,8 +1557,10 @@
     <Content Include="scripts\version.json" />
     <Content Include="www\.gitignore" />
     <Content Include="www\app\app.js" />
+    <Content Include="www\app\app2.js" />
     <Content Include="www\app\controllers\apictrl.js" />
     <Content Include="www\app\controllers\apppiii.js" />
+    <Content Include="www\app\controllers\ionpushctrl.js" />
     <Content Include="www\app\controllers\lecturectrl.js" />
     <Content Include="www\app\controllers\newsctrl.js" />
     <Content Include="www\app\controllers\newsdisplayctrl.js" />
@@ -1578,6 +1597,7 @@
     <Content Include="www\js\bower_components\angular-sanitize\index.js" />
     <Content Include="www\js\bower_components\angular-sanitize\package.json" />
     <Content Include="www\js\bower_components\angular-sanitize\README.md" />
+    <Content Include="www\js\bower_components\angular-websocket.js" />
     <Content Include="www\js\bower_components\angulartics\.bower.json" />
     <Content Include="www\js\bower_components\angulartics\.bowerrc" />
     <Content Include="www\js\bower_components\angulartics\.gitignore" />
@@ -1693,6 +1713,8 @@
     <Content Include="www\js\bower_components\angular\index.js" />
     <Content Include="www\js\bower_components\angular\package.json" />
     <Content Include="www\js\bower_components\angular\README.md" />
+    <Content Include="www\js\bower_components\ionic-core.js" />
+    <Content Include="www\js\bower_components\ionic-push.js" />
     <Content Include="www\js\bower_components\jquery\.bower.json" />
     <Content Include="www\js\bower_components\jquery\bower.json" />
     <Content Include="www\js\bower_components\jquery\dist\jquery.js" />
