@@ -22,8 +22,9 @@
 
 
     <body ng-app="mhdapp">
+        <toaster-container toaster-options="{'position-class': 'toast-top-left'}"></toaster-container>
         <!--login goes here-->
-
+        
         <div ng-controller="logctrl">
             <form name="logForm" novalidate ng-if="notLoggedIn">
                 <div class="row">
@@ -39,18 +40,18 @@
                                 <div class="large-12 columns">
                                     <div class="row">
                                         <div class="large-12 columns">
-                                            <input type="text" name="username" ng-model="user.username" required placeholder="Username" />
+                                            <input type="text" name="username" ng-model="user.username" required placeholder="إسم المستخدم" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-12 columns">
-                                            <input type="password" name="password" ng-model="user.password" required placeholder="Password" />
+                                            <input type="password" name="password" ng-model="user.password" required placeholder="كلمة السر" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-12 large-centered columns">
-                                            <button class="button expand" ng-click="logverif()">LogIn</button>
-                                            <toaster-container toaster-options="{'position-class': 'toast-top-left'}"></toaster-container>
+                                            <button class="button expand" ng-click="logverif()">تسجيل الدخول</button>
+                                           <!-- <toaster-container toaster-options="{'position-class': 'toast-top-left'}"></toaster-container>-->
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +73,7 @@
                                 <section class="top-bar-section">
                                     <!-- Right Nav Section -->
                                     <ul class="right">
-                                        <li><a href="#">تواصل معنا</a></li>
+                                        <!--<li><a href="#" ng-click="logout()">تسجيل الخروج</a></li>-->
                                         <li><a href="#">عن المركز</a></li>
                                         <!--  <li><a href="#login">login</a></li>-->
                                         <li><a href="#viewarticles"> روايات</a></li>
@@ -86,6 +87,7 @@
                                         </li>
                                         <li><a href="#main">الصفحة الرئيسية </a></li>
                                     </ul>
+                                    <div class="logout"> <a href="#" ng-click="logout()" class="left">تسجيل الخروج</a></div>
                                     <!-- Left Nav Section -->
                                 </section>
                             </nav>
@@ -155,13 +157,14 @@
                 </div>
             </div>
         </div>
-
+        
         <script src="plupload/js/plupload.full.min.js"></script>
         <script src="plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
         <script src="angular-1.3/angular.min.js"></script>
         <script src="angular-1.3/angular-route.js"></script>
         <script src="angular-1.3/angular-resource.js"></script>
         <script src="angular-1.3/angular-animate.min.js"></script>
+        <script src="angular-1.3/angular-cookies.js"></script>
         <script src="foundation/js/foundation.min.js"></script>
         <script src="../Scripts/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
         <script src="../Scripts/bower_components/videogular/videogular.js"></script>

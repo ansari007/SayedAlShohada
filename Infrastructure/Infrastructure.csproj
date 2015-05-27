@@ -90,9 +90,11 @@
     <Compile Include="Repository\IArticlesRepository.cs" />
     <Compile Include="Repository\ILecturesRepository.cs" />
     <Compile Include="Repository\ILoginRepository.cs" />
+    <Compile Include="Repository\IMainPageRepository.cs" />
     <Compile Include="Repository\Imp\ArticlesRepository.cs" />
     <Compile Include="Repository\Imp\LecturesRepository.cs" />
     <Compile Include="Repository\Imp\LoginRepository.cs" />
+    <Compile Include="Repository\Imp\MainPageRepository.cs" />
     <Compile Include="Repository\Imp\NewsRepository.cs" />
     <Compile Include="Repository\Imp\PushRepository.cs" />
     <Compile Include="Repository\INewsRepository.cs" />

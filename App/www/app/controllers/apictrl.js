@@ -1,7 +1,7 @@
 (function () {
     'use strict';
-    angular.module('eliteApp').factory('apictrl', ['$ionicLoading', '$stateParams', '$http', '$q', 'DSCacheFactory', apictrl]);
-    function apictrl($ionicLoading, $stateParams, $http, $q, DSCacheFactory) {
+    angular.module('eliteApp').factory('apictrl', ['$ionicLoading', '$stateParams', '$http', '$q', 'DSCacheFactory', '$ionicUser', '$ionicPush', apictrl]);
+    function apictrl($ionicLoading, $stateParams, $http, $q, DSCacheFactory, $ionicUser, $ionicPush) {
         DSCacheFactory("MessagesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
         DSCacheFactory("MessagedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
         DSCacheFactory("LecturesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
@@ -67,7 +67,7 @@
         // ===============================================================
 
         var vm = this;
-        var local = "http://Dev-010:59454/api/";
+        var local = "http://Dev010:1181/api/";
         var online = "http://sayedalshohada.azurewebsites.net/api/";
 
         function getmsgs(forceRefresh) {
@@ -193,7 +193,50 @@
               console.log("error post device info");
           });
         }
-        return {
+
+        function identifyUser () {
+            console.log('Ionic User: Identifying with Ionic User service');
+
+            var user = $ionicUser.get();
+            if (true) {
+                // Set your user_id here, or generate a random one.
+                user.user_id = $ionicUser.generateGUID();
+                angular.extend(user, {
+                    name: 'Ionitron',
+                    bio: 'I come from planet Ion'
+                });
+
+                // Identify your user with the Ionic User Service
+                $ionicUser.identify(user).then(function () {
+                    $scope.identified = true;
+                    alert('Identified user ' + user.name + '\n ID ' + user.user_id);
+                });
+
+            };
+        };
+
+
+
+       function pushRegister () {
+            console.log('Ionic Push: Registering user');
+
+            // Register with the Ionic Push service.  All parameters are optional.
+            $ionicPush.register({
+                canShowAlert: true, //Can pushes show an alert on your screen?
+                canSetBadge: true, //Can pushes update app icon badges?
+                canPlaySound: true, //Can notifications play a sound?
+                canRunActionsOnWake: true, //Can run actions outside the app,
+                onNotification: function (notification) {
+                    // Handle new push notifications here
+                    // console.log(notification);
+                    return true;
+                }
+            });
+
+        };
+       return {
+           pushRegister: pushRegister,
+            identifyUser: identifyUser,
             getmsgs: getmsgs,
             getmsgdis: getmsgdis,
             getlectures: getlectures,

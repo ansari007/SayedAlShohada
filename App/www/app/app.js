@@ -1,4 +1,8 @@
-angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova'])
+angular.module("eliteApp", ["ionic", "angular-data.DSCacheFactory", 'ngCordova',
+  'ionic.service.core',
+  'ionic.service.push',
+  'eliteApp.controllers',
+  'eliteApp.services'])
 
 
 .run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $cordovaDialogs, $rootScope, $http, $cordovaDevice, apictrl) {
