@@ -1,4 +1,4 @@
-﻿var mhdapp = angular.module("mhdapp", ['ngRoute', 'ngAnimate', 'toaster', "ngSanitize",
+﻿var mhdapp = angular.module("mhdapp", ['ngRoute', 'ngAnimate', 'toaster', "ngSanitize",'ngCookies',
 			"com.2fdevs.videogular",
 			"com.2fdevs.videogular.plugins.controls",
 			"com.2fdevs.videogular.plugins.overlayplay",
@@ -85,7 +85,9 @@ mhdapp.controller("c1", function ($scope) {
 
 mhdapp.controller("c3", ["$scope", "$routeParams", "$http", "$location", '$route', '$window','toaster', c3]);
 function c3($scope, $routeParams, $http, $location, $route, $window, toaster) {
+    $scope.dat = 0;
     $scope.currentPage = 1;
+    $scope.enablepagi = false;
     sessionStorage.pagelecsession = $scope.currentPage;
     sessionStorage.pageconlecsession = $scope.currentPage;
     if (sessionStorage.lecsession != null) {
@@ -114,7 +116,12 @@ function c3($scope, $routeParams, $http, $location, $route, $window, toaster) {
     //    console.log($scope.dat);
     //});
     $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (result) {
-
+        if (result.data.news.length != 0) {
+            $scope.enablepagi = true;
+        }
+        else {
+            $scope.enablepagi = false;
+        }
         $scope.dat = result.data.news;
         $scope.totalpage = result.data.total;
         console.log($scope.dat);
@@ -150,7 +157,26 @@ function c3($scope, $routeParams, $http, $location, $route, $window, toaster) {
         $http.delete('/api/Lectures/Deletelec/' + val).
           success(function (data, status, headers, config) {
               $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (result) {
+                  $scope.totalpage = result.data.total;
                   $scope.dat = result.data.news;
+                  if (result.data.news.length != 0) {
+                      
+                      $scope.enablepagi = true;
+                  }
+                  else {
+                      if ($scope.currentPage != 1) {
+                          $scope.currentPage--;
+                          $scope.enablepagi = true;
+                          $http.get('/api/Lectures/GetNext/' + $scope.currentPage).then(function (resultt) {
+
+                              $scope.totalpage = result.data.total;
+                              $scope.dat = resultt.data.news;
+                          });
+                      }
+                      else { $scope.enablepagi = false; }
+                      
+                  }
+                  
                   $scope.popsuccess = function () {
                       toaster.pop('note', "تمة الحذف بنجاح", "");
                   };
@@ -206,11 +232,13 @@ function c3($scope, $routeParams, $http, $location, $route, $window, toaster) {
             $scope.currentPage++;
             sessionStorage.pagelecsession = $scope.currentPage;
             sessionStorage.pageconlecsession = $scope.currentPage;
+           
 
             $http.get('/api/Lectures/Getnext/' + $scope.currentPage).then(function (result) {
 
 
                 $scope.dat = result.data.news;
+                $scope.totalpage = result.data.total;
                 console.log($scope.dat);
             });
         }
@@ -231,7 +259,8 @@ function c3($scope, $routeParams, $http, $location, $route, $window, toaster) {
 
 
 mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaster) {
-
+    $scope.dat = 0;
+    $scope.enablepagi = false;
     $scope.classnext = 'bancolor';
     $scope.classprevious = 'unavailable';
     $scope.currentPage = 1;
@@ -244,7 +273,12 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaste
     }
     $scope.user = { title: '', description: '' };
     $http.get('/api/Messages/GetNext/' + $scope.currentPage).then(function (result) {
-
+        if (result.data.news.length != 0) {
+            $scope.enablepagi = true;
+        }
+        else {
+            $scope.enablepagi = false;
+        }
         $scope.dat = result.data.news;
         $scope.totalpage = result.data.total;
         console.log($scope.dat);
@@ -263,8 +297,11 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaste
             $scope.currentPage++;
             sessionStorage.pagesession = $scope.currentPage;
             $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
+
                 $scope.dat = result.data.news;
+                $scope.totalpage = result.data.total;
                 console.log($scope.dat);
+                console.log("totalpage",$scope.totalpage);
             });
         }
     }
@@ -275,6 +312,7 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaste
             sessionStorage.pagesession = $scope.currentPage;
             $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
                 $scope.dat = result.data.news;
+                $scope.totalpage = result.data.total;
                 console.log($scope.dat);
             });
         }
@@ -294,8 +332,15 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaste
                 $scope.myForm.$setPristine();
                 $scope.user = { title: '', description: '' };
                 console.log("post ok");
-                $http.get('/api/Messages/Getnext/' + 1).then(function (result) {
-
+                $scope.currentPage = 1;
+                $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
+                    $scope.totalpage = result.data.total;
+                    if (result.data.news.length != 0) {
+                        $scope.enablepagi = true;
+                    }
+                    else {
+                        $scope.enablepagi = false;
+                    }
                     $scope.dat = result.data.news;
 
                     $scope.popsuccess = function () {
@@ -303,6 +348,7 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaste
                     };
                     $scope.popsuccess();
                     console.log($scope.dat);
+                    console.log("currentpage",$scope.currentPage);
                 });
             })
             .error(function (data, status, headers, config) {
@@ -321,9 +367,25 @@ mhdapp.controller("inbox", function ($scope, $routeParams, $http, $route, toaste
         $http.delete('/api/Messages/Deletenews/' + val)
             .success(function (data, status, headers, config) {
                 $http.get('/api/Messages/Getnext/' + $scope.currentPage).then(function (result) {
-
+                    $scope.totalpage = result.data.total;
                     $scope.dat = result.data.news;
-                    console.log($scope.dat);
+                    if (result.data.news.length != 0) {
+
+                        $scope.enablepagi = true;
+                    }
+                    else {
+                        if ($scope.currentPage != 1) {
+                            $scope.currentPage--;
+                            $scope.enablepagi = true;
+                            $http.get('/api/Messages/GetNext/' + $scope.currentPage).then(function (resultt) {
+
+                                $scope.totalpage = result.data.total;
+                                $scope.dat = resultt.data.news;
+                            });
+                        }
+                        else { $scope.enablepagi = false; }
+
+                    }
                     console.log("second httpget");
                     $scope.popsuccess = function () {
                         toaster.pop('note', "تمة الحذف بنجاح", "");
@@ -504,35 +566,61 @@ mhdapp.controller("editlecCtrl", function ($scope, $routeParams, $http, $locatio
 
 
 
-mhdapp.controller("logctrl", function ($scope, $routeParams, $http, $location, $window, toaster) {
-
-    console.log("login ctrl");
+mhdapp.controller("logctrl", function ($scope, $routeParams, $http, $location, $window, toaster, $cookieStore) {
     $scope.user = { username: '', password: '' };
-    $scope.notLoggedIn = true;
-    $scope.LoggedIn = false;
-    $scope.popfailed = function () {
+    if ($cookieStore.get('login') != null) {
+        console.log(" cookie was found");
+        $cookieStore.put('login', false);
+        $scope.notLoggedIn = false;
+        $scope.LoggedIn = true;
+    } else {
+
+        console.log("login ctrl");
+        console.log("cookie was not found");
+        /* var favoriteCookie = $cookieStore.get('myFavorite');*/
+        
+        $scope.notLoggedIn = true;
+        $scope.LoggedIn = false;
+    }
+    $scope.popfailed = function() {
         toaster.pop('error', "الإسم أو كلمة المرور غير مطابقة", "");
     };
     console.log("post not ok");
 
-    $scope.logverif = function () {
-        $http.post('/api/Login/Verif', $scope.user).then(function (result) {
-            var loggedResult = result.data;
-            if (loggedResult == false) {
-                $scope.popfailed();
-            } else {
-                $scope.LoggedIn = loggedResult;
-                $scope.notLoggedIn = false;
-            }
-            console.log($scope.LoggedIn);
+    $scope.logverif = function() {
+        if ($scope.user.username == "" || $scope.user.password == "") {
+            $scope.popfailed();
+        } else{
+            $http.post('/api/Login/Verif', $scope.user).then(function(result) {
+                var loggedResult = result.data;
+                if (loggedResult == false) {
+                    $scope.popfailed();
+                } else {
+                    $scope.LoggedIn = loggedResult;
+                    $scope.notLoggedIn = false;
+                    $cookieStore.put('login', true);
+                    $location.path("/main");
 
-        });
+                }
+                console.log($scope.LoggedIn);
+
+            });
+    }
+}
+
+   
+    
+    $scope.logout = function () {
+        $cookieStore.remove('login');
+        $scope.notLoggedIn = true;
+        $scope.LoggedIn = false;
     }
 });
 
 
 mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toaster) {
-
+    $scope.dat = 0;
+    $scope.enablepagi = false;
     $scope.classnext = 'bancolor';
     $scope.classprevious = 'unavailable';
     $scope.currentPage = 1;
@@ -547,6 +635,12 @@ mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toa
     $scope.user = { title: '', description: '' };
 
     $http.get('/api/Articles/GetNext/' + $scope.currentPage).then(function (result) {
+        if (result.data.Articles.length != 0) {
+            $scope.enablepagi = true;
+        }
+        else {
+            $scope.enablepagi = false;
+        }
         $scope.dat = result.data.Articles;
         $scope.totalpage = result.data.total;
         console.log($scope.dat);
@@ -568,6 +662,7 @@ mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toa
 
             $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
                 $scope.dat = result.data.Articles;
+                $scope.totalpage = result.data.total;
                 console.log($scope.dat);
             });
         }
@@ -579,6 +674,7 @@ mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toa
             sessionStorage.pagesession = $scope.currentPage;
             $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
                 $scope.dat = result.data.Articles;
+                $scope.totalpage = result.data.total;
                 console.log($scope.dat);
             });
         }
@@ -598,7 +694,15 @@ mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toa
                 $scope.myForm.$setPristine();
                 $scope.user = { title: '', description: '' };
                 console.log("post ok");
-                $http.get('/api/Articles/Getnext/' + 1).then(function (result) {
+                $scope.currentPage = 1;
+                $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+                    $scope.totalpage = result.data.total;
+                    if (result.data.Articles.length != 0) {
+                        $scope.enablepagi = true;
+                    }
+                    else {
+                        $scope.enablepagi = false;
+                    }
                     $scope.dat = result.data.Articles;
                     $scope.popsuccess = function () {
                         toaster.pop('note', "تمة الإضافة بنجاح", "");
@@ -622,9 +726,26 @@ mhdapp.controller("articles", function ($scope, $routeParams, $http, $route, toa
 
         $http.delete('/api/Articles/DeleteArticles/' + val)
             .success(function (data, status, headers, config) {
-                $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function(result) {
+                $http.get('/api/Articles/Getnext/' + $scope.currentPage).then(function (result) {
+                    $scope.totalpage = result.data.total;
+                    $scope.dat = result.data.Articles;
+                    if (result.data.Articles.length != 0) {
 
-                    $scope.dat = result.data.news;
+                        $scope.enablepagi = true;
+                    }
+                    else {
+                        if ($scope.currentPage != 1) {
+                            $scope.currentPage--;
+                            $scope.enablepagi = true;
+                            $http.get('/api/Articles/GetNext/' + $scope.currentPage).then(function (resultt) {
+
+                                $scope.totalpage = result.data.total;
+                                $scope.dat = resultt.data.Articles;
+                            });
+                        }
+                        else { $scope.enablepagi = false; }
+
+                    }
                     $scope.popsuccess = function() {
                         toaster.pop('note', "تمة الحذف بنجاح", "");
                     };

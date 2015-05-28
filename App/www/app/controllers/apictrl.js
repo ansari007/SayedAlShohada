@@ -87,7 +87,7 @@
                 $ionicLoading.show({
                     template: '...Loading'
                 });
-                $http.get(local + "Messages/Getall").success(function (data) {
+                $http.get(online + "Messages/Getall").success(function (data) {
                     self.MessagesCache.put(cacheKey, data);
                     $ionicLoading.hide();
                     deferred.resolve(data);
@@ -116,7 +116,7 @@
             }
 
             else {
-                $http.get(local + "Messages/Getnew/" + vm.num).success(function (data) {
+                $http.get(online + "Messages/Getnew/" + vm.num).success(function (data) {
 
                     self.MessagedispCache.put(cacheKey, data);
                     deferred.resolve(data);
@@ -150,7 +150,7 @@
                 $ionicLoading.show({
                     template: 'Loading...'
                 });
-                $http.get(local + "Lectures/Getall").success(function (data) {
+                $http.get(online + "Lectures/Getall").success(function (data) {
 
                     console.log("lecture received via HTTP");
                     self.LecturesCache.put(cacheKey, data);
@@ -169,7 +169,7 @@
         function getlecture() {
             var deferred = $q.defer();
             vm.num = $stateParams.id;
-            $http.get(local + "Lectures/Getlec/" + vm.num).success(function (data) {
+            $http.get(online + "Lectures/Getlec/" + vm.num).success(function (data) {
                 deferred.resolve(data);
                 console.log("received one lecture via http ", data, status);
             })
@@ -184,7 +184,7 @@
         //----------------<push notification>-------------------------------------------------------------------
         function postdeviceinfo(device) {
             //alert(device);
-            $http.post(local + "Push/InsertDevice", device).
+            $http.post(online + "Push/InsertDevice", device).
            success(function (data, status, headers, config) {
                console.log(" device info post ok");
            }).

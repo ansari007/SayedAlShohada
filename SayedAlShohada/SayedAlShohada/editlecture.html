@@ -14,8 +14,8 @@
                 max_file_size: '10mb',
                 // Specify what files to browse for
                 mime_types: [
-                    { title: "Image files", extensions: "jpg,gif,png" },
-                    { title: "Zip files", extensions: "zip" },
+                  /*  { title: "Image files", extensions: "jpg,gif,png" },
+                    { title: "Zip files", extensions: "zip" },*/
                     { title: "Video files", extensions: "mp4" }
                 ]
             },
@@ -72,7 +72,7 @@
                 <div class="large-3 small-8 columns">
                     <input type="text" ng-model="user.title" required placeholder="إضافة عنوان" name="title" />
                     <span style="color:red" ng-show="lecForm.title.$dirty && lecForm.title.$invalid">
-                        <span ng-show="lecForm.title.$error.required">Title is required</span>
+                        <span ng-show="lecForm.title.$error.required">الرجاء إدخال العنوان</span>
                     </span>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="large-12  small-12 columns">
                     <textarea placeholder="إضافة تفصيل" ng-model="user.description" required name="description"></textarea>
                     <span style="color:red" ng-show="lecForm.description.$dirty && lecForm.description.$invalid">
-                        <span ng-show="lecForm.description.$error.required">Description is required</span>
+                        <span ng-show="lecForm.description.$error.required">الرجاء إدخال التفصيل</span>
                     </span>
                 </div>
             </div>

@@ -238,3 +238,15 @@
     
 }
 
+.logout {
+    line-height: 47px !important;
+    padding-left: 20px !important;
+}
+
+.logout a {
+    color: white !important;
+}
+
+/*.logout a:hover {
+    color: green !important;
+}*/
