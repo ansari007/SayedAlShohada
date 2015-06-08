@@ -22,7 +22,7 @@ namespace Infrastructure.Services.PushNotification
         public bool isStarted;
 
         private string IPhoneAppName = "net.mentis.SayedAlShohada";
-        private string IpadAppName = "generosoft.etejah.ipad";
+        private string IpadAppName = "net.SayedAlShohada.ipad";
 
         public ApplePushNotificationService(IPushRepository repository)
         {
@@ -50,12 +50,12 @@ namespace Infrastructure.Services.PushNotification
             bool isProduction = false;
             var iPhoneCertificate = Resources.Shared.Dev_Certificates;
 #else
-            bool isProduction = true;
-            var iPhoneCertificate = Resources.Shared.Etejah_Pro_Certificates;
+            //bool isProduction = true;
+            //var iPhoneCertificate = Resources.Shared.Etejah_Pro_Certificates;
 #endif
-            this._iphoneChannelSettings = new ApplePushChannelSettings(isProduction, iPhoneCertificate,
-                Resources.Shared.Apple_Certification_Password);
-            this._pushBroker.RegisterAppleService(this._iphoneChannelSettings, IPhoneAppName); //Extension method
+            //this._iphoneChannelSettings = new ApplePushChannelSettings(isProduction, iPhoneCertificate,
+            //    Resources.Shared.Apple_Certification_Password);
+            //this._pushBroker.RegisterAppleService(this._iphoneChannelSettings, IPhoneAppName); //Extension method
         }
 
         public void Stop()
