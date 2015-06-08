@@ -50,8 +50,8 @@ namespace SayedAlShohada.Controllers
                     this._androidPushService.SendMessage(form.message, listDeviceInfo);
                 //if (applicationkey == DeviceTypeEnum.Android.ApplicationKey)
                 //    this._androidService.SendMessage(message, listDeviceInfo);
-                else
-                    this._applePushService.SendMessage(form.message, listDeviceInfo);
+                //else
+                //    this._applePushService.SendMessage(form.message, listDeviceInfo);
             }
 
             //return this.RedirectToAction("Push");
