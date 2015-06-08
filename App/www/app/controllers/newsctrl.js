@@ -5,7 +5,7 @@
         var vm = this;
         vm.loadList = function (forceRefresh) {
             apictrl.getmsgs(forceRefresh).then(function (data) {
-                alert("ok");
+                
                 vm.news = data;
             }).finally(function () {
                 $scope.$broadcast('scroll.refreshComplete');

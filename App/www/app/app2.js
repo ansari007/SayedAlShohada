@@ -15,7 +15,7 @@
       //        gcm_id: '774696930133'
       //    });
       //}])
-.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $cordovaDialogs, $rootScope, $http, $cordovaDevice, apictrl) {
+.run(function ($ionicPlatform, DSCacheFactory, $cordovaPush, $cordovaDialogs, $rootScope, $http, $cordovaDevice, apictrl,$ionicPush) {
      $ionicPlatform.ready(function () {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -75,20 +75,20 @@
 
              case 'message':
               
-               /*  $ionicPush.register({
+                 $ionicPush.register({
                      canShowAlert: true, //Can pushes show an alert on your screen?
                      canSetBadge: true, //Can pushes update app icon badges?
                      canPlaySound: true, //Can notifications play a sound?
                      canRunActionsOnWake: true, //Can run actions outside the app,
                      onNotification: function (notification) {
                          // Handle new push notifications here
-                         // console.log(notification);
+                          alert(notification);
                          return true;
                      }
-                 });*/
+                 });
        
   
-                if (e.foreground) {
+               /* if (e.foreground) {
                     $cordovaDialogs.alert(e.payload.message, "Push Notification Received");
                     // on Android soundname is outside the payload.
                     // On Amazon FireOS all custom attributes are contained within payload
@@ -118,16 +118,14 @@
                 $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
                 ////Only works on Amazon Fire OS
                 //$status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
-                break;
+                break;*/
 
             case 'error':
-                console.log("ERROR -> MSG: " + e.msg);
-                //alert('<li>ERROR -> MSG:' + e.msg + '</li>');
+                alert("error");
                 break;
 
             default:
-                console.log("Unknown, an event was received and we do not know what it is");
-                //alert('<li>EVENT -> Unknown, an event was received and we do not know what it is</li>');
+                alert("Unknown");
                 break;
         }
     }

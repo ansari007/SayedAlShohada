@@ -16,7 +16,7 @@ namespace SayedAlShohada.Models.Mappers.Imp
             device.UdId =form.UdId;
             device.OsVersion = form.OsVersion;
             device.CreatedDate = DateTime.Now;
-            device.ModifiedDate = DateTime.Now;
+            device.ModifiedDate = DateTime.UtcNow;
             device.AppVersion = "1.0";
             return device;
         }

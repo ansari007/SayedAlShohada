@@ -9,32 +9,29 @@
         <div class="row bgtitlecolor">
             <div class=" col padding ">
                 <h4 class="nomargin sectitlecolor">
-                    <b>أخر رسالة</b>
+                    <b>أخر خبر</b>
                 </h4>
-                <h5 class="wrap sectitlecolor">
+                <h5 class="wrap sectitlecolor" ng-controller="mainpageinfoctrl as vm">
                     <b>
-                        شركة جوجل أو غوغل أو قوقل (بالإنكليزية: Google) هي شركة عامة أمريكية تربح من العمل في مجال الإعلان المرتبط بخدمات البحث على الإنترنت وإرسال رسائل البريد الإلكتروني. وأختير اسم غوغل الذي يعكس المُهمة التي تقوم بها الشركة، وهي تنظيم ذلك الكم الهائل من المعلومات المُتاحة على الويب.[2]
+                        {{vm.news.Description}}
                     </b>
                 </h5>
             </div>
         </div>
 
-        <div class="row" ng-controller ="videogularctrl as vm">
+        <div class="row" ng-controller="mainpageinfoctrl as vm">
             <div class="padding col">
                 <!-- <input type="hidden" value={{vm.url}} id="hiddenUrl" ng-controller="videogularctrl as vm" />-->
-               
+
                 <div id="player">error player...</div>
             </div>
         </div>
 
-        <div class="row ">
-            <div class="col  ">
-                <h4 class="sectitlecolor"><b>روايات</b></h4>
+        <div class="row " ng-controller="mainpageinfoctrl as vm">
+            <div class="col">
+                <h4 class="sectitlecolor"><b>أخر رواية </b></h4>
 
-
-
-                <h5 class="sectitlecolor"> <b>شركة جوجل أو غوغل أو قوقل (بالإنكليزية: Google) هي شركة عامة أمريكية تربح من العمل في مجال الإعلان المرتبط بخدمات البحث على الإنترنت وإرسال رسائل البريد الإلكتروني. وأختير اسم غوغل الذي يعكس المُهمة التي تقوم بها الشركة، وهي تنظيم ذلك الكم الهائل من المعلومات المُتاحة على الويب.</b></h5>
-
+                <h5 class="sectitlecolor"> <b>{{vm.article.Description}}</b></h5>
             </div>
         </div>
     </ion-content>

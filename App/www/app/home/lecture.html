@@ -10,21 +10,28 @@
             </div>
         </div>
 
-        <div class="row  ">
-            <div class="col col-33 col-offset-33"><h4><b>عنوان الفيديو{{vm.lectures[vm.nid].Vtitle}}</b></h4></div>
-            <div class="col col-center ">
+        <div class="row" ng-controller="mainpageinfoctrl as vm">
+            <div class="col col-33 col-offset-33"><h4 class="titlecolor"><b>{{vm.lecture.Vtitle}}</b></h4></div>
+            <!--<div class="col col-center ">
                 <img width="96%" ng-src="Content/pic/socialiconsk.jpg" />
+            </div>-->
+        </div>
+        
+        <div class="row" ng-controller="mainpageinfoctrl as vm">
+            <div class="padding col">
+
+                <div id="player">error player...</div>
             </div>
         </div>
 
-        <div class="row bgtitlecolor">
+        <div class="row bgtitlecolor" ng-controller="mainpageinfoctrl as vm">
             <div class=" col padding ">
-                <h5 class="wrap sectitlecolor">
-                    <b>
-                        شركة جوجل أو غوغل أو قوقل (بالإنكليزية: Google) هي شركة عامة أمريكية تربح من العمل في مجال الإعلان المرتبط بخدمات البحث على الإنترنت وإرسال رسائل البريد الإلكتروني. وأختير اسم غوغل الذي يعكس المُهمة التي تقوم بها الشركة، وهي تنظيم ذلك الكم الهائل من المعلومات المُتاحة على الويب.[2]
-                    </b>
-                </h5>
-            </div>
+                <h5 class=" wrap sectitlecolor">
+            <b>
+                {{vm.Vdescription}}
+            </b>
+            </h5>
+        </div>
         </div>
 
         <div class="row  ">

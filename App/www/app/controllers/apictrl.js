@@ -6,13 +6,18 @@
         DSCacheFactory("MessagedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
         DSCacheFactory("LecturesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
         DSCacheFactory("LecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("MainPageNewsdispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("MainPageArticledispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("MainPageLecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
 
         self.MessagesCache = DSCacheFactory.get("MessagesCache");
         self.MessagedispCache = DSCacheFactory.get("MessagedispCache");
         self.LecturesCache = DSCacheFactory.get("LecturesCache");
         self.LecturedispCache = DSCacheFactory.get("LecturedispCache");
         self.staticCache = DSCacheFactory.get("staticCache");
-
+        self.MainPageNewsdispCache = DSCacheFactory.get("MainPageNewsdispCache");
+        self.MainPageArticledispCache = DSCacheFactory.get("MainPageArticledispCache");
+        self.MainPageLecturedispCache = DSCacheFactory.get("MainPageLecturedispCache");
         // ===============================================
         self.MessagesCache.setOptions({
             onExpire: function (key, value) {
@@ -65,7 +70,41 @@
         });
 
         // ===============================================================
+        self.MainPageNewsdispCache.setOptions({
+            onExpire: function (key, value) {
+                getmainpagenews().then(function () {
+                    console.log("MainPageNewsdispCache  was  refreshed");
+                }, function () {
+                    console.log("Error getting data putting expire data item back into the MainPageNewsdispCache");
+                    self.MainPageNewsdispCache.put(key, value);
+                });
+            }
+        });
+        //==================================================================
 
+        self.MainPageArticledispCache.setOptions({
+            onExpire: function (key, value) {
+                getmainpagearticle().then(function () {
+                    console.log("MainPageArticledispCache  was  refreshed");
+                }, function () {
+                    console.log("Error getting data putting expire data item back into the MainPageArticledispCache");
+                    self.MainPageArticledispCache.put(key, value);
+                });
+            }
+        });
+        //==================================================================
+
+        self.MainPageLecturedispCache.setOptions({
+            onExpire: function (key, value) {
+                getmainpagelecture().then(function () {
+                    console.log("MainPageLecturedispCache  was  refreshed");
+                }, function () {
+                    console.log("Error getting data putting expire data item back into the MainPageLecturedispCache");
+                    self.MainPageLecturedispCache.put(key, value);
+                });
+            }
+        });
+        //==================================================================
         var vm = this;
         var local = "http://Dev010:1181/api/";
         var online = "http://sayedalshohada.azurewebsites.net/api/";
@@ -180,6 +219,103 @@
             return deferred.promise;
         }
 
+        function getmainpagenews(forceRefresh) {
+            
+            var cacheKey = "mainpagenews";
+            var mainpagenewsdata = null;
+            var deferred = $q.defer();
+            if (!forceRefresh) {
+                var mainpagenewsdata = self.MainPageNewsdispCache.get(cacheKey);
+            };
+
+            if (mainpagenewsdata) {
+                console.log("lecture found in the Cache");
+                deferred.resolve(mainpagenewsdata);
+            }
+            else {
+                $ionicLoading.show({
+                    template: 'Loading...'
+                });
+                $http.get(online + "MainPage/Getnews").success(function (data) {
+                    self.MainPageNewsdispCache.put(cacheKey, data);
+                    $ionicLoading.hide();
+                    deferred.resolve(data);
+                    console.log("received news via http ", data, status);
+                })
+                .error(function () {
+                    $ionicLoading.hide();
+                    console.log("error get one lecture");
+                    deferred.reject();
+                });
+        }
+
+        return deferred.promise;
+        }
+
+    
+        function getmainpagearticle(forceRefresh) {
+            var cacheKey = "mainpagearticle";
+            var mainpagearticledata = null;
+            var deferred = $q.defer();
+
+            if (!forceRefresh) {
+                var mainpagearticledata = self.MainPageArticledispCache.get(cacheKey);
+            };
+
+            if (mainpagearticledata) {
+                console.log("lecture found in the Cache");
+                deferred.resolve(mainpagearticledata);
+            } else {
+                $ionicLoading.show({
+                    template: 'Loading...'
+                });
+                $http.get(online + "MainPage/Getarticle").success(function (data) {
+                    self.MainPageArticledispCache.put(cacheKey, data);
+                    $ionicLoading.hide();
+                        deferred.resolve(data);
+                        console.log("received article via http ", data, status);
+                    })
+                    .error(function () {
+                        $ionicLoading.hide();
+                        console.log("error get one article");
+                        deferred.reject();
+                    });
+            }
+            return deferred.promise;
+        }
+
+
+
+        function getmainpagelecture(forceRefresh) {
+            var cacheKey = "mainpagelecture";
+            var mainpagelecturedata = null;
+            var deferred = $q.defer();
+            if (!forceRefresh) {
+                var mainpagelecturedata = self.MainPageLecturedispCache.get(cacheKey);
+            };
+
+            if (mainpagelecturedata) {
+                console.log("lecture found in the Cache");
+                deferred.resolve(mainpagelecturedata);
+            } else {
+                $ionicLoading.show({
+                    template: 'Loading...'
+                });
+                $http.get(online + "MainPage/Getlecture").success(function (data) {
+                    self.MainPageLecturedispCache.put(cacheKey, data);
+                    $ionicLoading.hide();
+                        deferred.resolve(data);
+                        console.log("received lecture via http ", data, status);
+                    })
+                    .error(function () {
+                        $ionicLoading.hide();
+                        console.log("error get one lecture");
+                        deferred.reject();
+                    });
+
+            }
+            return deferred.promise;
+        }
 
         //----------------<push notification>-------------------------------------------------------------------
         function postdeviceinfo(device) {
@@ -218,7 +354,7 @@
 
 
        function pushRegister () {
-            console.log('Ionic Push: Registering user');
+            alert('Ionic Push: Registering user');
 
             // Register with the Ionic Push service.  All parameters are optional.
             $ionicPush.register({
@@ -241,7 +377,11 @@
             getmsgdis: getmsgdis,
             getlectures: getlectures,
             getlecture: getlecture,
-            postdeviceinfo: postdeviceinfo
+            postdeviceinfo: postdeviceinfo,
+            getmainpagelecture: getmainpagelecture,
+            getmainpagearticle: getmainpagearticle,
+            getmainpagenews: getmainpagenews
+
         };
     };
 })();

@@ -24,6 +24,7 @@ namespace Infrastructure.Repository.Imp
                  }
                  else {
                      var tab = cnn.Get<Push>(device.UdId);
+                     device.CreatedDate = tab.CreatedDate;
                      device.Id = tab.Id;
                   cnn.Update(device);
                  
