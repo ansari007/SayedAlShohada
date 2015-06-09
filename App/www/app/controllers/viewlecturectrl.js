@@ -6,23 +6,24 @@
     function viewlecturectrl($scope, $stateParams, apictrl, $sce) {
         console.log("view lecture here");
         var vm = this;
-        //vm.localhost = "http://Dev-010:59454";
-        vm.localhost = "http://sayedalshohada.azurewebsites.net/";
+        var local = "http://localhost:1322";
+        var online = "http://sayedalshohada.azurewebsites.net";
+        var url = local;
         vm.nid = $stateParams.id;
 
         apictrl.getlecture().then(function (data) {
             vm.lecture = data;
-            vm.videourl = vm.localhost + data.Vlocation;
+            vm.videourl = url + data.Vlocation;
             window.postMessage(vm.videourl, '*');
             console.log("mhd", vm.lecture);
             console.log("news-number", vm.nid);
 
         });
 
-        vm.makevurl = function (val) {
-            return $sce.trustAsResourceUrl(vm.localhost + val);
+       /* vm.makevurl = function (val) {
+            return $sce.trustAsResourceUrl(url + val);
 
-        };
+        };*/
 
         console.log("vm.nid", vm.nid);
     };

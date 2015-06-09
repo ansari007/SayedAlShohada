@@ -41,7 +41,7 @@ namespace SayedAlShohada.Controllers
 
                     // filePath = HttpContext.Current.Server.MapPath("~/Files/" + postedFile.FileName);
                     postedFile.SaveAs(path + "\\" + postedFile.FileName);
-                    filePath = "Files/" + postedFile.FileName;
+                    filePath = "/Files/" + postedFile.FileName;
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, filePath);
                 HttpContext.Current.Items["fpath"] = filePath;
