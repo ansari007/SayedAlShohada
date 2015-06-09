@@ -1,50 +1,39 @@
 ﻿$(document).ready(function () {
     setTimeout(function () {
 
-        var k = "";
+        var videoUrl = "";
         window.addEventListener('message', function (e) {
-            k = e.data;
-            ;
-            if (k == "") {
+            videoUrl = e.data;;
+            if (videoUrl == "") {
                 alert("nothing here");
-            }
-            else {
+            } else {
                 setTimeout(function () {
                     jwplayer("player").setup({
-                        file: k,
+                        file: videoUrl,
                         width: "100%",
                         image: "Content/pic/videothub.jpg"
-                       /* image: "http://sayedalshohada.azurewebsites.net/pic/videothub.jpg"*/
                     });
                 });
             }
         });
     });
-});
 
+    //setTimeout(function () {
+    //    var videoUrl = "";
+    //    window.addEventListener('message', function (e) {
+    //        videoUrl = e.data;
 
-$(document).ready(function () {
-    setTimeout(function () {
-
-        var k = "";
-        window.addEventListener('message', function (e) {
-            k = e.data;
-
-            if (k == "") {
-                alert("nothing here");
-            }
-            else {
-                setTimeout(function () {
-                    jwplayer("playerlec").setup({
-                        file: k,
-                        width: "100%",
-                        image: "Content/pic/videoexample.jpg"
-                       /* image: "http://sayedalshohada.azurewebsites.net/pic/videoexample.jpg"*/
-                    });
-                });
-            }
-        });
-
-
-    });
+    //        if (videoUrl == "") {
+    //            alert("nothing here");
+    //        } else {
+    //            setTimeout(function () {
+    //                jwplayer("playerlec").setup({
+    //                    file: videoUrl,
+    //                    width: "100%",
+    //                    image: "Content/pic/videoexample.jpg"
+    //                });
+    //            });
+    //        }
+    //    });
+    //});
 });

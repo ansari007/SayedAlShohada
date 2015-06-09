@@ -19,11 +19,6 @@
         vm.url = "http://sayedalshohada.azurewebsites.net"+$scope.v4;
 
         window.postMessage(vm.url, '*');
-        /*"http://www.videogular.com/assets/images/videogular.png"
-        http://Dev-010:59454/SayedAlShohada/video/123.mp4
-        */
-        /*http://Dev-010:59454/SayedAlShohada/pic/videothub.jpg
-        */
 
         vm.makevurl = function (val) {
             return $sce.trustAsResourceUrl(vm.localhost + val);

@@ -507,7 +507,7 @@ mhdapp.controller("vidogularv4", function ($scope, $routeParams, $http, $sce) {
     var that = this;
 
     $http.get('/api/Lectures/Getlec/' + $scope.idv).then(function (result) {
-        $scope.v4 = result.data.Vlocation;
+        $scope.v4 = 'http://dev-08:59454/' + result.data.Vlocation;
         console.log($scope.v4 + "v4loc");
         that.config = {
             sources: [

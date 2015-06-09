@@ -106,8 +106,9 @@
         });
         //==================================================================
         var vm = this;
-        var local = "http://Dev010:1181/api/";
+        var local = "http://Dev-08:59454/api/";
         var online = "http://sayedalshohada.azurewebsites.net/api/";
+        var url = local;
 
         function getmsgs(forceRefresh) {
             if (typeof forceRefresh === "undefined") { forceRefresh = false; }
@@ -126,7 +127,8 @@
                 $ionicLoading.show({
                     template: '...Loading'
                 });
-                $http.get(online + "Messages/Getall").success(function (data) {
+                $http.get(url + "Messages/Getall").success(function (data) {
+                        alert("Message" + data);
                     self.MessagesCache.put(cacheKey, data);
                     $ionicLoading.hide();
                     deferred.resolve(data);
@@ -155,7 +157,7 @@
             }
 
             else {
-                $http.get(online + "Messages/Getnew/" + vm.num).success(function (data) {
+                $http.get(url + "Messages/Getnew/" + vm.num).success(function (data) {
 
                     self.MessagedispCache.put(cacheKey, data);
                     deferred.resolve(data);
@@ -189,7 +191,7 @@
                 $ionicLoading.show({
                     template: 'Loading...'
                 });
-                $http.get(online + "Lectures/Getall").success(function (data) {
+                $http.get(url + "Lectures/Getall").success(function (data) {
 
                     console.log("lecture received via HTTP");
                     self.LecturesCache.put(cacheKey, data);
@@ -208,7 +210,7 @@
         function getlecture() {
             var deferred = $q.defer();
             vm.num = $stateParams.id;
-            $http.get(online + "Lectures/Getlec/" + vm.num).success(function (data) {
+            $http.get(url + "Lectures/Getlec/" + vm.num).success(function (data) {
                 deferred.resolve(data);
                 console.log("received one lecture via http ", data, status);
             })
@@ -236,7 +238,7 @@
                 $ionicLoading.show({
                     template: 'Loading...'
                 });
-                $http.get(online + "MainPage/Getnews").success(function (data) {
+                $http.get(url + "MainPage/Getnews").success(function (data) {
                     self.MainPageNewsdispCache.put(cacheKey, data);
                     $ionicLoading.hide();
                     deferred.resolve(data);
@@ -269,7 +271,7 @@
                 $ionicLoading.show({
                     template: 'Loading...'
                 });
-                $http.get(online + "MainPage/Getarticle").success(function (data) {
+                $http.get(url + "MainPage/Getarticle").success(function (data) {
                     self.MainPageArticledispCache.put(cacheKey, data);
                     $ionicLoading.hide();
                         deferred.resolve(data);
@@ -283,7 +285,6 @@
             }
             return deferred.promise;
         }
-
 
 
         function getmainpagelecture(forceRefresh) {
@@ -301,7 +302,7 @@
                 $ionicLoading.show({
                     template: 'Loading...'
                 });
-                $http.get(online + "MainPage/Getlecture").success(function (data) {
+                $http.get(url + "MainPage/Getlecture").success(function (data) {
                     self.MainPageLecturedispCache.put(cacheKey, data);
                     $ionicLoading.hide();
                         deferred.resolve(data);
@@ -320,7 +321,7 @@
         //----------------<push notification>-------------------------------------------------------------------
         function postdeviceinfo(device) {
             //alert(device);
-            $http.post(online + "Push/InsertDevice", device).
+            $http.post(url + "Push/InsertDevice", device).
            success(function (data, status, headers, config) {
                console.log(" device info post ok");
            }).
@@ -351,8 +352,6 @@
             };
         };
 
-
-
        function pushRegister () {
             alert('Ionic Push: Registering user');
 
@@ -371,7 +370,7 @@
 
         };
        return {
-           pushRegister: pushRegister,
+           //pushRegister: pushRegister,
             identifyUser: identifyUser,
             getmsgs: getmsgs,
             getmsgdis: getmsgdis,
