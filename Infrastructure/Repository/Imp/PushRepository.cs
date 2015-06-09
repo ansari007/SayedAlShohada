@@ -18,14 +18,14 @@ namespace Infrastructure.Repository.Imp
 
                  var query = "select * from Push where UdId=@UdId";
                  var resultat = cnn.Query<Push>(query, new { UdId = device.UdId});
-                 if (resultat.Count() == 0)
+                 if (!resultat.Any())
                  {
                       var id = cnn.Insert(device);
                  }
                  else {
-                     var tab = cnn.Get<Push>(device.UdId);
-                     device.CreatedDate = tab.CreatedDate;
-                     device.Id = tab.Id;
+
+                     device.CreatedDate = resultat.SingleOrDefault().CreatedDate;
+                     device.Id = resultat.SingleOrDefault().Id;
                   cnn.Update(device);
                  
                  }

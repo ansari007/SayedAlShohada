@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -27,14 +28,20 @@ namespace SayedAlShohada.Controllers
             HttpResponseMessage result = null;
             var filePath = "";
             var httpRequest = HttpContext.Current.Request;
+            var path = string.Concat(AppDomain.CurrentDomain.BaseDirectory, "Files");
+
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
             if (httpRequest.Files.Count > 0)
             {
                 foreach (string file in httpRequest.Files)
                 {
                     var postedFile = httpRequest.Files[file];
-                    filePath = HttpContext.Current.Server.MapPath("~/Files/" + postedFile.FileName);
-                    postedFile.SaveAs(filePath);
-                    filePath = "~/Files/" + postedFile.FileName;
+
+                    // filePath = HttpContext.Current.Server.MapPath("~/Files/" + postedFile.FileName);
+                    postedFile.SaveAs(path + "\\" + postedFile.FileName);
+                    filePath = "Files/" + postedFile.FileName;
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, filePath);
                 HttpContext.Current.Items["fpath"] = filePath;
@@ -47,7 +54,7 @@ namespace SayedAlShohada.Controllers
 
             return result;
         }
-        
+
     }
 }
 
