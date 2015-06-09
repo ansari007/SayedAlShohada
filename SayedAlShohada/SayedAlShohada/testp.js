@@ -4,6 +4,17 @@
 			"com.2fdevs.videogular.plugins.overlayplay",
 			"com.2fdevs.videogular.plugins.poster"]);
 
+
+
+mhdapp.factory('UrlService', function () {
+
+    var local = "http://dev-08:59454/";
+    var online = "http://sayedalshohada.azurewebsites.net/";
+    return {
+        url: online
+    };
+});
+
 mhdapp.config(["$routeProvider", function ($routeProvider) {
     $routeProvider
         .when('/', {
@@ -501,15 +512,12 @@ mhdapp.controller("vidogularv3", function ($scope, $routeParams, $http, $sce) {
 });*/
 
 
-mhdapp.controller("vidogularv4", function ($scope, $routeParams, $http, $sce) {
+mhdapp.controller("vidogularv4", function ($scope, $routeParams, $http, $sce,UrlService) {
     console.log("videogularv4 Ctrl");
-    var local = "http://localhost:1322";
-    var online = "http://sayedalshohada.azurewebsites.net";
-    var url = local;
     var that = this;
 
     $http.get('/api/Lectures/Getlec/' + $scope.idv).then(function (result) {
-        $scope.v4 = url + result.data.Vlocation;
+        $scope.v4 = UrlService.url + result.data.Vlocation;
         console.log($scope.v4 + "v4loc");
         that.config = {
             sources: [
@@ -858,15 +866,12 @@ mhdapp.controller("mainpagectrl", function ($scope, $routeParams, $http, $window
     });
 });
 
-mhdapp.controller("vidogularmainpage", function ($scope, $routeParams, $http, $sce) {
+mhdapp.controller("vidogularmainpage", function ($scope, $routeParams, $http, $sce, UrlService) {
     console.log("videogularmainpage Ctrl");
-    var local = "http://localhost:1322";
-    var online = "http://sayedalshohada.azurewebsites.net";
-    var url = local;
     var that = this;
 
     $http.get('/api/MainPage/Getlecture' ).then(function (result) {
-        $scope.v4 = url+result.data.Vlocation;
+        $scope.v4 = UrlService.url + result.data.Vlocation;
         console.log($scope.v4 + "v4loc");
         that.config = {
             sources: [
