@@ -1579,6 +1579,8 @@
     <Content Include="www\app\app2.js" />
     <Content Include="www\app\controllers\apictrl.js" />
     <Content Include="www\app\controllers\apppiii.js" />
+    <Content Include="www\app\controllers\articlesctrl.js" />
+    <Content Include="www\app\controllers\articlesdisplayctrl.js" />
     <Content Include="www\app\controllers\ionpushctrl.js" />
     <Content Include="www\app\controllers\lecturectrl.js" />
     <Content Include="www\app\controllers\mainpageinfo.js" />
@@ -1588,6 +1590,8 @@
     <Content Include="www\app\controllers\testjava.js" />
     <Content Include="www\app\controllers\videogularctrl.js" />
     <Content Include="www\app\controllers\viewlecturectrl.js" />
+    <Content Include="www\app\home\article.html" />
+    <Content Include="www\app\home\articlesdisplay.html" />
     <Content Include="www\app\home\home.html" />
     <Content Include="www\app\home\lecture.html" />
     <Content Include="www\app\home\mainpage.html" />

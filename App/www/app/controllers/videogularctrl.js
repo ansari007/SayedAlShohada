@@ -7,9 +7,9 @@
         console.log("videogular goes here!!!");
         var vm = this;
 
-        var local = "http://localhost:1322";
-        var online = "http://sayedalshohada.azurewebsites.net";
-        var url = local;
+        var local = "http://localhost:1322/";
+        var online = "http://sayedalshohada.azurewebsites.net/";
+        var url = online;
       
         vm.nid = $stateParams.id;
         $http.get('/api/Lectures/Getlec/' + $scope.idv).then(function(result) {

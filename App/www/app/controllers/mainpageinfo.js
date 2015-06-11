@@ -3,9 +3,9 @@
     angular.module('eliteApp').controller('mainpageinfoctrl', ['$http', 'apictrl', '$scope', mainpageinfoctrl]);
     function mainpageinfoctrl($http, apictrl, $scope) {
         var vm = this;
-        var local = "http://localhost:1322";
-        var online = "http://sayedalshohada.azurewebsites.net";
-        var url = local;
+        var local = "http://localhost:1322/";
+        var online = "http://sayedalshohada.azurewebsites.net/";
+        var url = online;
         apictrl.getmainpagenews().then(function (data) {
            
             vm.news = data;
@@ -21,7 +21,8 @@
         apictrl.getmainpagelecture().then(function (data) {
            
             vm.lecture = data;
-            $scope.v4 = result.data.Vlocation;
+            $scope.v4 = data.Vlocation;
+            
             vm.url = url+ $scope.v4;
            /* var obj = { type: "message2", vurl: vm.url };
             window.postMessage(obj, '*');

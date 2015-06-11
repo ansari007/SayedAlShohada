@@ -43,7 +43,7 @@
                 case 'registered':
 
                     if (e.regid.length > 0) {
-                        alert("Regid " + e.regid);
+                        //alert("Regid " + e.regid);
                         //Post
                         var device = {
                             Token: e.regid,
@@ -55,20 +55,7 @@
                     }
                     break;
 
-                case 'message':
-                    alert("Enter message section");
-
-                    $ionicPush.register({
-                        canShowAlert: false, //Can pushes show an alert on your screen?
-                        canSetBadge: false, //Can pushes update app icon badges?
-                        canPlaySound: false, //Can notifications play a sound?
-                        canRunActionsOnWake: false, //Can run actions outside the app,
-                        onNotification: function (notification) {
-                            // Handle new push notifications here
-                            alert(notification);
-                            return true;
-                        }
-                    });
+                case 'message':                  
 
 
                     /* if (e.foreground) {
@@ -104,11 +91,11 @@
                      break;*/
 
                 case 'error':
-                    alert("error");
+                   // alert("error");
                     break;
 
                 default:
-                    alert("Unknown");
+                    //alert("Unknown");
                     break;
             }
         }
@@ -135,6 +122,14 @@
         .state('home.news', {
             url: "/news",
             templateUrl: "www/app/home/news.html"
+        })
+         .state('home.article', {
+             url: "/article",
+             templateUrl: "www/app/home/article.html"
+         })
+        .state('home.articlesdisplay', {
+            url: "/article/:id",
+            templateUrl: "www/app/home/articlesdisplay.html"
         })
         .state('home.newsdisplay', {
             url: "/news/:id",

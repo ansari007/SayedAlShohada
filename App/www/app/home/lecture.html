@@ -11,7 +11,7 @@
         </div>
 
         <div class="row" ng-controller="mainpageinfoctrl as vm">
-            <div class="col col-33 col-offset-33"><h4 class="titlecolor"><b>{{vm.lecture.Vtitle}}</b></h4></div>
+            <div class="col  col-offset-33"><h4 class="titlecolor"><b>{{vm.lecture.Vtitle}}</b></h4></div>
             <!--<div class="col col-center ">
                 <img width="96%" ng-src="Content/pic/socialiconsk.jpg" />
             </div>-->
@@ -20,15 +20,21 @@
         <div class="row" ng-controller="mainpageinfoctrl as vm">
             <div class="padding col">
 
-                <div id="player">error player...</div>
+                <div id="playerlec"><div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+</div></div>
             </div>
         </div>
 
         <div class="row bgtitlecolor" ng-controller="mainpageinfoctrl as vm">
             <div class=" col padding ">
-                <h5 class=" wrap sectitlecolor">
+                <h5 class=" wrap sectitlecolor textsize">
             <b>
-                {{vm.Vdescription}}
+                {{vm.lecture.Vdescription}}
             </b>
             </h5>
         </div>
@@ -48,7 +54,7 @@
                 <img ng-src="Content/pic/videoexample.jpg">
 
                 <h2>{{val.Vtitle}}</h2>
-                <p>By Nine Inch Nails</p>
+                <p>{{val.Date}}</p>
             </a>
         </div>
     </ion-content>

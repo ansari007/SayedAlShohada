@@ -1,0 +1,23 @@
+﻿<ion-view ng-controller="articlesctrl as vm">
+    <ion-content class="has-header">
+        <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="vm.loadList(true)">
+        </ion-refresher>
+        <div class="row">
+            <div class="padding col ">
+                <h2 class="titlecolor nomargin">روايات</h2>
+            </div>
+        </div>
+        <div class="list">
+            <a align="right" class="item " ng-repeat="val in vm.news"
+               ng-href="#/home/article/{{val.Id}}">
+
+                <h2 class="newstitlecolor"> <b>{{val.Title}}</b></h2>
+                <p>{{val.Date}}</p>
+            </a>
+        </div>
+
+
+
+    </ion-content>
+</ion-view>

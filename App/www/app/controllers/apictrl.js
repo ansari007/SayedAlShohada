@@ -9,6 +9,9 @@
         DSCacheFactory("MainPageNewsdispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
         DSCacheFactory("MainPageArticledispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
         DSCacheFactory("MainPageLecturedispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("ArticlesCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+        DSCacheFactory("ArticlesdispCache", { storageMode: "localStorage", maxAge: 5000000, deleteOnExpire: "aggressive" });
+
 
         self.MessagesCache = DSCacheFactory.get("MessagesCache");
         self.MessagedispCache = DSCacheFactory.get("MessagedispCache");
@@ -18,6 +21,8 @@
         self.MainPageNewsdispCache = DSCacheFactory.get("MainPageNewsdispCache");
         self.MainPageArticledispCache = DSCacheFactory.get("MainPageArticledispCache");
         self.MainPageLecturedispCache = DSCacheFactory.get("MainPageLecturedispCache");
+        self.ArticlesCache = DSCacheFactory.get("ArticlesCache");
+        self.ArticlesdispCache = DSCacheFactory.get("ArticlesdispCache");
         // ===============================================
         self.MessagesCache.setOptions({
             onExpire: function (key, value) {
@@ -105,10 +110,34 @@
             }
         });
         //==================================================================
+        self.ArticlesCache.setOptions({
+            onExpire: function (key, value) {
+
+                getarticles().then(function () {
+                    console.log("ArticlesCache  was  refreshed");
+                }, function () {
+                    console.log("Error getting data putting expire data item back into the ArticlesCache");
+                    self.ArticlesCache.put(key, value);
+                });
+            }
+        });
+        //    ===============================================
+        self.ArticlesdispCache.setOptions({
+            onExpire: function (key, value) {
+
+                getarticledis().then(function () {
+                    console.log("ArticlesdispCache cache was  refreshed");
+                }, function () {
+                    console.log("Error getting data putting expire data item back into the ArticlesdispCache");
+                    self.ArticlesdispCache.put(key, value);
+                });
+            }
+        });
+        //  ================================================================
         var vm = this;
         var local = "http://Dev-08:59454/api/";
         var online = "http://sayedalshohada.azurewebsites.net/api/";
-        var url = local;
+        var url = online;
 
         function getmsgs(forceRefresh) {
             if (typeof forceRefresh === "undefined") { forceRefresh = false; }
@@ -128,7 +157,7 @@
                     template: '...Loading'
                 });
                 $http.get(url + "Messages/Getall").success(function (data) {
-                        alert("Message" + data);
+                        
                     self.MessagesCache.put(cacheKey, data);
                     $ionicLoading.hide();
                     deferred.resolve(data);
@@ -189,7 +218,7 @@
             }
             else {
                 $ionicLoading.show({
-                    template: 'Loading...'
+                    template: '...Loading'
                 });
                 $http.get(url + "Lectures/Getall").success(function (data) {
 
@@ -236,7 +265,7 @@
             }
             else {
                 $ionicLoading.show({
-                    template: 'Loading...'
+                    template: '...Loading'
                 });
                 $http.get(url + "MainPage/Getnews").success(function (data) {
                     self.MainPageNewsdispCache.put(cacheKey, data);
@@ -269,7 +298,7 @@
                 deferred.resolve(mainpagearticledata);
             } else {
                 $ionicLoading.show({
-                    template: 'Loading...'
+                    template: '...Loading'
                 });
                 $http.get(url + "MainPage/Getarticle").success(function (data) {
                     self.MainPageArticledispCache.put(cacheKey, data);
@@ -300,7 +329,7 @@
                 deferred.resolve(mainpagelecturedata);
             } else {
                 $ionicLoading.show({
-                    template: 'Loading...'
+                    template: '...Loading'
                 });
                 $http.get(url + "MainPage/Getlecture").success(function (data) {
                     self.MainPageLecturedispCache.put(cacheKey, data);
@@ -314,6 +343,68 @@
                         deferred.reject();
                     });
 
+            }
+            return deferred.promise;
+        }
+        //=====================================<articles>====================================================
+
+        function getarticles(forceRefresh) {
+            if (typeof forceRefresh === "undefined") { forceRefresh = false; }
+            var cacheKey = "articles";
+            var messagesdata = null;
+            var deferred = $q.defer();
+            if (!forceRefresh) {
+                var messagesdata = self.ArticlesCache.get(cacheKey);
+            };
+
+            if (messagesdata) {
+                console.log("found data inside the cache", messagesdata);
+                deferred.resolve(messagesdata);
+            }
+            else {
+                $ionicLoading.show({
+                    template: '...Loading'
+                });
+                $http.get(url + "Articles/Getall").success(function (data) {
+                   
+                    self.ArticlesCache.put(cacheKey, data);
+                    $ionicLoading.hide();
+                    deferred.resolve(data);
+                    console.log("received msgsdata via http", data, status);
+                })
+                .error(function () {
+                    $ionicLoading.hide();
+                    console.log("error http mhd");
+                    deferred.reject();
+                });
+            }
+            return deferred.promise;
+        }
+
+        function getarticledis() {
+            vm.num = $stateParams.id;
+            var deferred = $q.defer();
+            var cacheKey = "articlesdispCache" + vm.num;
+
+            console.log(cacheKey);
+
+            var messagedispdata = self.ArticlesdispCache.get(cacheKey);
+            if (messagedispdata) {
+                deferred.resolve(messagedispdata);
+                console.log("received msgdispdata from the cache");
+            }
+
+            else {
+                $http.get(url + "Articles/Getnew/" + vm.num).success(function (data) {
+
+                    self.ArticlesdispCache.put(cacheKey, data);
+                    deferred.resolve(data);
+                    console.log("received ArticlesdispCache data via HTTP");
+                })
+                .error(function () {
+                    console.log("error http mhd");
+                    deferred.reject();
+                });
             }
             return deferred.promise;
         }
@@ -346,14 +437,14 @@
                 // Identify your user with the Ionic User Service
                 $ionicUser.identify(user).then(function () {
                     $scope.identified = true;
-                    alert('Identified user ' + user.name + '\n ID ' + user.user_id);
+                  //  alert('Identified user ' + user.name + '\n ID ' + user.user_id);
                 });
 
             };
         };
 
        function pushRegister () {
-            alert('Ionic Push: Registering user');
+           // alert('Ionic Push: Registering user');
 
             // Register with the Ionic Push service.  All parameters are optional.
             $ionicPush.register({
@@ -379,8 +470,9 @@
             postdeviceinfo: postdeviceinfo,
             getmainpagelecture: getmainpagelecture,
             getmainpagearticle: getmainpagearticle,
-            getmainpagenews: getmainpagenews
-
+            getmainpagenews: getmainpagenews,
+            getarticles: getarticles,
+            getarticledis: getarticledis
         };
     };
 })();

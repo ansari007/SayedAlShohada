@@ -11,26 +11,35 @@
 
             </div>
         </div>
-        <div class="row" ng-controller="viewlecturectrl as vm">
+        <div class="row" >
             <div class="padding col">
                
                
-                <div id="playerlec">error player...</div>
+                <div id="playerviewlec">
+                         <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
 
         <div class="row  ">
-            <div class="col col-33 col-offset-33"><h4 class="titlecolor"><b>{{vm.lecture.Vtitle}}</b></h4></div>
-            <div class="col col-center ">
-                <img width="96%" ng-src="Content/pic/socialiconsk.jpg" />
-            </div>
+            <div class="col  col-offset-33"><h4 class="titlecolor"><b>{{vm.lecture.Vtitle}}</b></h4></div>
+
+            <!--<div class="col col-center ">
+                $1$img width="96%" ng-src="Content/pic/socialiconsk.jpg" />#1#
+            </div>-->
         </div>
 
         <div class="row bgtitlecolor">
             <div class=" col padding ">
 
-                <h5 class="wrap sectitlecolor">
+                <h5 class="wrap sectitlecolor textsize">
                     <b>
                         {{vm.lecture.Vdescription}}
                     </b>
@@ -46,7 +55,7 @@
             <div class="col col-33 col-offset-33">
             </div>
             <div class="col  padding">
-                <img ng-src="Content/pic/joinus.jpg" align="left" />
+               <!-- <img ng-src="Content/pic/joinus.jpg" align="left" />-->
             </div>
         </div>
     </ion-content>

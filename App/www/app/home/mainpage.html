@@ -1,37 +1,47 @@
-<ion-view>
+<ion-view ng-controller="mainpageinfoctrl as vm">
     <ion-content class="has-header">
+        
+       
+
         <div class="row">
             <div class="col col-50 ">
                 <h3 class="titlecolor nomargin"><b>الصفحة الرئيسية</b></h3>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="padding col">
+                <!-- <input type="hidden" value={{vm.url}} id="hiddenUrl" ng-controller="videogularctrl as vm" />-->
 
+                <div id="playermain">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row bgtitlecolor">
             <div class=" col padding ">
                 <h4 class="nomargin sectitlecolor">
-                    <b>أخر خبر</b>
+                    <!--<b>أخر خبر</b>--><b>{{vm.news.Title}}</b>
                 </h4>
-                <h5 class="wrap sectitlecolor" ng-controller="mainpageinfoctrl as vm">
+                <h5 class="wrap sectitlecolor textsize">
                     <b>
                         {{vm.news.Description}}
                     </b>
                 </h5>
             </div>
         </div>
+       
+        <div class="row ">
+            <div class="col ">
+                <h4 class="sectitlecolor textsize"><b><!--أخر رواية-->  {{vm.article.Title}}</b></h4>
 
-        <div class="row" ng-controller="mainpageinfoctrl as vm">
-            <div class="padding col">
-                <!-- <input type="hidden" value={{vm.url}} id="hiddenUrl" ng-controller="videogularctrl as vm" />-->
-
-                <div id="player">error player...</div>
-            </div>
-        </div>
-
-        <div class="row " ng-controller="mainpageinfoctrl as vm">
-            <div class="col">
-                <h4 class="sectitlecolor"><b>أخر رواية </b></h4>
-
-                <h5 class="sectitlecolor"> <b>{{vm.article.Description}}</b></h5>
+                <h5 class="sectitlecolor textsize"> <b>{{vm.article.Description}}</b></h5>
             </div>
         </div>
     </ion-content>
