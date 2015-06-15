@@ -28,6 +28,18 @@
                         senderID: "774696930133",
                         ecb: "window.onNotificationGCM"
                     });
+               /* $ionicPush.register({
+                    canShowAlert: true, //Can pushes show an alert on your screen?
+                    canSetBadge: true, //Can pushes update app icon badges?
+                    canPlaySound: true, //Can notifications play a sound?
+                    canRunActionsOnWake: true, //Can run actions outside the app,
+                    onNotification: function (notification) {
+                        // Handle new push notifications here
+                        alert("notification goes here!!")
+                        alert(notification);
+                        return true;
+                    }
+                });*/
             }
 
             function successHandler(result) {
@@ -43,7 +55,7 @@
                 case 'registered':
 
                     if (e.regid.length > 0) {
-                        //alert("Regid " + e.regid);
+                        /*alert("Regid " + e.regid);*/
                         //Post
                         var device = {
                             Token: e.regid,
@@ -56,10 +68,10 @@
                     break;
 
                 case 'message':                  
+                    alert("notification goes here!!");
 
-
-                    /* if (e.foreground) {
-                         $cordovaDialogs.alert(e.payload.message, "Push Notification Received");
+                     if (e.foreground) {
+                        alert(e.payload.message, "Push Notification Received");
                          // on Android soundname is outside the payload.
                          // On Amazon FireOS all custom attributes are contained within payload
                          //var soundfile = e.soundname || e.payload.sound;
@@ -69,26 +81,17 @@
                      }
                      else {  // otherwise we were launched because the user touched a notification in the notification tray.
                          if (e.coldstart) {
-                             console.log("notification is in coldstart");
-                             //JSON.stringify(e.payload.msgcnt);
-                             //alert("touch notification tray");
-                             $("#app-status-ul").append('<li>--COLDSTART NOTIFICATION--' + '</li>');
+ 
+
+                            
                          }
                          else {
-                             console.log("notification is in notification tray");
-                             //JSON.stringify(e.payload.msgcnt);
-                             //alert("touch notification tray");
-                             $("#app-status-ul").append('<li>--BACKGROUND NOTIFICATION--' + '</li>');
+
+                            
                          }
                      }
-                     console.log("notification is in notification tray for gcm or amazon");
-                     //alert(e.payload.msgcnt);
-                     $("#app-status-ul").append('<li>MESSAGE -> MSG: ' + e.payload.message + '</li>');
-                     ////Only works for GCM
-                     $("#app-status-ul").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
-                     ////Only works on Amazon Fire OS
-                     //$status.append('<li>MESSAGE -> TIME: ' + e.payload.timeStamp + '</li>');
-                     break;*/
+                   
+                     break;
 
                 case 'error':
                    // alert("error");
